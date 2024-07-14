@@ -1,3 +1,10 @@
+// Time
+time =
+{
+    delta : 0,
+    speed : 1
+};
+
 // Window
 window =
 {
