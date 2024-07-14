@@ -16,6 +16,9 @@ window =
 window_set_size(window.width, window.height);
 surface_resize(application_surface, window.width, window.height);
 
+// Set gui size
+display_set_gui_size(room_width, room_height);
+
 // Center window
 window_center();
 
@@ -32,3 +35,6 @@ show_debug_overlay(true);
 
 // Randomize
 randomize();
+
+// Go to next room
+room_goto_next();
