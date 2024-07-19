@@ -30,6 +30,18 @@ with (obj_input)
     }
 }
 
+// Draw the input instances' cursor
+with (obj_input)
+{
+    if (cursor.display)
+    {
+        if (cursor.sprite != -1)
+        {
+            draw_sprite_stretched_ext(cursor.sprite, cursor.subimg, cursor.x, cursor.y, cursor.w, cursor.h, cursor.color, cursor.alpha);
+        }
+    }
+}
+
 // Draw the input instances' tooltip
 with (obj_input)
 {

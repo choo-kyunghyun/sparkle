@@ -19,6 +19,9 @@ actions[BUTTON_STATES.PRESSED] = function() { image_index = 2; image_alpha = 1; 
 actions[BUTTON_STATES.RELEASED] = function() { image_index = 1; image_alpha = 1; };
 actions[BUTTON_STATES.DISABLED] = function() { image_alpha = 0.5; };
 
+// Hotkey
+hotkey = -1;
+
 // Sound effects
 sfx = array_create_ext(BUTTON_STATES.DISABLED + 1, function() { return -1; });
 sfx[BUTTON_STATES.HOVERED] = snd_tick;
@@ -59,6 +62,22 @@ text =
     c3 : c_white,
     c4 : c_white,
     alpha : 1
+};
+
+// Cursor
+cursor =
+{
+    display : false,
+    sprite : spr_cursor,
+    subimg : 0,
+    x : x,
+    y : y,
+    w : 0,
+    h : 0,
+    rot : 0,
+    color : c_white,
+    alpha : 1,
+    speed : 0.1
 };
 
 // Tooltip

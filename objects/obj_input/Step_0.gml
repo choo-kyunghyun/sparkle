@@ -3,6 +3,26 @@ var _hover = position_meeting(mouse_x, mouse_y, id);
 var _pressed = mouse_check_button_pressed(mb_left);
 var _released = mouse_check_button_released(mb_left);
 
+// Hotkey detection
+if (hotkey != -1)
+{
+    if (keyboard_check_pressed(hotkey))
+    {
+        _hover = true;
+        _pressed = true;
+    }
+    else if (keyboard_check_released(hotkey))
+    {
+        _hover = true;
+        _released = true;
+    }
+    else if (keyboard_check(hotkey))
+    {
+        _hover = true;
+        _pressed = true;
+    }
+}
+
 // State transition with sfx
 var _transition = function(_state)
 {
@@ -44,6 +64,21 @@ else if (state == BUTTON_STATES.RELEASED && !_hover)
 else if (state == BUTTON_STATES.RELEASED && _hover)
 {
     _transition(BUTTON_STATES.HOVERED);
+}
+
+// Cursor
+if (state == BUTTON_STATES.NORMAL || state == BUTTON_STATES.DISABLED)
+{
+    cursor.display = false;
+    cursor.w = 0;
+    cursor.h = 0;
+}
+else
+{
+    cursor.display = true;
+    cursor.w = lerp(cursor.w, sprite_width, cursor.speed);
+    cursor.h = lerp(cursor.h, sprite_height, cursor.speed);
+    show_debug_message(cursor.w);
 }
 
 // Tooltip
