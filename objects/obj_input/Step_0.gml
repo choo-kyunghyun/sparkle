@@ -76,9 +76,8 @@ if (state == BUTTON_STATES.NORMAL || state == BUTTON_STATES.DISABLED)
 else
 {
     cursor.display = true;
-    cursor.w = lerp(cursor.w, sprite_width, cursor.speed);
-    cursor.h = lerp(cursor.h, sprite_height, cursor.speed);
-    show_debug_message(cursor.w);
+    cursor.w = lerp(cursor.w, sprite_width, cursor.speed * obj_game.time.delta);
+    cursor.h = lerp(cursor.h, sprite_height, cursor.speed * obj_game.time.delta);
 }
 
 // Tooltip

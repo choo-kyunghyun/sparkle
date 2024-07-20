@@ -77,7 +77,7 @@ cursor =
     rot : 0,
     color : c_white,
     alpha : 1,
-    speed : 0.1
+    speed : 20
 };
 
 // Tooltip
