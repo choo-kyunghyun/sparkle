@@ -1,6 +1,6 @@
 # Sparkle
 
-<img src="assets/splash.png" alt="Sparkle" style="border-radius: 16px">
+![Sparkle](assets/splash.png)
 
 Sparkle is an open-source [GameMaker](https://gamemaker.io/en) project for everyone. This project aims to implement features as simply as possible so that everyone can use them.
 
@@ -71,3 +71,5 @@ These are features that will be implemented in the future.
 - Camera system
 - Actor object
 - Audio system
+- Dialogue system
+- Gamepad support
