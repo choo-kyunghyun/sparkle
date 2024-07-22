@@ -1,5 +1,5 @@
 // Input detection
-var _hover = position_meeting(mouse_x, mouse_y, id);
+var _hover = position_meeting(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), id);
 var _pressed = mouse_check_button_pressed(mb_left);
 var _released = mouse_check_button_released(mb_left);
 
@@ -67,17 +67,20 @@ else if (state == BUTTON_STATES.RELEASED && _hover)
 }
 
 // Cursor
-if (state == BUTTON_STATES.NORMAL || state == BUTTON_STATES.DISABLED)
+if (cursor.sprite != -1)
 {
-    cursor.display = false;
-    cursor.w = 0;
-    cursor.h = 0;
-}
-else
-{
-    cursor.display = true;
-    cursor.w = lerp(cursor.w, sprite_width, cursor.speed * obj_game.time.delta);
-    cursor.h = lerp(cursor.h, sprite_height, cursor.speed * obj_game.time.delta);
+    if (state == BUTTON_STATES.NORMAL || state == BUTTON_STATES.DISABLED)
+    {
+        cursor.display = false;
+        cursor.w = 0;
+        cursor.h = 0;
+    }
+    else
+    {
+        cursor.display = true;
+        cursor.w = lerp(cursor.w, sprite_width, cursor.speed * obj_game.time.delta);
+        cursor.h = lerp(cursor.h, sprite_height, cursor.speed * obj_game.time.delta);
+    }
 }
 
 // Tooltip
