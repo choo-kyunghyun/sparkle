@@ -4,21 +4,16 @@ var _font = -1;
 // Draw the input instances
 with (obj_input)
 {
+    // Draw the input instance
     draw_self();
-}
 
-// Draw the input instances' icon
-with (obj_input)
-{
+    // Draw the input instances' icon
     if (icon.sprite != -1)
     {
         draw_sprite_ext(icon.sprite, icon.subimg, icon.x, icon.y, icon.xscale, icon.yscale, icon.rot, icon.color, icon.alpha);
     }
-}
 
-// Draw the input instances' text
-with (obj_input)
-{
+    // Draw the input instances' text
     if (text.string != "")
     {
         if (text.font != -1)
