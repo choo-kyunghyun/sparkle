@@ -68,7 +68,6 @@ These are helpful resources for indie developers creating video games.
 
 These are features that will be implemented in the future.
 
-- Camera system
 - Actor object
 - Audio system
 - Dialogue system
