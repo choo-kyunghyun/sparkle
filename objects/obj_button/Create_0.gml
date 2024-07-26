@@ -1,5 +1,5 @@
 // States
-enum BUTTON_STATES
+enum BUTTON_STATE
 {
     NORMAL,
     HOVERED,
@@ -9,27 +9,31 @@ enum BUTTON_STATES
 }
 
 // State variables
-state = BUTTON_STATES.NORMAL;
+state = BUTTON_STATE.NORMAL;
 
 // Actions
-actions = array_create_ext(BUTTON_STATES.DISABLED + 1, function() { return undefined; });
-actions[BUTTON_STATES.NORMAL] = function() { image_index = 0; image_alpha = 1; };
-actions[BUTTON_STATES.HOVERED] = function() { image_index = 1; image_alpha = 1; };
-actions[BUTTON_STATES.PRESSED] = function() { image_index = 2; image_alpha = 1; };
-actions[BUTTON_STATES.RELEASED] = function() { image_index = 1; image_alpha = 1; };
-actions[BUTTON_STATES.DISABLED] = function() { image_alpha = 0.5; };
+actions = array_create_ext(BUTTON_STATE.DISABLED + 1, function() { return undefined; });
+
+// Sound effects
+sfx = array_create_ext(BUTTON_STATE.DISABLED + 1, function() { return -1; });
+
+// Visual effects
+vfx = array_create_ext(BUTTON_STATE.DISABLED + 1, function() { return undefined; });
 
 // Hotkey
 hotkey = -1;
 
-// Sound effects
-sfx = array_create_ext(BUTTON_STATES.DISABLED + 1, function() { return -1; });
-sfx[BUTTON_STATES.HOVERED] = snd_tick;
-sfx[BUTTON_STATES.PRESSED] = snd_pressed;
-sfx[BUTTON_STATES.RELEASED] = snd_released;
+// Predefined actions
+actions[BUTTON_STATE.NORMAL] = function() { image_index = 0; image_alpha = 1; };
+actions[BUTTON_STATE.HOVERED] = function() { image_index = 1; image_alpha = 1; };
+actions[BUTTON_STATE.PRESSED] = function() { image_index = 2; image_alpha = 1; };
+actions[BUTTON_STATE.RELEASED] = function() { image_index = 1; image_alpha = 1; };
+actions[BUTTON_STATE.DISABLED] = function() { image_alpha = 0.5; };
 
-// Visual effects
-vfx = array_create_ext(BUTTON_STATES.DISABLED + 1, function() { return undefined; });
+// Predefined sound effects
+sfx[BUTTON_STATE.HOVERED] = snd_tick;
+sfx[BUTTON_STATE.PRESSED] = snd_pressed;
+sfx[BUTTON_STATE.RELEASED] = snd_released;
 
 // Icon
 icon =

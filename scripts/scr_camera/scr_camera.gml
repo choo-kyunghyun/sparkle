@@ -51,6 +51,9 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     };
 
     /// @desc Updates the position of the camera.
+    /// @arg {Real} _x The x position of the camera.
+    /// @arg {Real} _y The y position of the camera.
+    /// @arg {Real} _z The z position of the camera.
     static position = function(_x = 0, _y = 0, _z = 0)
     {
         x = _x;
@@ -59,6 +62,8 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     };
 
     /// @desc Updates the size of the camera.
+    /// @arg {Real} _width The width of the camera.
+    /// @arg {Real} _height The height of the camera.
     static size = function(_width = room_width, _height = room_height)
     {
         width = _width;
@@ -66,6 +71,9 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     };
 
     /// @desc Updates the axes of the camera.
+    /// @arg {Real} _yaw The yaw of the camera.
+    /// @arg {Real} _pitch The pitch of the camera.
+    /// @arg {Real} _roll The roll of the camera.
     static axes = function(_yaw = 0, _pitch = 0, _roll = 0)
     {
         yaw = _yaw;

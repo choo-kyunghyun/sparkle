@@ -28,7 +28,7 @@ var _transition = function(_state)
 {
     if (state != _state)
     {
-        if (sfx[_state] != -1 && state != BUTTON_STATES.RELEASED)
+        if (sfx[_state] != -1 && state != BUTTON_STATE.RELEASED)
         {
             audio_play_sound(sfx[_state], 10, false);
         }
@@ -37,39 +37,39 @@ var _transition = function(_state)
 };
 
 // State transition
-if (state == BUTTON_STATES.NORMAL && _hover)
+if (state == BUTTON_STATE.NORMAL && _hover)
 {
-    _transition(BUTTON_STATES.HOVERED);
+    _transition(BUTTON_STATE.HOVERED);
 }
-else if (state == BUTTON_STATES.HOVERED && _pressed)
+else if (state == BUTTON_STATE.HOVERED && _pressed)
 {
-    _transition(BUTTON_STATES.PRESSED);
+    _transition(BUTTON_STATE.PRESSED);
 }
-else if (state == BUTTON_STATES.HOVERED && !_hover)
+else if (state == BUTTON_STATE.HOVERED && !_hover)
 {
-    _transition(BUTTON_STATES.NORMAL);
+    _transition(BUTTON_STATE.NORMAL);
 }
-else if (state == BUTTON_STATES.PRESSED && _released && _hover)
+else if (state == BUTTON_STATE.PRESSED && _released && _hover)
 {
-    _transition(BUTTON_STATES.RELEASED);
+    _transition(BUTTON_STATE.RELEASED);
 }
-else if (state == BUTTON_STATES.PRESSED && _released && !_hover)
+else if (state == BUTTON_STATE.PRESSED && _released && !_hover)
 {
-    _transition(BUTTON_STATES.NORMAL);
+    _transition(BUTTON_STATE.NORMAL);
 }
-else if (state == BUTTON_STATES.RELEASED && !_hover)
+else if (state == BUTTON_STATE.RELEASED && !_hover)
 {
-    _transition(BUTTON_STATES.NORMAL);
+    _transition(BUTTON_STATE.NORMAL);
 }
-else if (state == BUTTON_STATES.RELEASED && _hover)
+else if (state == BUTTON_STATE.RELEASED && _hover)
 {
-    _transition(BUTTON_STATES.HOVERED);
+    _transition(BUTTON_STATE.HOVERED);
 }
 
 // Cursor
 if (cursor.sprite != -1)
 {
-    if (state == BUTTON_STATES.NORMAL || state == BUTTON_STATES.DISABLED)
+    if (state == BUTTON_STATE.NORMAL || state == BUTTON_STATE.DISABLED)
     {
         cursor.display = false;
         cursor.w = 0;

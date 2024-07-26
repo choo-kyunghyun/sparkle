@@ -2,7 +2,7 @@
 var _font = -1;
 
 // Draw the input instances
-with (obj_input)
+with (obj_button)
 {
     // Draw the input instance
     draw_self();
@@ -26,7 +26,7 @@ with (obj_input)
 }
 
 // Draw the input instances' cursor
-with (obj_input)
+with (obj_button)
 {
     if (cursor.display)
     {
@@ -38,7 +38,7 @@ with (obj_input)
 }
 
 // Draw the input instances' tooltip
-with (obj_input)
+with (obj_button)
 {
     if (tooltip.display)
     {
@@ -80,7 +80,7 @@ with (obj_input)
 }
 
 // Draw visual effects for the input instances
-with (obj_input)
+with (obj_button)
 {
     if (vfx[state] != undefined)
     {

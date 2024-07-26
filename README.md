@@ -72,3 +72,4 @@ These are features that will be implemented in the future.
 - Audio system
 - Dialogue system
 - Gamepad support
+- Gesture input

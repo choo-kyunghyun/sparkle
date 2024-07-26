@@ -15,19 +15,22 @@ window =
 // Camera
 camera = new Camera();
 
-// Vertex format
-vertex_format_begin();
-vertex_format_add_position_3d();
-vertex_format_add_normal();
-vertex_format_add_color();
-vertex_format_add_texcoord();
-vertex_format = vertex_format_end();
+// Input
+input =
+{
+    left : function() { return keyboard_check(ord("A")); },
+    right : function() { return keyboard_check(ord("D")); },
+    up : function() { return keyboard_check(ord("W")); },
+    down : function() { return keyboard_check(ord("S")); },
+    jump : function() { return keyboard_check(vk_space); },
+    attack : function() { return mouse_check_button(mb_left); },
+    interact : function() { return keyboard_check_pressed(ord("E")); },
+    pause : function() { return keyboard_check_pressed(vk_escape); },
+    scan : function() { return keyboard_check_pressed(ord("F")); }
+};
 
-// Vertex buffer
-vertex_buffer = vertex_create_buffer();
-
-// Vertex texture
-vertex_texture = -1;
+// Vertex manager
+vertex_manager = new VertexManager();
 
 // Set gpu settings
 gpu_set_ztestenable(true);
@@ -57,7 +60,7 @@ game_set_speed(display_get_frequency(), gamespeed_fps);
 randomize();
 
 // Set debug overlay
-show_debug_overlay(false);
+show_debug_overlay(true);
 
 // Set release mode
 gml_release_mode(false);
