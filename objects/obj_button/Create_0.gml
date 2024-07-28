@@ -1,13 +1,3 @@
-// States
-enum BUTTON_STATE
-{
-    NORMAL,
-    HOVERED,
-    PRESSED,
-    RELEASED,
-    DISABLED
-}
-
 // State variables
 state = BUTTON_STATE.NORMAL;
 
@@ -72,10 +62,10 @@ text =
 cursor =
 {
     display : false,
-    sprite : -1,
+    sprite : spr_cursor,
     subimg : 0,
-    x : x,
-    y : y,
+    x : x - sprite_width / 2,
+    y : y - sprite_height / 2,
     w : 0,
     h : 0,
     rot : 0,

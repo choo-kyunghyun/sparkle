@@ -12,6 +12,9 @@ window =
     height : display_get_height() * 0.5
 };
 
+// Collider
+collider = instance_create_layer(0, 0, layer, obj_collider);
+
 // Camera
 camera = new Camera();
 
@@ -31,6 +34,12 @@ input =
 
 // Vertex manager
 vertex_manager = new VertexManager();
+
+// Level - gravity, timer, etc
+level = -1;
+
+// UI manager
+// ui_manager = new UIManager();
 
 // Set gpu settings
 gpu_set_ztestenable(true);
@@ -55,6 +64,10 @@ window_center();
 
 // Set game speed
 game_set_speed(display_get_frequency(), gamespeed_fps);
+
+// Audio settings
+
+// Draw settings
 
 // Randomize
 randomize();

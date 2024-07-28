@@ -12,21 +12,21 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"5d3f1164-5a81-4646-ad46-0d265c4c4c3a","name":"5d3f1164-5a81-4646-ad46-0d265c4c4c3a","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"2d8235f3-1fea-48ce-bae3-ca175c27efad","name":"2d8235f3-1fea-48ce-bae3-ca175c27efad","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":32,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"5b40f4a2-7c74-482a-a2fa-2263ddebc1be","blendMode":0,"displayName":"default","isLocked":false,"name":"5b40f4a2-7c74-482a-a2fa-2263ddebc1be","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"e80046b4-d184-4585-9f9d-c552ae969753","blendMode":0,"displayName":"default","isLocked":false,"name":"e80046b4-d184-4585-9f9d-c552ae969753","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_water",
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Tile Sets",
-    "path":"folders/Sprites/Tile Sets.yy",
+    "name":"Blocks",
+    "path":"folders/Sprites/Blocks.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
@@ -69,8 +69,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"5d3f1164-5a81-4646-ad46-0d265c4c4c3a","path":"sprites/spr_water/spr_water.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"165df9ed-8e13-4e86-bd5f-88cb597b1037","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"2d8235f3-1fea-48ce-bae3-ca175c27efad","path":"sprites/spr_water/spr_water.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"2bc3a32f-7164-4a56-ad77-ace96fb7a9cc","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

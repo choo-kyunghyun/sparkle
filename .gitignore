@@ -61,3 +61,6 @@ Temporary Items
 # Stitch
 .Stitch
 /tmp
+
+# Temporary folders
+/assets/temp

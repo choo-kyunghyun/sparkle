@@ -89,6 +89,16 @@ function VertexManager() constructor
         }
     }
 
+    /// @desc Freeze all vertex buffers in the manager
+    static freeze_all = function()
+    {
+        for (var _i = 0; _i < array_length(buffers); _i++)
+        {
+            vertex_freeze(buffers[_i].buffer);
+            buffers[_i].frozen = true;
+        }
+    }
+
     /// @desc Submits all vertex buffers in the manager
     static submit = function()
     {

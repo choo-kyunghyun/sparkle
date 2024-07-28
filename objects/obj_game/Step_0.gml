@@ -39,16 +39,4 @@ with (obj_actor)
         }
     }
 }
-with (obj_wall)
-{
-    if (visible && sprite_index != -1)
-    {
-        // Get texture
-        var _tex = sprite_get_texture(sprite_index, image_index);
-
-        // Cube
-        var _buffer = _vm.add(_tex);
-        vertex_add_cube(_buffer, sprite_index, image_index, x, y, depth - sprite_height, image_xscale, image_yscale, image_angle, image_pitch, image_roll, image_blend, image_alpha);
-    }
-}
 _vm.end_all();

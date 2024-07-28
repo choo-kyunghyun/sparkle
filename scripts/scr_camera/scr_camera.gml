@@ -14,7 +14,7 @@
 /// @arg {Real} _znear The near clipping plane of the camera.
 /// @arg {Real} _zfar The far clipping plane of the camera.
 /// @arg {Function, Real} _script The script of the camera.
-function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_height, _target = noone, _dist = 128, _speed = 5, _yaw = 270, _pitch = 45, _roll = 0, _fov = 60, _znear = 1, _zfar = 32000, _script = camera_update_default) constructor
+function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_height, _target = noone, _dist = 256, _speed = 5, _yaw = 270, _pitch = 45, _roll = 0, _fov = 60, _znear = 1, _zfar = 32000, _script = camera_update_default) constructor
 {
     id = camera_create_view(_x, _y, _width, _height);
     x = _x;

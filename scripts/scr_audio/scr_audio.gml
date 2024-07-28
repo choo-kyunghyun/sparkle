@@ -1,0 +1,5 @@
+/// @desc 
+function Emitter() constructor
+{
+	
+}
