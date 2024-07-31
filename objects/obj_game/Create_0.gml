@@ -40,6 +40,7 @@ level = -1;
 
 // UI manager
 // ui_manager = new UIManager();
+button_manager = new ButtonManager();
 
 // Set gpu settings
 gpu_set_ztestenable(true);

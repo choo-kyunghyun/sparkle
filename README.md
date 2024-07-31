@@ -2,7 +2,7 @@
 
 ![Sparkle](assets/splash.png)
 
-Sparkle is an open-source [GameMaker](https://gamemaker.io/en) project. The goal of this project is to make the various features as easy to use as possible. It leverages GameMaker's latest features, including object-oriented programming and Variable Definitions, to help even beginners create commercial-quality video games. This project is in its early stages and there may be inconsistent changes.
+Sparkle is an open-source [GameMaker](https://gamemaker.io/en) project. The goal of this project is to make the various features as easy to use as possible. This project is in its early stages and there may be inconsistent changes.
 
 ## Table of Contents
 
@@ -60,14 +60,17 @@ These are helpful resources for indie developers creating video games.
 | Simple gravity for any axis | Implement gravity that works on any axis |
 | Collider object | Develop special colliders for platformer |
 | Camera update script for FPS | Create a script to update the camera for FPS games |
+| Chapter 1 | Demo chapter for rpg games |
+| Chapter 2 | Demo chapter for platformer games |
 
 ### Known Issues
 
 | Issue | Description | Status |
 | ----- | ----------- | ------ |
-| Button text position | Button text is drawn in the wrong position | Fix in progress |
-| Button vbatch breaks | Button object causes many vbatch breaks. | Investigating |
-| Camera pitch clamp | This needs to be modified to prevent the camera from having a pitch that is out of range. | Pending |
+| Button tswaps | Button object causes many texture swaps. | Fix in progress |
+| Button vbatches | Button object causes many vbatch breaks. | Fix in progress |
+| Camera pitch | The pitch of the camera must be clamped. | Investigating |
+| Escape characters | `draw_text_format()` can't handle `\n` | Pending |
 
 ### Improvements
 

@@ -1,5 +1,5 @@
 /// @desc 
-function Emitter() constructor
+function AudioEmitter() constructor
 {
 	
 }

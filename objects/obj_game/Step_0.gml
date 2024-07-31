@@ -8,6 +8,16 @@ if (keyboard_check(vk_alt) && keyboard_check_pressed(vk_enter))
     window_set_fullscreen(!window_get_fullscreen());
 }
 
+// Watermark
+if (string_ends_with(keyboard_string, "sparkle"))
+{
+    url_open("https://github.com/Choo-Kyunghyun/Sparkle");
+    keyboard_string = string_delete(keyboard_string, string_length(keyboard_string), -7);
+}
+
+// Update buttons
+button_manager.update();
+
 // Update actor
 with (obj_actor)
 {

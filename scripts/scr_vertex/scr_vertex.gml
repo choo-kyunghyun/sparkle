@@ -52,6 +52,7 @@ function VertexManager() constructor
     /// @arg {Constant.ZFunction} _zfunc The z function to use.
     /// @arg {Boolean} _frozen Whether the buffer is frozen.
     /// @return {Id.VertexBuffer} The vertex buffer.
+    /// @pure
     static find = function(_texture, _zfunc = cmpfunc_lessequal, _frozen = false)
     {
         for (var _i = 0; _i < array_length(buffers); _i++)
