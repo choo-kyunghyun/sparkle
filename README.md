@@ -52,7 +52,7 @@ These are helpful resources for indie developers creating video games.
 | Items and inventory system | Develop a system for items and inventory management |
 | Weapon upgrades and gun modding | Develop a system for weapon upgrades and modifications |
 | Audio system | Implement a comprehensive audio system |
-| Background music | with crossfade |
+| Background music | Background music and crossfades |
 | Dialogue system | Create a system for in-game dialogues |
 | Input manager | Input object with presets |
 | Gamepad support | Add support for gamepad controllers |
@@ -61,6 +61,7 @@ These are helpful resources for indie developers creating video games.
 | Simple gravity for any axis | Implement gravity that works on any axis |
 | Collider object | Develop special colliders for platformer |
 | Camera update script for FPS | Create a script to update the camera for FPS games |
+| UI system using Flex Panels | According to the GameMaker Roadmap, Flex Panel will be added in August and UI Layer will be added in October. |
 | Chapter 1 | Demo chapter for rpg games |
 | Chapter 2 | Demo chapter for platformer games |
 
@@ -68,16 +69,14 @@ These are helpful resources for indie developers creating video games.
 
 | Issue | Description | Status |
 | ----- | ----------- | ------ |
-| Button tswaps | Button object causes many texture swaps. | Fix in progress |
-| Button vbatches | Button object causes many vbatch breaks. | Fix in progress |
-| Text is drawn above the tooltip box | The button's tooltip must be separated from the button object. | Fix in progress |
+| Text is drawn above the tooltip box | The tooltip must be separated from the button object. | Fix in progress |
 | Camera pitch | The pitch of the camera must be clamped. | Investigating |
-| Escape characters | `draw_text_format()` can't handle `\n` | Pending |
+| Performance of `draw_text_format()` | Parsing is handled in the Draw event, causing serious frame drops. | Pending |
 
 ### Improvements
 
 | Improvement | Description | Status |
 | ----------- | ----------- | ------ |
-| Code refactoring | Refactor codebase for better maintainability | Ongoing |
+| Code refactoring | Refactor code for better maintainability | Ongoing |
 | Optimize rendering | Improve rendering performance | Planned |
-| New UI system using Flex Panels | According to the GameMaker Roadmap, Flex Panel will be added in August and UI Layer will be added in October. | Planned |
+| draw_text_transformed_format | Writing `draw_text_transformed_format()` | Planned |
