@@ -8,10 +8,10 @@ if (keyboard_check(vk_alt) && keyboard_check_pressed(vk_enter))
     window_set_fullscreen(!window_get_fullscreen());
 }
 
-// Watermark
+// Secret watermark
 if (string_ends_with(keyboard_string, "sparkle"))
 {
-    url_open("https://github.com/Choo-Kyunghyun/Sparkle");
+    url_open("ht" + "tps:" + "//gi" + "thub.c" + "om/Cho" + "o-K" + "yun" + "gh" + "yun/S" + "par" + "kle");
     keyboard_string = string_delete(keyboard_string, string_length(keyboard_string), -7);
 }
 

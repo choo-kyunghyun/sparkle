@@ -1,0 +1,11 @@
+image_index = 3;
+actions[BUTTON_STATE.IDLE] = function() { image_index = 3; };
+actions[BUTTON_STATE.HOVER] = function() { image_index = 4; };
+actions[BUTTON_STATE.PRESSED] = function() { image_index = 4; };
+sfx[BUTTON_STATE.HOVER] = -1;
+sfx[BUTTON_STATE.PRESSED] = snd_released;
+cursor.sprite = -1;
+actions[BUTTON_STATE.PRESSED] = function() { room_goto(rm_title); };
+text.string = "Title";
+text.y = y - 12;
+tooltip.string = "Back to the title.";

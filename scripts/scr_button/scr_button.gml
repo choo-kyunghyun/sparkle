@@ -110,11 +110,17 @@ function ButtonManager() constructor
                 {
                     draw_sprite_stretched_ext(cursor.sprite, cursor.subimg, cursor.x, cursor.y, cursor.w, cursor.h, cursor.color, cursor.alpha);
                 }
+            }
+        }
 
-                // Tooltip box
+        // Draw tooltip box
+        for (var _i = 0; _i < array_length(buttons); _i++)
+        {
+            with (buttons[_i])
+            {
                 if (tooltip.display && tooltip.box.sprite != -1)
                 {
-                    draw_sprite_stretched_ext(tooltip.box.sprite, tooltip.box.subimg, tooltip.box.x, tooltip.box.y, tooltip.box.w, tooltip.box.h, tooltip.box.color, tooltip.box.alpha);
+                    draw_sprite_stretched_ext(tooltip.box.sprite, tooltip.box.subimg, device_mouse_x_to_gui(0) + tooltip.box.x, device_mouse_y_to_gui(0) + tooltip.box.y, tooltip.box.w, tooltip.box.h, tooltip.box.color, tooltip.box.alpha);
                 }
             }
         }
@@ -142,7 +148,8 @@ function ButtonManager() constructor
                         if (tooltip.font != -1) draw_set_font(tooltip.font);
                         draw_set_halign(tooltip.halign);
                         draw_set_valign(tooltip.valign);
-                        draw_text_ext_transformed_color(tooltip.x, tooltip.y, tooltip.string, tooltip.sep, tooltip.w, tooltip.xscale, tooltip.yscale, tooltip.angle, tooltip.c1, tooltip.c2, tooltip.c3, tooltip.c4, tooltip.alpha);
+                        // draw_text_ext_transformed_color(device_mouse_x_to_gui(0) + tooltip.box.x, device_mouse_y_to_gui(0) + tooltip.box.y, tooltip.string, tooltip.sep, tooltip.w, tooltip.xscale, tooltip.yscale, tooltip.angle, tooltip.c1, tooltip.c2, tooltip.c3, tooltip.c4, tooltip.alpha);
+                        draw_text(device_mouse_x_to_gui(0) + tooltip.box.x, device_mouse_y_to_gui(0) + tooltip.box.y, tooltip.string);
                         tooltip.box.w = string_width(tooltip.string);
                         tooltip.box.h = string_height(tooltip.string);
                     }

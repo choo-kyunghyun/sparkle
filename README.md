@@ -52,6 +52,7 @@ These are helpful resources for indie developers creating video games.
 | Items and inventory system | Develop a system for items and inventory management |
 | Weapon upgrades and gun modding | Develop a system for weapon upgrades and modifications |
 | Audio system | Implement a comprehensive audio system |
+| Background music | with crossfade |
 | Dialogue system | Create a system for in-game dialogues |
 | Input manager | Input object with presets |
 | Gamepad support | Add support for gamepad controllers |
@@ -69,6 +70,7 @@ These are helpful resources for indie developers creating video games.
 | ----- | ----------- | ------ |
 | Button tswaps | Button object causes many texture swaps. | Fix in progress |
 | Button vbatches | Button object causes many vbatch breaks. | Fix in progress |
+| Text is drawn above the tooltip box | The button's tooltip must be separated from the button object. | Fix in progress |
 | Camera pitch | The pitch of the camera must be clamped. | Investigating |
 | Escape characters | `draw_text_format()` can't handle `\n` | Pending |
 
