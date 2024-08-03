@@ -13,7 +13,6 @@ with (obj_plane)
 {
 	var _buffer = _vm.add(sprite_get_texture(sprite_index, image_index));
 	vertex_add_sprite_ext(_buffer, sprite_index, image_index, x, y, depth, image_xscale, image_yscale, image_angle, image_pitch, image_roll, image_blend, image_alpha);
-	
 }
 with (obj_cube)
 {
@@ -22,7 +21,6 @@ with (obj_cube)
 }
 with (obj_wall)
 {
-    // Check if the wall is visible
     if (visible && sprite_index != -1)
     {
         var _buffer = _vm.add(sprite_get_texture(sprite_index, image_index));

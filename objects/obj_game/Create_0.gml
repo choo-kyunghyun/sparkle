@@ -79,5 +79,5 @@ show_debug_overlay(true);
 // Set release mode
 gml_release_mode(false);
 
-// Go to next room
-room_goto_next();
+// Play the intro
+layer_sequence_play(layer_sequence_create(layer_create(depth, "sequence"), 0, 0, seq_intro));

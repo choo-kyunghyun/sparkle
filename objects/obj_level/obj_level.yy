@@ -31,6 +31,8 @@
     {"$GMObjectProperty":"v1","%Name":"camera_x","filters":[],"listItems":[],"multiselect":false,"name":"camera_x","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"camera_y","filters":[],"listItems":[],"multiselect":false,"name":"camera_y","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"camera_z","filters":[],"listItems":[],"multiselect":false,"name":"camera_z","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
+    {"$GMObjectProperty":"v1","%Name":"camera_width","filters":[],"listItems":[],"multiselect":false,"name":"camera_width","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"room_width","varType":0,},
+    {"$GMObjectProperty":"v1","%Name":"camera_height","filters":[],"listItems":[],"multiselect":false,"name":"camera_height","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"room_height","varType":0,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

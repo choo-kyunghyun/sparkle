@@ -15,7 +15,7 @@ function VertexManager() constructor
     /// @desc Adds a vertex buffer to the manager
     /// @arg {Pointer.Texture} _texture The texture to add.
     /// @arg {Constant.ZFunction} _zfunc The z function to use.
-    /// @arg {Boolean} _begin Whether to begin the buffer.
+    /// @arg {Bool} _begin Whether to begin the buffer.
     /// @return {Id.VertexBuffer} The vertex buffer.
     static add = function(_texture, _zfunc = cmpfunc_lessequal, _begin = true)
     {
@@ -50,7 +50,7 @@ function VertexManager() constructor
     /// @desc Finds a vertex buffer in the manager
     /// @arg {Pointer.Texture} _texture The texture to find.
     /// @arg {Constant.ZFunction} _zfunc The z function to use.
-    /// @arg {Boolean} _frozen Whether the buffer is frozen.
+    /// @arg {Bool} _frozen Whether the buffer is frozen.
     /// @return {Id.VertexBuffer} The vertex buffer.
     /// @pure
     static find = function(_texture, _zfunc = cmpfunc_lessequal, _frozen = false)
@@ -340,14 +340,14 @@ function vertex_add_cube(_buffer, _sprite, _subimg, _x, _y, _z, _xscale, _yscale
         _y[_i] = _center_y + _dx * _sin_yaw + _dy * _cos_yaw;
 
         // Rotate around the x-axis
-        var _dy = _y[_i] - _center_y;
+        _dy = _y[_i] - _center_y;
         var _dz = _z[_i] - _center_z;
         _y[_i] = _center_y + _dy * _cos_pitch - _dz * _sin_pitch;
         _z[_i] = _center_z + _dy * _sin_pitch + _dz * _cos_pitch;
 
         // Rotate around the y-axis
-        var _dx = _x[_i] - _center_x;
-        var _dz = _z[_i] - _center_z;
+        _dx = _x[_i] - _center_x;
+        _dz = _z[_i] - _center_z;
         _x[_i] = _center_x + _dx * _cos_roll - _dz * _sin_roll;
         _z[_i] = _center_z + _dx * _sin_roll + _dz * _cos_roll;
     }

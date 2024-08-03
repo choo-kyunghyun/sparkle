@@ -4,16 +4,6 @@
 
 Sparkle is an open-source [GameMaker](https://gamemaker.io/en) project. The goal of this project is to make the various features as easy to use as possible. This project is in its early stages and there may be inconsistent changes.
 
-## Table of Contents
-
-- [Features](#features)
-- [License](#license)
-- [Resources](#resources)
-- [Roadmap](#roadmap)
-    - [Planned Features](#planned-features)
-    - [Known Issues](#known-issues)
-    - [Improvements](#improvements)
-
 ## Features
 
 ### Button
