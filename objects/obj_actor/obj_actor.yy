@@ -8,8 +8,8 @@
   "name":"obj_actor",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Sparkle",
+    "path":"folders/Objects/Sparkle.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -31,6 +31,7 @@
     {"$GMObjectProperty":"v1","%Name":"sprite_index","filters":[
         "GMSprite",
       ],"listItems":[],"multiselect":false,"name":"sprite_index","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"spr_merchant","path":"sprites/spr_merchant/spr_merchant.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"spr_merchant","varType":5,},
+    {"$GMObjectProperty":"v1","%Name":"image_index","filters":[],"listItems":[],"multiselect":false,"name":"image_index","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"playable","filters":[],"listItems":[],"multiselect":false,"name":"playable","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
     {"$GMObjectProperty":"v1","%Name":"silhouette","filters":[],"listItems":[],"multiselect":false,"name":"silhouette","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":3,},
     {"$GMObjectProperty":"v1","%Name":"movement_speed","filters":[],"listItems":[],"multiselect":false,"name":"movement_speed","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"256","varType":0,},

@@ -8,8 +8,8 @@
   "name":"obj_wall",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Sparkle",
+    "path":"folders/Objects/Sparkle.yy",
   },
   "parentObjectId":null,
   "persistent":false,

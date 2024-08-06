@@ -1,4 +1,4 @@
-/// @desc Manager class for vertex buffers and textures
+/// @desc Manager class for vertex buffers and textures.
 function VertexManager() constructor
 {
     // Vertex buffers
@@ -11,11 +11,11 @@ function VertexManager() constructor
     vertex_format_add_color();
     vertex_format_add_texcoord();
     format = vertex_format_end();
-
+    
     /// @desc Adds a vertex buffer to the manager
-    /// @arg {Pointer.Texture} _texture The texture to add.
-    /// @arg {Constant.ZFunction} _zfunc The z function to use.
-    /// @arg {Bool} _begin Whether to begin the buffer.
+    /// @param {Pointer.Texture} _texture The texture to add.
+    /// @param {Constant.ZFunction} _zfunc The z function to use.
+    /// @param {Bool} _begin Whether to begin the buffer.
     /// @return {Id.VertexBuffer} The vertex buffer.
     static add = function(_texture, _zfunc = cmpfunc_lessequal, _begin = true)
     {
@@ -48,10 +48,10 @@ function VertexManager() constructor
     }
 
     /// @desc Finds a vertex buffer in the manager
-    /// @arg {Pointer.Texture} _texture The texture to find.
-    /// @arg {Constant.ZFunction} _zfunc The z function to use.
-    /// @arg {Bool} _frozen Whether the buffer is frozen.
-    /// @return {Id.VertexBuffer} The vertex buffer.
+    /// @param {Pointer.Texture} _texture The texture to find.
+    /// @param {Constant.ZFunction} _zfunc The z function to use.
+    /// @param {Bool} _frozen Whether the buffer is frozen.
+    /// @return {Id.VertexBuffer, Undefined} The vertex buffer.
     /// @pure
     static find = function(_texture, _zfunc = cmpfunc_lessequal, _frozen = false)
     {
@@ -76,7 +76,7 @@ function VertexManager() constructor
     }
 
     /// @desc Freeze a vertex buffer in the manager
-    /// @arg {Id.VertexBuffer} _buffer The vertex buffer to freeze.
+    /// @param {Id.VertexBuffer} _buffer The vertex buffer to freeze.
     static freeze = function(_buffer)
     {
         for (var _i = 0; _i < array_length(buffers); _i++)
@@ -146,15 +146,15 @@ function VertexManager() constructor
 }
 
 /// @desc Adds a vertex to the vertex buffer
-/// @arg {Id.VertexBuffer} _buffer The vertex buffer to add the vertex to.
-/// @arg {Real} _x The x position of the vertex.
-/// @arg {Real} _y The y position of the vertex.
-/// @arg {Real} _z The z position of the vertex.
-/// @arg {Real} _nx The x normal of the vertex.
-/// @arg {Real} _ny The y normal of the vertex.
-/// @arg {Real} _nz The z normal of the vertex.
-/// @arg {Constant.Color} _color The color of the vertex.
-/// @arg {Real} _alpha The alpha of the vertex.
+/// @param {Id.VertexBuffer} _buffer The vertex buffer to add the vertex to.
+/// @param {Real} _x The x position of the vertex.
+/// @param {Real} _y The y position of the vertex.
+/// @param {Real} _z The z position of the vertex.
+/// @param {Real} _nx The x normal of the vertex.
+/// @param {Real} _ny The y normal of the vertex.
+/// @param {Real} _nz The z normal of the vertex.
+/// @param {Constant.Color} _color The color of the vertex.
+/// @param {Real} _alpha The alpha of the vertex.
 function vertex_add(_buffer, _x, _y, _z, _nx, _ny, _nz, _color, _alpha, _u, _v)
 {
     vertex_position_3d(_buffer, _x, _y, _z);
@@ -164,16 +164,16 @@ function vertex_add(_buffer, _x, _y, _z, _nx, _ny, _nz, _color, _alpha, _u, _v)
 }
 
 /// @desc Adds a quadrilateral to the vertex buffer
-/// @arg {Id.VertexBuffer} _buffer The vertex buffer to add the quadrilateral to.
-/// @arg {Array} _x The x positions of the quadrilateral.
-/// @arg {Array} _y The y positions of the quadrilateral.
-/// @arg {Array} _z The z positions of the quadrilateral.
-/// @arg {Real} _nx The x normal of the quadrilateral.
-/// @arg {Real} _ny The y normal of the quadrilateral.
-/// @arg {Real} _nz The z normal of the quadrilateral.
-/// @arg {Constant.Color} _color The color of the quadrilateral.
-/// @arg {Real} _alpha The alpha of the quadrilateral.
-/// @arg {Array} _uvs The uvs of the quadrilateral.
+/// @param {Id.VertexBuffer} _buffer The vertex buffer to add the quadrilateral to.
+/// @param {Array} _x The x positions of the quadrilateral.
+/// @param {Array} _y The y positions of the quadrilateral.
+/// @param {Array} _z The z positions of the quadrilateral.
+/// @param {Real} _nx The x normal of the quadrilateral.
+/// @param {Real} _ny The y normal of the quadrilateral.
+/// @param {Real} _nz The z normal of the quadrilateral.
+/// @param {Constant.Color} _color The color of the quadrilateral.
+/// @param {Real} _alpha The alpha of the quadrilateral.
+/// @param {Array} _uvs The uvs of the quadrilateral.
 function vertex_add_quadrilateral(_buffer, _x, _y, _z, _nx, _ny, _nz, _color, _alpha, _uvs)
 {
     vertex_add(_buffer, _x[0], _y[0], _z[0], _nx, _ny, _nz, _color, _alpha, _uvs[0], _uvs[1]);
@@ -185,12 +185,12 @@ function vertex_add_quadrilateral(_buffer, _x, _y, _z, _nx, _ny, _nz, _color, _a
 }
 
 /// @desc Adds a sprite to the vertex buffer
-/// @arg {Id.VertexBuffer} _buffer The vertex buffer to add the sprite to.
-/// @arg {Asset.GMSprite} _sprite The sprite to add.
-/// @arg {Real} _subimg The subimage of the sprite to add.
-/// @arg {Real} _x The x position of the sprite.
-/// @arg {Real} _y The y position of the sprite.
-/// @arg {Real} _z The z position of the sprite.
+/// @param {Id.VertexBuffer} _buffer The vertex buffer to add the sprite to.
+/// @param {Asset.GMSprite} _sprite The sprite to add.
+/// @param {Real} _subimg The subimage of the sprite to add.
+/// @param {Real} _x The x position of the sprite.
+/// @param {Real} _y The y position of the sprite.
+/// @param {Real} _z The z position of the sprite.
 function vertex_add_sprite(_buffer, _sprite, _subimg, _x, _y, _z)
 {
     // Get UVs
@@ -211,19 +211,19 @@ function vertex_add_sprite(_buffer, _sprite, _subimg, _x, _y, _z)
 }
 
 /// @desc Adds a sprite to the vertex buffer
-/// @arg {Id.VertexBuffer} _buffer The vertex buffer to add the sprite to.
-/// @arg {Asset.GMSprite} _sprite The sprite to add.
-/// @arg {Real} _subimg The subimage of the sprite to add.
-/// @arg {Real} _x The x position of the sprite.
-/// @arg {Real} _y The y position of the sprite.
-/// @arg {Real} _z The z position of the sprite.
-/// @arg {Real} _xscale The x scale of the sprite.
-/// @arg {Real} _yscale The y scale of the sprite.
-/// @arg {Real} _yaw The yaw of the sprite.
-/// @arg {Real} _pitch The pitch of the sprite.
-/// @arg {Real} _roll The roll of the sprite.
-/// @arg {Constant.Color} _color The color of the sprite.
-/// @arg {Real} _alpha The alpha of the sprite.
+/// @param {Id.VertexBuffer} _buffer The vertex buffer to add the sprite to.
+/// @param {Asset.GMSprite} _sprite The sprite to add.
+/// @param {Real} _subimg The subimage of the sprite to add.
+/// @param {Real} _x The x position of the sprite.
+/// @param {Real} _y The y position of the sprite.
+/// @param {Real} _z The z position of the sprite.
+/// @param {Real} _xscale The x scale of the sprite.
+/// @param {Real} _yscale The y scale of the sprite.
+/// @param {Real} _yaw The yaw of the sprite.
+/// @param {Real} _pitch The pitch of the sprite.
+/// @param {Real} _roll The roll of the sprite.
+/// @param {Constant.Color} _color The color of the sprite.
+/// @param {Real} _alpha The alpha of the sprite.
 function vertex_add_sprite_ext(_buffer, _sprite, _subimg, _x, _y, _z, _xscale, _yscale, _yaw, _pitch, _roll, _color, _alpha)
 {
     // Get UVs
@@ -282,28 +282,28 @@ function vertex_add_sprite_ext(_buffer, _sprite, _subimg, _x, _y, _z, _xscale, _
 }
 
 /// @desc Adds a self sprite to the vertex buffer
-/// @arg {Id.VertexBuffer} _buffer The vertex buffer to add the sprite to.
-/// @arg {Real} _pitch The pitch of the sprite.
-/// @arg {Real} _roll The roll of the sprite.
+/// @param {Id.VertexBuffer} _buffer The vertex buffer to add the sprite to.
+/// @param {Real} _pitch The pitch of the sprite.
+/// @param {Real} _roll The roll of the sprite.
 function vertex_add_self(_buffer, _pitch, _roll)
 {
     vertex_add_sprite_ext(_buffer, sprite_index, image_index, x, y, depth, image_xscale, image_yscale, image_angle, _pitch, _roll, image_blend, image_alpha);
 }
 
 /// @desc Adds a cube to the vertex buffer with a sprite
-/// @arg {Id.VertexBuffer} _buffer The vertex buffer to add the cube to.
-/// @arg {Asset.GMSprite} _sprite The sprite to add.
-/// @arg {Real} _subimg The subimage of the sprite to add.
-/// @arg {Real} _x The x position of the cube.
-/// @arg {Real} _y The y position of the cube.
-/// @arg {Real} _z The z position of the cube.
-/// @arg {Real} _xscale The x scale of the cube.
-/// @arg {Real} _yscale The y scale of the cube.
-/// @arg {Real} _yaw The yaw of the cube.
-/// @arg {Real} _pitch The pitch of the cube.
-/// @arg {Real} _roll The roll of the cube.
-/// @arg {Constant.Color} _color The color of the cube.
-/// @arg {Real} _alpha The alpha of the cube.
+/// @param {Id.VertexBuffer} _buffer The vertex buffer to add the cube to.
+/// @param {Asset.GMSprite} _sprite The sprite to add.
+/// @param {Real} _subimg The subimage of the sprite to add.
+/// @param {Real} _x The x position of the cube.
+/// @param {Real} _y The y position of the cube.
+/// @param {Real} _z The z position of the cube.
+/// @param {Real} _xscale The x scale of the cube.
+/// @param {Real} _yscale The y scale of the cube.
+/// @param {Real} _yaw The yaw of the cube.
+/// @param {Real} _pitch The pitch of the cube.
+/// @param {Real} _roll The roll of the cube.
+/// @param {Constant.Color} _color The color of the cube.
+/// @param {Real} _alpha The alpha of the cube.
 function vertex_add_cube(_buffer, _sprite, _subimg, _x, _y, _z, _xscale, _yscale, _yaw, _pitch, _roll, _color, _alpha)
 {
     // Get width and height of the sprite

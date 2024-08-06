@@ -1,16 +1,13 @@
 /// @desc Apply a format tag
-/// @param _tag The tag to apply
-/// @return Returns true if the tag is valid and false otherwise
+/// @param {String} _tag The tag to apply
+/// @return {Bool} Returns true if the tag is valid and false otherwise
 function draw_apply_format(_tag)
 {
     // Get the position of the equal sign
     var _split_pos = string_pos("=", _tag);
 
     // Check if the tag is valid
-    if (_split_pos == -1)
-    {
-        return false;
-    }
+    if (_split_pos == 0) return false;
 
     // Get the key and value
     var _key = string_copy(_tag, 1, _split_pos - 1);
@@ -19,14 +16,11 @@ function draw_apply_format(_tag)
     // Set the color
     if (_key == "color")
     {
-        // Hexadecimal color
+        // Hexadecimal values using the # symbol
         if (string_char_at(_value, 1) == "#")
         {
             // Check if the color is in #RRGGBB format
-            if (string_length(_value) != 7)
-            {
-                return false;
-            }
+            if (string_length(_value) != 7) return false;
 
             // Split #RRGGBB into RGB
             var _red = real("0x" + string_copy(_value, 2, 2));
@@ -36,9 +30,40 @@ function draw_apply_format(_tag)
             // Set the color
             draw_set_color(make_color_rgb(_red, _green, _blue));
         }
-        // #rrggbbaa
-        // $bbggrr
-        // $aabbggrr
+        // Hexadeciaml values using the $ symbol
+        else if (string_char_at(_value, 1) == "$")
+        {
+            // Check if the color is in $BBGGRR format
+            if (string_length(_value) == 7)
+            {
+                // Split $BBGGRR into RGB
+                var _blue = real("0x" + string_copy(_value, 2, 2));
+                var _green = real("0x" + string_copy(_value, 4, 2));
+                var _red = real("0x" + string_copy(_value, 6, 2));
+
+                // Set the color
+                draw_set_color(make_color_rgb(_red, _green, _blue));
+            }
+            // Check if the color is in $AABBGGRR format
+            else if (string_length(_value) == 9)
+            {
+                // Split $AABBGGRR into ARGB
+                var _alpha = real("0x" + string_copy(_value, 2, 2));
+                var _blue = real("0x" + string_copy(_value, 4, 2));
+                var _green = real("0x" + string_copy(_value, 6, 2));
+                var _red = real("0x" + string_copy(_value, 8, 2));
+
+                // Set the color
+                draw_set_color(make_color_rgb(_red, _green, _blue));
+
+                // Set the alpha
+                draw_set_alpha(_alpha / 255);
+            }
+            else
+            {
+                return false;
+            }
+        }
         // Color name
         else
         {
@@ -83,10 +108,7 @@ function draw_apply_format(_tag)
         var _font = asset_get_index(_value);
 
         // Check if the font exists
-        if (_font == -1)
-        {
-            return false;
-        }
+        if (_font == -1) return false;
 
         // Set the font
         draw_set_font(_font);

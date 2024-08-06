@@ -1,19 +1,19 @@
 /// @desc The camera object.
-/// @arg {Real} _x The x position of the camera.
-/// @arg {Real} _y The y position of the camera.
-/// @arg {Real} _z The z position of the camera.
-/// @arg {Real} _width The width of the camera.
-/// @arg {Real} _height The height of the camera.
-/// @arg {Asset.GMObject, Id.Instance} _target The target of the camera.
-/// @arg {Real} _dist The distance of the camera.
-/// @arg {Real} _speed The speed of the camera.
-/// @arg {Real} _yaw The yaw of the camera.
-/// @arg {Real} _pitch The pitch of the camera.
-/// @arg {Real} _roll The roll of the camera.
-/// @arg {Real} _fov The field of view of the camera.
-/// @arg {Real} _znear The near clipping plane of the camera.
-/// @arg {Real} _zfar The far clipping plane of the camera.
-/// @arg {Function, Real} _script The script of the camera.
+/// @param {Real} _x The x position of the camera.
+/// @param {Real} _y The y position of the camera.
+/// @param {Real} _z The z position of the camera.
+/// @param {Real} _width The width of the camera.
+/// @param {Real} _height The height of the camera.
+/// @param {Asset.GMObject, Id.Instance} _target The target of the camera.
+/// @param {Real} _dist The distance of the camera.
+/// @param {Real} _speed The speed of the camera.
+/// @param {Real} _yaw The yaw of the camera.
+/// @param {Real} _pitch The pitch of the camera.
+/// @param {Real} _roll The roll of the camera.
+/// @param {Real} _fov The field of view of the camera.
+/// @param {Real} _znear The near clipping plane of the camera.
+/// @param {Real} _zfar The far clipping plane of the camera.
+/// @param {Function, Real} _script The script of the camera.
 function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_height, _target = noone, _dist = 256, _speed = 5, _yaw = 270, _pitch = 45, _roll = 0, _fov = 60, _znear = 1, _zfar = 32000, _script = camera_update_default) constructor
 {
     id = camera_create_view(_x, _y, _width, _height);
@@ -43,17 +43,15 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     /// @desc Updates the camera.
     static update = function()
     {
+        if (event_number != ev_step_end) debug_event("Camera: Update event should be in the End Step event.");
         script();
-        if (custom != undefined)
-        {
-            custom();
-        }
+        if (custom != undefined) custom();
     };
 
     /// @desc Updates the position of the camera.
-    /// @arg {Real} _x The x position of the camera.
-    /// @arg {Real} _y The y position of the camera.
-    /// @arg {Real} _z The z position of the camera.
+    /// @param {Real} _x The x position of the camera.
+    /// @param {Real} _y The y position of the camera.
+    /// @param {Real} _z The z position of the camera.
     static position = function(_x = 0, _y = 0, _z = 0)
     {
         x = _x;
@@ -62,8 +60,8 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     };
 
     /// @desc Updates the size of the camera.
-    /// @arg {Real} _width The width of the camera.
-    /// @arg {Real} _height The height of the camera.
+    /// @param {Real} _width The width of the camera.
+    /// @param {Real} _height The height of the camera.
     static size = function(_width = room_width, _height = room_height)
     {
         width = _width;
@@ -71,9 +69,9 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     };
 
     /// @desc Updates the axes of the camera.
-    /// @arg {Real} _yaw The yaw of the camera.
-    /// @arg {Real} _pitch The pitch of the camera.
-    /// @arg {Real} _roll The roll of the camera.
+    /// @param {Real} _yaw The yaw of the camera.
+    /// @param {Real} _pitch The pitch of the camera.
+    /// @param {Real} _roll The roll of the camera.
     static axes = function(_yaw = 0, _pitch = 0, _roll = 0)
     {
         yaw = _yaw;

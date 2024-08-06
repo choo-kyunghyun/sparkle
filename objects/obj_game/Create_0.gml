@@ -18,6 +18,12 @@ collider = instance_create_layer(0, 0, layer, obj_collider);
 // Camera
 camera = new Camera();
 
+// Vertex manager
+vertex_manager = new VertexManager();
+
+// UI manager
+ui_manager = new UIManager();
+
 // Input
 input =
 {
@@ -32,20 +38,12 @@ input =
     scan : function() { return keyboard_check_pressed(ord("F")); }
 };
 
-// Vertex manager
-vertex_manager = new VertexManager();
-
-// Level - gravity, timer, etc
-level = -1;
-
-// UI manager
-// ui_manager = new UIManager();
-button_manager = new ButtonManager();
+// Level
+level = noone;
 
 // Set gpu settings
 gpu_set_ztestenable(true);
 gpu_set_alphatestenable(true);
-gpu_set_cullmode(cull_counterclockwise);
 
 // Reset display
 if (display_aa >= 8)        display_reset(8, false);
@@ -78,6 +76,3 @@ show_debug_overlay(true);
 
 // Set release mode
 gml_release_mode(false);
-
-// Play the intro
-layer_sequence_play(layer_sequence_create(layer_create(depth, "sequence"), 0, 0, seq_intro));

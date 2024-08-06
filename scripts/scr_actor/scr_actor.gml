@@ -1,10 +1,11 @@
-
+/// @desc Actor manager
 function ActorManager() constructor
 {
 	
 }
 
 /// @desc Control the player
+// Note: This function needs to be rewritten.
 function actor_player()
 {
     // Game
@@ -22,6 +23,5 @@ function actor_player()
         var _dist = movement_speed * obj_game.time.delta;
 
         move_and_collide(lengthdir_x(_dist, _dir), lengthdir_y(_dist, _dir), obj_wall);
-		// move_and_collide(lengthdir_x(_dist, _dir), lengthdir_y(_dist, _dir), obj_wall, 4, 0, 0, abs(lengthdir_x(_dist, _dir)), abs(lengthdir_y(_dist, _dir)));
     }
 }

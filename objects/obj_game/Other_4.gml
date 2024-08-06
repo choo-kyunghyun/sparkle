@@ -4,7 +4,7 @@ view_visible[0] = true;
 view_camera[0] = camera.id;
 
 // Refresh the button manager
-button_manager.refresh();
+ui_manager.refresh();
 
 // Update the vertex buffer
 var _vm = vertex_manager;
