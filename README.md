@@ -6,9 +6,17 @@ Sparkle is an open-source [GameMaker](https://gamemaker.io/en) project. The goal
 
 ## Features
 
-### Button
+### Master object
 
-Provides an button object that is based on the finite state machine. Default structures are provided and you can use them as easily as writing CSS and JavaScript code.
+A single game object manages all systems. This allows for a quick understanding of the entire code and makes maintenance easy.
+
+### UI manager
+
+The project provides a UI manager. Buttons placed in the room editor are automatically managed by the manager. This makes it easy to add and manage UI elements.
+
+### Camera
+
+A camera object that supports both 2D and 3D is provided. You only need to select one of the pre-written update functions. This allows for easy application of camera settings suitable for various game genres.
 
 ## License
 
@@ -31,42 +39,28 @@ These are helpful resources for indie developers creating video games.
 
 ## Project Status
 
-### Planned Features
-
-| Feature | Description |
-| ------- | ----------- |
-| Sparkle wiki | Comprehensive documentation and guides for the project |
-| Actor object with management system | Manage actors within the game |
-| Factions for actors | Create faction parent objects for actors |
-| Buffs and debuffs | Implement a system for buffs and debuffs |
-| Items and inventory system | Develop a system for items and inventory management |
-| Weapon upgrades and gun modding | Develop a system for weapon upgrades and modifications |
-| Audio system | Implement a comprehensive audio system |
-| Background music | Background music and crossfades |
-| Dialogue system | Create a system for in-game dialogues |
-| Input manager | Input object with presets |
-| Gamepad support | Add support for gamepad controllers |
-| Gesture input | Implement gesture-based input controls |
-| Custom tilemap scripts | Create custom scripts for tilemap manipulation |
-| Simple gravity for any axis | Implement gravity that works on any axis |
-| Collider object | Develop special colliders for platformer |
-| Camera update script for FPS | Create a script to update the camera for FPS games |
-| UI system using Flex Panels | According to the GameMaker Roadmap, Flex Panel will be added in August and UI Layer will be added in October. |
-| Chapter 1 | Demo chapter for rpg games |
-| Chapter 2 | Demo chapter for platformer games |
-
-### Known Issues
-
-| Issue | Description | Status |
-| ----- | ----------- | ------ |
-| Text is drawn above the tooltip box | The tooltip must be separated from the button object. | Fix in progress |
-| Camera pitch | The pitch of the camera must be clamped. | Investigating |
-| Performance of `draw_text_format()` | Parsing is handled in the Draw event, causing serious frame drops. | Pending |
-
-### Improvements
-
-| Improvement | Description | Status |
-| ----------- | ----------- | ------ |
-| Code refactoring | Refactor code for better maintainability | Ongoing |
-| Optimize rendering | Improve rendering performance | Planned |
-| draw_text_transformed_format | Writing `draw_text_transformed_format()` | Planned |
+| Type | Item | Description | Status |
+| ---- | ---- | ----------- | ------ |
+| Feature | Sparkle wiki | Comprehensive documentation and guides for the project | Planned |
+| Feature | Actor | Implement actor object, faction system, pathfinding script, buffs and debuffs system, and actor manager | Planned |
+| Feature | Items and inventory | Implement items and actor inventory | Planned |
+| Feature | Item upgrade system | Implement item upgrade system including weapon modding | Planned |
+| Feature | Audio manager | Implement a comprehensive audio system | Planned |
+| Feature | Crossfading | Crossfading for bgm transition | Planned |
+| Feature | Dialogue | In-game dialogues system with external files support | Planned |
+| Feature | Input manager | Input manager with gamepad support and presets | Planned |
+| Feature | Gesture | Support gestures | Planned |
+| Feature | Tilemap | Custom tilemap scripts for tilemap manipulation | Planned |
+| Feature | Gravity | Simple gravity for any axis | Planned |
+| Feature | `obj_collider` | Special collider object for platformer | Planned |
+| Feature | FPS camera | A camera update script for FPS games | Planned |
+| Feature | HUD | According to the GameMaker Roadmap, Flex Panel will be added in August and UI Layer will be added in October. | Planned |
+| Feature | `draw_text_transformed_format()` | Implement more draw_text_format functions | Planned |
+| Feature | Chapter 1 | Demo chapter for rpg | Planned |
+| Feature | Chapter 2 | Demo chapter for platformer | Planned |
+| Feature | Chapter 3 | Demo chapter for top-view shooting | Planned |
+| Issues | `draw_apply_format()` causes framerate drop | Parsing is performed in the Draw event. | Fix in progress |
+| Issues | Camera pitch | The pitch of the camera must be clamped. | Investigating |
+| Issues | Performance of `draw_text_format()` | Parsing is handled in the Draw event, causing serious frame drops. | Pending |
+| Improvement | Code refactoring | Refactor code for better maintainability | Ongoing |
+| Improvement | Optimize rendering | Improve rendering performance | Planned |
