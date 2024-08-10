@@ -8,8 +8,8 @@
   "name":"obj_panel",
   "overriddenProperties":[],
   "parent":{
-    "name":"User Interfaces",
-    "path":"folders/Objects/Sparkle/User Interfaces.yy",
+    "name":"Core Objects",
+    "path":"folders/Objects/Core Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -41,8 +41,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_panel",
-    "path":"sprites/spr_panel/spr_panel.yy",
+    "name":"spr_roundrect",
+    "path":"sprites/spr_roundrect/spr_roundrect.yy",
   },
   "spriteMaskId":null,
   "visible":true,

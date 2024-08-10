@@ -44,7 +44,7 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     static update = function()
     {
         if (event_number != ev_step_end) debug_event("Camera: Update event should be in the End Step event.");
-        script();
+        if (script != undefined) script();
         if (custom != undefined) custom();
     };
 
@@ -78,9 +78,39 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
         pitch = _pitch;
         roll = _roll;
     };
+
+    /// @desc Resizes the camera to fit the window.
+    /// @param {Real} _base_width The base width of the camera.
+    /// @param {Real} _base_height The base height of the camera.
+    static resize = function(_base_width = room_width, _base_height = room_height)
+    {
+        // Get the window size
+        var _width = window_get_width();
+        var _height = window_get_height();
+
+        // Calculate the aspect ratio
+        var _aspect = _width / _height;
+
+        // Portrait
+        if (_aspect < 1)
+        {
+            height = min(_height, _base_height);
+            width = height * _aspect;
+        }
+        // Landscape
+        else
+        {
+            width = min(_width, _base_width);
+            height = width / _aspect;
+        }
+
+        // Update the camera
+        camera_set_view_size(id, floor(width), floor(height));
+        show_debug_message("Camera: Resized to " + string(width) + "x" + string(height));
+    };
 }
 
-/// @desc Updates the camera for a default game.
+/// @desc Updates the camera
 function camera_update_default()
 {
     with (obj_game)
@@ -103,8 +133,53 @@ function camera_update_default()
     }
 }
 
+/// @desc Updates the camera without boundary checking.
+function camera_update_free()
+{
+    with (obj_game)
+    {
+        // Update the position
+        if (camera.target >= 0)
+        {
+            camera.x = lerp(camera.x, camera.target.x, camera.speed * time.delta);
+            camera.y = lerp(camera.y, camera.target.y, camera.speed * time.delta);
+        }
+
+        // Update the camera
+        camera_set_view_pos(camera.id, camera.x, camera.y);
+        camera_set_view_size(camera.id, camera.width, camera.height);
+        camera_apply(camera.id);
+    }
+}
+
 /// @desc Updates the camera for an RPG game.
 function camera_update_rpg()
+{
+    with (obj_game)
+    {
+        // Calculate the distances of the camera from the target
+        var _dist_x = camera.dist * dcos(-camera.yaw) * dcos(-camera.pitch);
+        var _dist_y = camera.dist * dsin(-camera.yaw) * dcos(-camera.pitch);
+        var _dist_z = camera.dist * dsin(-camera.pitch);
+        
+        // Update the position
+        if (camera.target >= 0)
+        {
+            camera.x = lerp(camera.x, camera.target.x + _dist_x, camera.speed * time.delta);
+            camera.y = lerp(camera.y, camera.target.y + _dist_y, camera.speed * time.delta);
+            camera.z = lerp(camera.z, camera.target.depth + _dist_z, camera.speed * time.delta);
+        }
+
+        // Update the camera
+        camera_set_view_mat(camera.id, matrix_build_lookat(camera.x, camera.y, camera.z, camera.x - _dist_x, camera.y - _dist_y, camera.z - _dist_z, dsin(camera.roll), 0, dcos(camera.roll)));
+        camera_set_proj_mat(camera.id, matrix_build_projection_perspective_fov(camera.fov, camera.width / camera.height, camera.znear, camera.zfar));
+        camera_apply(camera.id);
+    }
+}
+
+/// @desc Updates the camera for FPS game.
+// Note: This function is not complete.
+function camera_update_fps()
 {
     with (obj_game)
     {

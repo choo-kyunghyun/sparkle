@@ -16,12 +16,15 @@ function UIManager() constructor
 
     // Create button manager
     button_manager = new ButtonManager();
+
+    // Scale
+    scale = 1;
 	
 	// Tooltip
 	tooltip =
     {
-        sprite : spr_tooltip,
-        subimg : -1,
+        sprite : spr_roundrect,
+        subimg : 0,
         x : 0,
         y : 0,
         width : 0,
@@ -31,22 +34,22 @@ function UIManager() constructor
         xoffset : 16,
         yoffset : 16,
         string : "",
+		color : c_black,
+		alpha : 0.5
         // font : -1,
         // sep : 0,
         // w : 64,
         // xscale : 1,
         // yscale : 1,
-        // angle : 0,
-        // c1 : c_white,
-        // c2 : c_white,
-        // c3 : c_white,
-        // c4 : c_white,
-        // alpha : 1
+        // angle : 0
     };
 
     /// @desc Update the user interface
     static update = function()
     {
+        // Update scale
+        display_set_gui_maximise(scale, scale);
+
         // Update panels
         panel_manager.update();
 
@@ -61,7 +64,7 @@ function UIManager() constructor
         var _inst = instance_position(_mouse_x, _mouse_y, obj_button);
 
         // Update tooltip
-        if (_inst != noone)
+        if (_inst != noone && _inst.visible && layer_get_visible(_inst.layer))
         {
             // Get tooltip string
             tooltip.string = _inst.tooltip;
@@ -112,7 +115,7 @@ function UIManager() constructor
             if (tooltip.y + tooltip.height > display_get_gui_height()) tooltip.y -= tooltip.height + tooltip.yoffset * 2;
 
             // Draw tooltip
-            draw_sprite_stretched(tooltip.sprite, tooltip.subimg, tooltip.x - tooltip.margin_x, tooltip.y - tooltip.margin_y, tooltip.width + tooltip.margin_x * 2, tooltip.height + tooltip.margin_y * 2);
+            draw_sprite_stretched_ext(tooltip.sprite, tooltip.subimg, tooltip.x - tooltip.margin_x, tooltip.y - tooltip.margin_y, tooltip.width + tooltip.margin_x * 2, tooltip.height + tooltip.margin_y * 2, tooltip.color, tooltip.alpha);
             draw_text(tooltip.x, tooltip.y, tooltip.string);
             // Note: The following code is commented out temporarily.
             // draw_text_ext_transformed_color(tooltip.x, tooltip.y, tooltip.string, tooltip.sep, tooltip.w, tooltip.xscale, tooltip.yscale, tooltip.angle, tooltip.c1, tooltip.c2, tooltip.c3, tooltip.c4, tooltip.alpha);
@@ -296,6 +299,9 @@ function ButtonManager() constructor
             {
                 with (_list[_i][_j])
                 {
+                    // Skip if button is invisible
+                    if (!_list[_i][_j].visible || !layer_get_visible(_list[_i][_j].layer)) continue;
+
                     // Input detection
                     var _hover = position_meeting(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), id);
                     var _pressed = mouse_check_button_pressed(mb_left);
@@ -342,6 +348,9 @@ function ButtonManager() constructor
         // Draw each button
         for (var _i = 0; _i < array_length(_array); _i++)
         {
+            // Skip if button is invisible
+            if (!_array[_i].visible || !layer_get_visible(_array[_i].layer)) continue;
+
             with (_array[_i])
             {
                 // Button

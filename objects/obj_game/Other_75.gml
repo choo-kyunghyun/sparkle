@@ -1,7 +1,7 @@
 // Local variable
 var _index = -1;
 
-// 
+// Update gamepad
 switch (async_load[? "event_type"])
 {
 	case "gamepad discovered":

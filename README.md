@@ -41,7 +41,7 @@ These are helpful resources for indie developers creating video games.
 
 | Type | Item | Description | Status |
 | ---- | ---- | ----------- | ------ |
-| Feature | Sparkle wiki | Comprehensive documentation and guides for the project | Planned |
+| ~~Feature~~ | ~~Sparkle wiki~~ | ~~Comprehensive documentation and guides for the project~~ New code editor supports markdown. I am considering changing to an internal manual instead of GitHub wiki. | ~~Planned~~ |
 | Feature | Actor | Implement actor object, faction system, pathfinding script, buffs and debuffs system, and actor manager | Planned |
 | Feature | Items and inventory | Implement items and actor inventory | Planned |
 | Feature | Item upgrade system | Implement item upgrade system including weapon modding | Planned |
@@ -54,7 +54,7 @@ These are helpful resources for indie developers creating video games.
 | Feature | Gravity | Simple gravity for any axis | Planned |
 | Feature | `obj_collider` | Special collider object for platformer | Planned |
 | Feature | FPS camera | A camera update script for FPS games | Planned |
-| Feature | HUD | According to the GameMaker Roadmap, Flex Panel will be added in August and UI Layer will be added in October. | Planned |
+| Feature | HUD and UI Rework | According to the GameMaker Roadmap, Flex Panel will be added in August and UI Layer will be added in October. | Planned |
 | Feature | `draw_text_transformed_format()` | Implement more draw_text_format functions | Planned |
 | Feature | Chapter 1 | Demo chapter for rpg | Planned |
 | Feature | Chapter 2 | Demo chapter for platformer | Planned |
@@ -64,3 +64,4 @@ These are helpful resources for indie developers creating video games.
 | Issues | Performance of `draw_text_format()` | Parsing is handled in the Draw event, causing serious frame drops. | Pending |
 | Improvement | Code refactoring | Refactor code for better maintainability | Ongoing |
 | Improvement | Optimize rendering | Improve rendering performance | Planned |
+| Improvement | New project logo | According to the GameMaker Roadmap, GameMaker will support SVG vectors. | Planned |

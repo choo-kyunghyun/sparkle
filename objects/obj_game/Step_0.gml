@@ -1,8 +1,27 @@
-// Local variables
-var _game = obj_game;
-var _vm = vertex_manager;
+// Update actor
+var _game = self;
+with (obj_actor)
+{
+	image_pitch = -_game.camera.pitch;
+    if (playable)
+    {
+        actor_player();
+    }
+}
 
-// Fullscreen toggle
+// Update level
+if (level >= 0 && level.update != undefined)
+{
+	level.update();
+}
+
+// Update user interfaces
+ui_manager.update();
+
+// Transition
+transition.update();
+
+// Toggle fullscreen
 if (keyboard_check(vk_alt) && keyboard_check_pressed(vk_enter))
 {
     window_set_fullscreen(!window_get_fullscreen());
@@ -15,20 +34,8 @@ if (string_ends_with(keyboard_string, "sparkle"))
     keyboard_string = string_delete(keyboard_string, string_length(keyboard_string), -7);
 }
 
-// Update user interfaces
-ui_manager.update();
-
-// Update actor
-with (obj_actor)
-{
-	image_pitch = -_game.camera.pitch;
-    if (playable)
-    {
-        actor_player();
-    }
-}
-
 // Update vertex buffer
+var _vm = vertex_manager;
 _vm.begin_all();
 with (obj_actor)
 {

@@ -8,8 +8,8 @@
   "name":"obj_actor",
   "overriddenProperties":[],
   "parent":{
-    "name":"Sparkle",
-    "path":"folders/Objects/Sparkle.yy",
+    "name":"Core Objects",
+    "path":"folders/Objects/Core Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
