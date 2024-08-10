@@ -64,4 +64,3 @@ These are helpful resources for indie developers creating video games.
 | Issues | Performance of `draw_text_format()` | Parsing is handled in the Draw event, causing serious frame drops. | Pending |
 | Improvement | Code refactoring | Refactor code for better maintainability | Ongoing |
 | Improvement | Optimize rendering | Improve rendering performance | Planned |
-| Improvement | New project logo | According to the GameMaker Roadmap, GameMaker will support SVG vectors. | Planned |

@@ -25,3 +25,12 @@ function actor_player()
         move_and_collide(lengthdir_x(_dist, _dir), lengthdir_y(_dist, _dir), obj_wall);
     }
 }
+
+/// @desc Apply gravity to the actor
+/// @param _dx The x-axis delta
+/// @param _dy The y-axis delta
+/// @param _dz The z-axis delta
+function actor_gravity(_dx, _dy, _dz, _max)
+{
+    
+}

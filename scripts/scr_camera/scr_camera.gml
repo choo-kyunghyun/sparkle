@@ -106,7 +106,6 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
 
         // Update the camera
         camera_set_view_size(id, floor(width), floor(height));
-        show_debug_message("Camera: Resized to " + string(width) + "x" + string(height));
     };
 }
 

@@ -72,6 +72,8 @@ game_set_speed(display_get_frequency(), gamespeed_fps);
 // Audio settings
 
 // Draw settings
+fnt_sparkle = font_add_sprite(spr_fnt_sparkle, ord("!"), false, 0);
+draw_set_font(fnt_sparkle);
 
 // Randomize
 randomize();

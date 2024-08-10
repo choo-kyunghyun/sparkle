@@ -25,31 +25,15 @@ function Transition(_filter = fx_create("_filter_contrast"), _param = "g_Contras
 		if (!active) return;
 
 		// Get the parameter value
-		var _val = fx_get_parameter(filter, param);
-		var _delta = delta * obj_game.time.delta;
+		var _val = fx_get_parameter(filter, param) + delta * obj_game.time.delta;
 
-		// Check the sign of the delta
-		if (delta > 0)
+		// Add the delta to the parameter value
+		fx_set_parameter(filter, param, _val);
+
+		// If the parameter value is at the target value, stop the transition
+		if ((delta > 0 && _val >= val_max) || (delta <= 0 && _val <= val_min))
 		{
-			// Increase the parameter value
-			fx_set_parameter(filter, param, _val + _delta);
-
-			// If the parameter value is greater than max value, stop the transition
-			if (_val + _delta >= val_max)
-			{
-				stop();
-			}
-		}
-		else
-		{
-			// Decrease the parameter value
-			fx_set_parameter(filter, param, _val - _delta);
-
-			// If the parameter value is less than min value, stop the transition
-			if (_val <= val_min)
-			{
-				stop();
-			}
+			stop();
 		}
 	}
 
@@ -69,20 +53,14 @@ function Transition(_filter = fx_create("_filter_contrast"), _param = "g_Contras
 	}
 
 	/// @desc Start the transition
+	/// @param {Asset.GMRoom} _room The room to transition to
 	static start = function(_room = -1)
 	{
 		// Create the filter layer
 		filter_layer = layer_create(-16000);
 
 		// Set the parameter to the start value
-		if (delta > 0)
-		{
-			fx_set_parameter(filter, param, val_min);
-		}
-		else
-		{
-			fx_set_parameter(filter, param, val_max);
-		}
+		fx_set_parameter(filter, param, ((delta > 0) ? val_min : val_max));
 
 		// Set the filter to the start value
 		layer_set_fx(filter_layer, filter);
@@ -101,14 +79,7 @@ function Transition(_filter = fx_create("_filter_contrast"), _param = "g_Contras
 		if (!active) return;
 
 		// Set the parameter to the target value
-		if (delta > 0)
-		{
-			fx_set_parameter(filter, param, val_max);
-		}
-		else
-		{
-			fx_set_parameter(filter, param, val_min);
-		}
+		fx_set_parameter(filter, param, ((delta > 0) ? val_max : val_min));
 
 		// Set the transition to inactive
 		active = false;

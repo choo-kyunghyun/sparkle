@@ -1,6 +1,12 @@
 // Play the intro
-intro = layer_sequence_create(layer, room_width / 2, room_height / 2, seq_intro);
+intro = layer_sequence_create(layer, 0, 0, seq_intro);
 layer_sequence_play(intro);
+
+// Camera
+var _camera = obj_game.camera;
+_camera.resize(room_width, room_height);
+_camera.x = -_camera.width / 2;
+_camera.y = -_camera.height / 2;
 
 // Check the intro
 update = function()
