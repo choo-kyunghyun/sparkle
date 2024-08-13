@@ -1,10 +1,10 @@
-/// @desc Actor manager
+/// @desc Actor manager.
 function ActorManager() constructor
 {
 	
 }
 
-/// @desc Control the player
+/// @desc Control the player.
 // Note: This function needs to be rewritten.
 function actor_player()
 {
@@ -26,10 +26,10 @@ function actor_player()
     }
 }
 
-/// @desc Apply gravity to the actor
-/// @param _dx The x-axis delta
-/// @param _dy The y-axis delta
-/// @param _dz The z-axis delta
+/// @desc Apply gravity to the actor.
+/// @param _dx The x-axis delta.
+/// @param _dy The y-axis delta.
+/// @param _dz The z-axis delta.
 function actor_gravity(_dx, _dy, _dz, _max)
 {
     

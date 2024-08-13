@@ -41,9 +41,9 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     };
 
     /// @desc Updates the camera.
+	// Note : Update event should be in the End Step event.
     static update = function()
     {
-        if (event_number != ev_step_end) debug_event("Camera: Update event should be in the End Step event.");
         if (script != undefined) script();
         if (custom != undefined) custom();
     };
@@ -117,13 +117,9 @@ function camera_update_default()
         // Update the position
         if (camera.target >= 0)
         {
-            camera.x = lerp(camera.x, camera.target.x, camera.speed * time.delta);
-            camera.y = lerp(camera.y, camera.target.y, camera.speed * time.delta);
+            camera.x = lerp(camera.x, camera.target.x - camera.width * 0.5, camera.speed * time.delta);
+            camera.y = lerp(camera.y, camera.target.y - camera.height * 0.5, camera.speed * time.delta);
         }
-
-        // Check the bounds
-        camera.x = clamp(camera.x, 0, room_width - camera.width);
-        camera.y = clamp(camera.y, 0, room_height - camera.height);
 
         // Update the camera
         camera_set_view_pos(camera.id, camera.x, camera.y);
@@ -132,17 +128,21 @@ function camera_update_default()
     }
 }
 
-/// @desc Updates the camera without boundary checking.
-function camera_update_free()
+/// @desc Updates the camera with boundary checking.
+function camera_update_bound()
 {
     with (obj_game)
     {
         // Update the position
         if (camera.target >= 0)
         {
-            camera.x = lerp(camera.x, camera.target.x, camera.speed * time.delta);
-            camera.y = lerp(camera.y, camera.target.y, camera.speed * time.delta);
+            camera.x = lerp(camera.x, camera.target.x - camera.width * 0.5, camera.speed * time.delta);
+            camera.y = lerp(camera.y, camera.target.y - camera.height * 0.5, camera.speed * time.delta);
         }
+		
+		// Check the bounds
+        camera.x = clamp(camera.x, 0, room_width - camera.width);
+        camera.y = clamp(camera.y, 0, room_height - camera.height);
 
         // Update the camera
         camera_set_view_pos(camera.id, camera.x, camera.y);

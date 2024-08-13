@@ -8,7 +8,7 @@ enum BUTTON_STATE
     DISABLED
 }
 
-/// @desc User Interface Manager
+/// @desc User interface manager.
 function UIManager() constructor
 {
     // Create panel manager
@@ -17,7 +17,7 @@ function UIManager() constructor
     // Create button manager
     button_manager = new ButtonManager();
 
-    // Scale
+    // GUI scale
     scale = 1;
 	
 	// Tooltip
@@ -80,8 +80,8 @@ function UIManager() constructor
         }
     }
 
-    /// @desc Draw the user interface
-    /// @param {Constant.EventType} _event The event that called this function
+    /// @desc Draw the user interface.
+    /// @param {Constant.EventType} _event The event that called this function.
     static draw = function(_event = event_number)
     {
         // Draw panels
@@ -91,15 +91,10 @@ function UIManager() constructor
         button_manager.draw(_event);
     }
 
-    /// @desc Draw the tooltip
+    /// @desc Draw the tooltip.
+	// Note: This function is called in the Draw GUI event.
     static draw_tooltip = function()
     {
-        // Check the event
-        if (event_number != ev_gui && event_number != ev_gui_begin && event_number != ev_gui_end)
-        {
-            debug_event("UIManager: Tooltip isn't drawn in GUI event");
-        }
-
         // Draw tooltip
         if (tooltip.sprite != -1 && tooltip.string != "")
         {
@@ -165,7 +160,6 @@ function PanelManager() constructor
             case ev_gui_end:
                 return panels_gui_end;
             default:
-                debug_event("PanelManager: Invalid event type");
                 return undefined;
         }
     }
@@ -263,7 +257,6 @@ function ButtonManager() constructor
             case ev_gui_end:
                 return buttons_gui_end;
             default:
-                debug_event("ButtonManager: Invalid event type");
                 return undefined;
         }
     }
@@ -324,7 +317,12 @@ function ButtonManager() constructor
                     cursor.display = (state == BUTTON_STATE.HOVER || state == BUTTON_STATE.PRESSED);
 
                     // Button actions
-                    if (actions[state] != undefined) actions[state]();
+                    if (actions[state] != undefined)
+					{
+						var _length = array_length(actions_args[state]);
+						if (_length) script_execute_ext(actions[state], actions_args[state], 0, _length);
+						else script_execute(actions[state]);
+					}
                 }
             }
         }

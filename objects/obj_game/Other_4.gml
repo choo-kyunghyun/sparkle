@@ -3,26 +3,28 @@ view_enabled = true;
 view_visible[0] = true;
 view_camera[0] = camera.id;
 
-// Change level instance
-if (instance_exists(obj_level))
-{
-	// Check for multiple instances of obj_level
-	if (instance_number(obj_level) > 1) debug_event("Multiple obj_level detected.");
+// Get the level instance
+// Note: Only one level instance should exist in the room
+level = instance_find(obj_level, 0);
 
-	// Change the level instance
-	level = instance_find(obj_level, 0);
-	
-	// Change the camera size
+// If the level instance exists
+if (level != noone)
+{	
+	// Update the camera size
 	if (level.camera_width != 0) camera.width = level.camera_width;
 	if (level.camera_height != 0) camera.height = level.camera_height;
 	camera.resize(camera.width, camera.height);
 
-	// Change the camera
-	camera.target = level.camera_target;
+	// Change the camera settings
 	camera.script = level.camera_update_script;
-	// camera.position(level.camera_x, level.camera_y, level.camera_z);
+	camera.target = level.camera_target;
+
+	// Update the camera position
+	if (camera.target == noone) camera.position(level.camera_x, level.camera_y, level.camera_z);
+	else camera.position(camera.target.x - camera.width / 2, camera.target.y - camera.height / 2, camera.target.depth - camera.dist);
 	
-	// Transition
+	// Start the transition effect
+	// Note: This code isn't complete and should be modified to fit your needs
 	if (level.transition)
 	{
 		transition.delta = transition.delta > 0 ? transition.delta : -transition.delta;
@@ -30,12 +32,16 @@ if (instance_exists(obj_level))
 	}
 }
 
-// Refresh the button manager
+// Refresh the GUI manager
 ui_manager.refresh();
 
-// Update the vertex buffer
+// Add static objects to the vertex buffer
 var _vm = vertex_manager;
+
+// Begin the vertex buffer
 _vm.begin_all();
+
+// Add all walls to the vertex buffer
 with (obj_wall)
 {
     if (visible && sprite_index != -1)
@@ -44,5 +50,9 @@ with (obj_wall)
         vertex_add_cube(_buffer, sprite_index, image_index, x, y, depth - sprite_height, image_xscale, image_yscale, image_angle, image_pitch, image_roll, image_blend, image_alpha);
     }
 }
+
+// Add all actors to the vertex buffer
 _vm.end_all();
+
+// Freeze the vertex buffer to improve performance
 _vm.freeze_all();

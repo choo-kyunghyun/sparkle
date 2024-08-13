@@ -1,10 +1,10 @@
-/// @desc Transition effect for room change
-/// @param {Struct} _filter The filter to use
-/// @param {String} _param The name of the parameter to change
-/// @param {Real} _val_min The minimum value of the parameter
-/// @param {Real} _val_max The maximum value of the parameter
-/// @param {Real} _delta The change in the parameter value per second
-function Transition(_filter = fx_create("_filter_contrast"), _param = "g_ContrastBrightness", _val_min = 0, _val_max = 1, _delta = 5) constructor
+/// @desc Transition effect for room change.
+/// @param {Struct} _filter The filter to use.
+/// @param {String} _param The name of the parameter to change.
+/// @param {Real} _val_min The minimum value of the parameter.
+/// @param {Real} _val_max The maximum value of the parameter.
+/// @param {Real} _delta The change in the parameter value per second.
+function Transition(_filter = fx_create("_filter_contrast"), _param = "g_ContrastBrightness", _val_min = 0, _val_max = 1, _delta = 4) constructor
 {
 	// Internal variables
 	active = false;
@@ -97,7 +97,7 @@ function Transition(_filter = fx_create("_filter_contrast"), _param = "g_Contras
 	}
 }
 
-/// @desc Transition effect for room change
+/// @desc Transition to a new room.
 function room_transition(_room)
 {
 	with (obj_game)

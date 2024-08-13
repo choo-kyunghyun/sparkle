@@ -1,4 +1,4 @@
-// Local variable
+// Gamepad index
 var _index = -1;
 
 // Update gamepad

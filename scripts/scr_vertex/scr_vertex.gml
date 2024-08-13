@@ -21,10 +21,8 @@ function VertexManager() constructor
     {
         // If the buffer already exists, return it
         var _buffer = find(_texture, _zfunc);
-        if (_buffer != undefined)
-        {
-            return _buffer;
-        }
+        if (_buffer != undefined) return _buffer;
+
         // Otherwise, create a new buffer
         var _data =
         {
@@ -33,17 +31,13 @@ function VertexManager() constructor
             zfunc : _zfunc,
             frozen : false
         };
+
         // Add the buffer to the list
         array_push(buffers, _data);
-        array_sort(buffers, function(_a, _b)
-        {
-            return _a.zfunc - _b.zfunc;
-        });
+        array_sort(buffers, function(_a, _b) { return _a.zfunc - _b.zfunc; });
+
         // Begin the buffer
-        if (_begin)
-        {
-            vertex_begin(_data.buffer, format);
-        }
+        if (_begin) vertex_begin(_data.buffer, format);
         return _data.buffer;
     }
 
@@ -55,6 +49,7 @@ function VertexManager() constructor
     /// @pure
     static find = function(_texture, _zfunc = cmpfunc_lessequal, _frozen = false)
     {
+        // Find the buffer in the list
         for (var _i = 0; _i < array_length(buffers); _i++)
         {
             if (buffers[_i].texture == _texture && buffers[_i].zfunc == _zfunc && buffers[_i].frozen == _frozen)
@@ -62,16 +57,21 @@ function VertexManager() constructor
                 return buffers[_i].buffer;
             }
         }
+
+        // If the buffer is not found, return undefined
         return undefined;
     }
 
     /// @desc Deletes all vertex buffers in the manager
     static delete_all = function()
     {
+        // Delete all buffers
         for (var _i = 0; _i < array_length(buffers); _i++)
         {
             vertex_delete_buffer(buffers[_i].buffer);
         }
+
+        // Clear the list
         buffers = [];
     }
 
@@ -125,10 +125,7 @@ function VertexManager() constructor
     {
         for (var _i = 0; _i < array_length(buffers); _i++)
         {
-            if (!buffers[_i].frozen)
-            {
-                vertex_begin(buffers[_i].buffer, format);
-            }
+            if (!buffers[_i].frozen) vertex_begin(buffers[_i].buffer, format);
         }
     }
 
@@ -137,10 +134,7 @@ function VertexManager() constructor
     {
         for (var _i = 0; _i < array_length(buffers); _i++)
         {
-            if (!buffers[_i].frozen)
-            {
-                vertex_end(buffers[_i].buffer);
-            }
+            if (!buffers[_i].frozen) vertex_end(buffers[_i].buffer);
         }
     }
 }
@@ -362,4 +356,44 @@ function vertex_add_cube(_buffer, _sprite, _subimg, _x, _y, _z, _xscale, _yscale
     vertex_add_quadrilateral(_buffer, [_x[4], _x[0], _x[3], _x[7]], [_y[4], _y[0], _y[3], _y[7]], [_z[4], _z[0], _z[3], _z[7]], 0, 0, 1, _color, _alpha, _uvs);
     vertex_add_quadrilateral(_buffer, [_x[3], _x[2], _x[6], _x[7]], [_y[3], _y[2], _y[6], _y[7]], [_z[3], _z[2], _z[6], _z[7]], 0, 0, 1, _color, _alpha, _uvs);
     vertex_add_quadrilateral(_buffer, [_x[4], _x[5], _x[1], _x[0]], [_y[4], _y[5], _y[1], _y[0]], [_z[4], _z[5], _z[1], _z[0]], 0, 0, 1, _color, _alpha, _uvs);
+}
+
+/// @desc Applies rotation to the given coordinates
+/// @param {Array} _xx The x coordinates array.
+/// @param {Array} _yy The y coordinates array.
+/// @param {Array} _zz The z coordinates array.
+/// @param {Real} _x The x origin.
+/// @param {Real} _y The y origin.
+/// @param {Real} _z The z origin.
+/// @param {Real} _angle The angle of rotation.
+/// @param {String} _axis The axis of rotation ('yaw', 'pitch', 'roll').
+// Note: This function is not tested.
+function apply_rotation(_xx, _yy, _zz, _x, _y, _z, _angle, _axis)
+{
+    var _cos = dcos(_angle);
+    var _sin = dsin(_angle);
+    for (var _i = 0; _i < 4; _i++)
+    {
+        if (_axis == "yaw")
+        {
+            var _dx = _xx[_i] - _x;
+            var _dy = _yy[_i] - _y;
+            _xx[_i] = _x + _dx * _cos + _dy * _sin;
+            _yy[_i] = _y - _dx * _sin + _dy * _cos;
+        }
+        else if (_axis == "pitch")
+        {
+            var _dy = _yy[_i] - _y;
+            var _dz = _zz[_i] - _z;
+            _yy[_i] = _y + _dy * _cos + _dz * _sin;
+            _zz[_i] = _z - _dy * _sin + _dz * _cos;
+        }
+        else if (_axis == "roll")
+        {
+            var _dx = _xx[_i] - _x;
+            var _dz = _zz[_i] - _z;
+            _xx[_i] = _x + _dx * _cos + _dz * _sin;
+            _zz[_i] = _z - _dx * _sin + _dz * _cos;
+        }
+    }
 }

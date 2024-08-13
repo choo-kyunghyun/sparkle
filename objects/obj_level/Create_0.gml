@@ -1,2 +1,2 @@
-// Remove sprite from object
+// Unassign the sprite
 sprite_index = -1;
