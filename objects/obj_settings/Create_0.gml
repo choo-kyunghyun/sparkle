@@ -1,6 +1,3 @@
-// Inherit the parent event
-// event_inherited();
-
 // Hide the object
 visible = false;
 

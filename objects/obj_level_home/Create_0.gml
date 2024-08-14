@@ -37,7 +37,10 @@ draw_gui = function()
 	draw_set_valign(fa_middle);
 
 	// Draw the time
-	draw_text_color(_width / 2, 64, _time, c_black, c_black, c_black, c_black, 1);
+	var _color = draw_get_color();
+	draw_set_color(c_black);
+	draw_text(_width / 2, 64, _time);
+	draw_set_color(_color);
 	
 	// Restore alignment
 	draw_set_halign(_halign);
