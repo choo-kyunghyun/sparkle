@@ -10,7 +10,7 @@
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"transition","path":"objects/obj_level/obj_level.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"False",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"camera_width","path":"objects/obj_level/obj_level.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"room_width",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"camera_height","path":"objects/obj_level/obj_level.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"room_width",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"camera_target","path":"objects/obj_level/obj_level.yy",},"resource":{"name":"obj_cheese","path":"objects/obj_cheese/obj_cheese.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"obj_cheese",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"camera_target","path":"objects/obj_level/obj_level.yy",},"resource":{"name":"obj_anchor","path":"objects/obj_anchor/obj_anchor.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"obj_anchor",},
   ],
   "parent":{
     "name":"Level Objects",

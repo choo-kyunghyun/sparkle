@@ -33,15 +33,9 @@ function UIManager() constructor
         margin_y : 8,
         xoffset : 16,
         yoffset : 16,
-        string : "",
+        string : -1,
 		color : c_black,
 		alpha : 0.5
-        // font : -1,
-        // sep : 0,
-        // w : 64,
-        // xscale : 1,
-        // yscale : 1,
-        // angle : 0
     };
 
     /// @desc Update the user interface
@@ -72,11 +66,19 @@ function UIManager() constructor
             // Set tooltip position
             tooltip.x = _mouse_x + tooltip.xoffset;
             tooltip.y = _mouse_y + tooltip.yoffset;
+
+            // Set tooltip size
+            tooltip.width = tooltip.string.width();
+            tooltip.height = tooltip.string.height();
+
+            // Offscreen handling
+            if (tooltip.x + tooltip.width > display_get_gui_width()) tooltip.x -= tooltip.width + tooltip.xoffset * 2;
+            if (tooltip.y + tooltip.height > display_get_gui_height()) tooltip.y -= tooltip.height + tooltip.yoffset * 2;
         }
         else
         {
             // Reset tooltip
-            tooltip.string = "";
+            tooltip.string = -1;
         }
     }
 
@@ -96,24 +98,10 @@ function UIManager() constructor
     static draw_tooltip = function()
     {
         // Draw tooltip
-        if (tooltip.sprite != -1 && tooltip.string != "")
+        if (tooltip.sprite != -1 && tooltip.string != -1)
         {
-            // Get width and height
-            // Note: Doing calculations in the Draw event will result in poor performance. We need to see if we can move this operation to the Step event.
-            // Issue: When using draw_text_format() instead of draw_text(), you must check whether width and height can be calculated properly. It may be necessary to implement string_width_format() and string_height_format().
-            tooltip.width = string_width(tooltip.string);
-            tooltip.height = string_height(tooltip.string);
-
-            // Offscreen handling
-            // Note: Doing calculations in the Draw event will result in poor performance. We need to see if we can move this operation to the Step event.
-            if (tooltip.x + tooltip.width > display_get_gui_width()) tooltip.x -= tooltip.width + tooltip.xoffset * 2;
-            if (tooltip.y + tooltip.height > display_get_gui_height()) tooltip.y -= tooltip.height + tooltip.yoffset * 2;
-
-            // Draw tooltip
             draw_sprite_stretched_ext(tooltip.sprite, tooltip.subimg, tooltip.x - tooltip.margin_x, tooltip.y - tooltip.margin_y, tooltip.width + tooltip.margin_x * 2, tooltip.height + tooltip.margin_y * 2, tooltip.color, tooltip.alpha);
-            draw_text(tooltip.x, tooltip.y, tooltip.string);
-            // Note: The following code is commented out temporarily.
-            // draw_text_ext_transformed_color(tooltip.x, tooltip.y, tooltip.string, tooltip.sep, tooltip.w, tooltip.xscale, tooltip.yscale, tooltip.angle, tooltip.c1, tooltip.c2, tooltip.c3, tooltip.c4, tooltip.alpha);
+            tooltip.string.draw(tooltip.x, tooltip.y);
         }
     }
 
@@ -132,9 +120,6 @@ function UIManager() constructor
 function PanelManager() constructor
 {
     // Arrays
-    panels_draw_begin = [];
-    panels_draw = [];
-    panels_draw_end = [];
     panels_gui_begin = [];
     panels_gui = [];
     panels_gui_end = [];
@@ -147,12 +132,6 @@ function PanelManager() constructor
     {
         switch (_event)
         {
-            case ev_draw_begin:
-                return panels_draw_begin;
-            case ev_draw:
-                return panels_draw;
-            case ev_draw_end:
-                return panels_draw_end;
             case ev_gui_begin:
                 return panels_gui_begin;
             case ev_gui:
@@ -168,7 +147,7 @@ function PanelManager() constructor
     static refresh = function()
     {
         // Remove all panels
-        var _list = [panels_draw_begin, panels_draw, panels_draw_end, panels_gui_begin, panels_gui, panels_gui_end];
+        var _list = [panels_gui_begin, panels_gui, panels_gui_end];
         for (var _i = 0; _i < array_length(_list); _i++)
         {
             array_delete(_list[_i], 0, array_length(_list[_i]));
@@ -187,7 +166,7 @@ function PanelManager() constructor
     /// @desc Update panels
     static update = function()
     {
-        var _list = [panels_draw_begin, panels_draw, panels_draw_end, panels_gui_begin, panels_gui, panels_gui_end];
+        var _list = [panels_gui_begin, panels_gui, panels_gui_end];
         for (var _i = 0; _i < array_length(_list); _i++)
         {
             for (var _j = 0; _j < array_length(_list[_i]); _j++)
@@ -229,9 +208,6 @@ function PanelManager() constructor
 function ButtonManager() constructor
 {
     // Arrays
-    buttons_draw_begin = [];
-    buttons_draw = [];
-    buttons_draw_end = [];
     buttons_gui_begin = [];
     buttons_gui = [];
     buttons_gui_end = [];
@@ -244,12 +220,6 @@ function ButtonManager() constructor
     {
         switch (_event)
         {
-            case ev_draw_begin:
-                return buttons_draw_begin;
-            case ev_draw:
-                return buttons_draw;
-            case ev_draw_end:
-                return buttons_draw_end;
             case ev_gui_begin:
                 return buttons_gui_begin;
             case ev_gui:
@@ -265,7 +235,7 @@ function ButtonManager() constructor
     static refresh = function()
     {
         // Remove all buttons
-        var _list = [buttons_draw_begin, buttons_draw, buttons_draw_end, buttons_gui_begin, buttons_gui, buttons_gui_end];
+        var _list = [buttons_gui_begin, buttons_gui, buttons_gui_end];
         for (var _i = 0; _i < array_length(_list); _i++)
         {
             array_delete(_list[_i], 0, array_length(_list[_i]));
@@ -285,7 +255,7 @@ function ButtonManager() constructor
     static update = function()
     {
         // Update each array
-        var _list = [buttons_draw_begin, buttons_draw, buttons_draw_end, buttons_gui_begin, buttons_gui, buttons_gui_end];
+        var _list = [buttons_gui_begin, buttons_gui, buttons_gui_end];
         for (var _i = 0; _i < array_length(_list); _i++)
         {
             for (var _j = 0; _j < array_length(_list[_i]); _j++)
@@ -319,9 +289,7 @@ function ButtonManager() constructor
                     // Button actions
                     if (actions[state] != undefined)
 					{
-						var _length = array_length(actions_args[state]);
-						if (_length) script_execute_ext(actions[state], actions_args[state], 0, _length);
-						else script_execute(actions[state]);
+                        script_execute_ext(actions[state], actions_args[state]);
 					}
                 }
             }
@@ -337,11 +305,6 @@ function ButtonManager() constructor
 
         // Check if array is valid
         if (array_length(_array) == 0) return;
-
-        // Store alignment and font
-        var _halign = draw_get_halign();
-        var _valign = draw_get_valign();
-        var _font = draw_get_font();
 
         // Draw each button
         for (var _i = 0; _i < array_length(_array); _i++)
@@ -370,14 +333,7 @@ function ButtonManager() constructor
             // Draw text
             with (_array[_i])
             {
-                // Text
-                if (text.string != "")
-                {
-                    if (text.font >= 0) draw_set_font(text.font);
-                    draw_set_halign(text.halign);
-                    draw_set_valign(text.valign);
-                    draw_text_ext_transformed_color(text.x, text.y, text.string, text.sep, text.w, text.xscale, text.yscale, text.angle, text.c1, text.c2, text.c3, text.c4, text.alpha);
-                }
+                text.draw(text_x, text_y);
             }
 
             // Draw visual effects
@@ -386,10 +342,5 @@ function ButtonManager() constructor
                 if (vfx[state] != undefined) vfx[state]();
             }
         }
-
-        // Restore alignment and font
-        draw_set_halign(_halign);
-        draw_set_valign(_valign);
-        draw_set_font(_font);
     }
 }

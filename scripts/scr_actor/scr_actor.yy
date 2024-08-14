@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_actor",
+  "%Name":"scr_Actor",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_actor",
+  "name":"scr_Actor",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"Core Scripts",
+    "path":"folders/Scripts/Core Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

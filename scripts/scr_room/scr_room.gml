@@ -25,7 +25,7 @@ function Transition(_filter = fx_create("_filter_contrast"), _param = "g_Contras
 		if (!active) return;
 
 		// Get the parameter value
-		var _val = fx_get_parameter(filter, param) + delta * obj_game.time.delta;
+		var _val = fx_get_parameter(filter, param) + delta * GAME.time.delta;
 
 		// Add the delta to the parameter value
 		fx_set_parameter(filter, param, _val);
@@ -100,7 +100,7 @@ function Transition(_filter = fx_create("_filter_contrast"), _param = "g_Contras
 /// @desc Transition to a new room.
 function room_transition(_room)
 {
-	with (obj_game)
+	with (GAME)
 	{
 		// Set the transition parameters
 		transition.delta = transition.delta > 0 ? -transition.delta : transition.delta;

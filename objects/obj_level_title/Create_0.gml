@@ -1,6 +1,3 @@
-// Inherit the parent event
-event_inherited();
-
 // Go to the rm_home when the player presses a key
 update = function()
 {

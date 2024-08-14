@@ -28,9 +28,6 @@
   "properties":[
     {"$GMObjectProperty":"v1","%Name":"gui_layer","filters":[],"listItems":[],"multiselect":false,"name":"gui_layer","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":3,},
     {"$GMObjectProperty":"v1","%Name":"event","filters":[],"listItems":[
-        "ev_draw_begin",
-        "ev_draw",
-        "ev_draw_end",
         "ev_gui_begin",
         "ev_gui",
         "ev_gui_end",

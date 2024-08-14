@@ -1,9 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_cheese",
+  "%Name":"obj_anchor",
   "eventList":[],
   "managed":true,
-  "name":"obj_cheese",
+  "name":"obj_anchor",
   "overriddenProperties":[],
   "parent":{
     "name":"Core Objects",

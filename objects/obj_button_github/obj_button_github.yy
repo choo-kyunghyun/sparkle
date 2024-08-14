@@ -6,7 +6,9 @@
   ],
   "managed":true,
   "name":"obj_button_github",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_button","path":"objects/obj_button/obj_button.yy",},"propertyId":{"name":"tooltip","path":"objects/obj_button/obj_button.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"Open GitHub repository",},
+  ],
   "parent":{
     "name":"Buttons",
     "path":"folders/Objects/User Interfaces/Buttons.yy",

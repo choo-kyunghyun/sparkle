@@ -1,4 +1,14 @@
+/// @desc String token class.
+/// @param {Real} _type The type of the token.
+/// @param {String, Real, Asset.GMFont, Constant.Color, Constant.HAlign, Constant.VAlign} _value The value of the token.
+function StringToken(_type, _value) constructor
+{
+    type = _type;
+    value = _value;
+}
+
 /// @desc String is a class that allows you to draw strings with tags. You can use the following tags: color, alpha, font, halign, and valign. The color tag can be in #RRGGBB, $BBGGRR, or color name format. The alpha tag can be a value between 0 and 1. The font tag can be the name of the font. The halign tag can be fa_left, fa_center, or fa_right. The valign tag can be fa_top, fa_middle, or fa_bottom. The string can contain the following tags: <color=...>, <alpha=...>, <font=...>, <halign=...>, <valign=...>, and \< to escape the < character. The string can also contain the newline character \n. The draw function can only be called in the Draw Event.
+/// @param {String} _str The string.
 function String(_str = "") constructor
 {
     // The string
@@ -23,7 +33,7 @@ function String(_str = "") constructor
 
     /// @desc toString function.
     /// @return {String} The string.
-    toString = function()
+    static toString = function()
     {
         return str;
     }
@@ -52,7 +62,7 @@ function String(_str = "") constructor
             // Handle the newline character
             if (_tokens[_i] == "\n")
             {
-                array_push(tokens, { type: tags.string, value: "\n" });
+                array_push(tokens, new StringToken(tags.string, "\n"));
                 continue;
             }
 
@@ -65,7 +75,7 @@ function String(_str = "") constructor
             // Check if the tag is valid
             if (array_length(_substr) == 1 || _split_pos == 0)
             {
-                array_push(tokens, { type: tags.string, value: _tokens[_i] });
+                array_push(tokens, new StringToken(tags.string, _tokens[_i]));
                 continue;
             }
 
@@ -128,7 +138,7 @@ function String(_str = "") constructor
                     }
                 }
                 // Color name
-                else
+                else if (string_char_at(_value, 1) == "c")
                 {
                     switch (_value)
                     {
@@ -156,6 +166,11 @@ function String(_str = "") constructor
                         case "c_yellow": _value = c_yellow; break;
                         default: _key = tags.string; break;
                     }
+                }
+                // Real values
+                else
+                {
+                    _value = real(_value);
                 }
             }
             else if (_key == tags.alpha)
@@ -201,15 +216,15 @@ function String(_str = "") constructor
             // If the key is a string, save the token
             if (_key == tags.string)
             {
-                array_push(tokens, { type: tags.string, value: _tokens[_i] });
+                array_push(tokens, new StringToken(tags.string, _tokens[_i]));
                 continue;
             }
 
             // Save the key-value pair
-            array_push(tokens, { type: _key, value: _value });
+            array_push(tokens, new StringToken(_key, _value));
 
             // Save the string
-            array_push(tokens, { type: tags.string, value: _substr[1] });
+            array_push(tokens, new StringToken(tags.string, _substr[1]));
         }
     }
 
@@ -217,7 +232,7 @@ function String(_str = "") constructor
     /// @param {String} _str The new string.
     static set = function(_str)
     {
-        if (!is_string(_str)) debug_event("String: Invalid string.");
+        if (!is_string(_str)) _str = string(_str);
         str = _str;
         tokenize();
     }
@@ -237,7 +252,7 @@ function String(_str = "") constructor
     }
 
     /// @desc Apply a tag while drawing the string.
-    /// @param {Struct} _tag The tag to apply.
+    /// @param {Struct.StringToken} _tag The tag to apply.
     static apply_tag = function(_tag)
     {
         switch (_tag.type)
@@ -541,6 +556,9 @@ function String(_str = "") constructor
             }
         }
 
+        // Add the heighest height to the total height
+        _height += _max_height;
+
         // Restore the font
         draw_set_font(_font);
 
@@ -715,6 +733,9 @@ function String(_str = "") constructor
             }
         }
 
+        // Add the heighest height to the total height
+        _height += _max_height;
+
         // Restore the font
         draw_set_font(_font);
 
@@ -731,6 +752,4 @@ function String(_str = "") constructor
         var _str = get(_tokenize);
         return string_char_at(_str, _index);
     }
-
-    
 }

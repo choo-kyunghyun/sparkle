@@ -1,0 +1,2 @@
+// Destroy
+game.destroy();

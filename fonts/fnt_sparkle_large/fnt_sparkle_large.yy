@@ -110,7 +110,7 @@
     "9647":{"character":9647,"h":52,"offset":10,"shift":47,"w":27,"x":366,"y":218,},
   },
   "hinting":0,
-  "includeTTF":true,
+  "includeTTF":false,
   "interpreter":0,
   "italic":false,
   "kerningPairs":[],
@@ -138,6 +138,6 @@
     "name":"Default",
     "path":"texturegroups/Default",
   },
-  "TTFName":"C:\\Users\\chook\\GameMakerProjects\\Sparkle\\fonts\\fnt_sparkle\\Sparkle.ttf",
+  "TTFName":null,
   "usesSDF":false,
 }

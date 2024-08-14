@@ -12,7 +12,7 @@ function VertexManager() constructor
     vertex_format_add_texcoord();
     format = vertex_format_end();
     
-    /// @desc Adds a vertex buffer to the manager
+    /// @desc Adds a vertex buffer to the manager.
     /// @param {Pointer.Texture} _texture The texture to add.
     /// @param {Constant.ZFunction} _zfunc The z function to use.
     /// @param {Bool} _begin Whether to begin the buffer.
@@ -41,7 +41,7 @@ function VertexManager() constructor
         return _data.buffer;
     }
 
-    /// @desc Finds a vertex buffer in the manager
+    /// @desc Finds a vertex buffer in the manager.
     /// @param {Pointer.Texture} _texture The texture to find.
     /// @param {Constant.ZFunction} _zfunc The z function to use.
     /// @param {Bool} _frozen Whether the buffer is frozen.
@@ -136,6 +136,72 @@ function VertexManager() constructor
         {
             if (!buffers[_i].frozen) vertex_end(buffers[_i].buffer);
         }
+    }
+}
+
+/// @desc Applies yaw rotation to the given coordinates
+/// @param {Array} _xx The x coordinates array.
+/// @param {Array} _yy The y coordinates array.
+/// @param {Real} _x The x origin.
+/// @param {Real} _y The y origin.
+/// @param {Real} _angle The angle of rotation.
+function vertex_rotate_yaw(_xx, _yy, _x, _y, _angle)
+{
+    // Calculate the sine and cosine of the angle
+    var _sin = dsin(_angle);
+    var _cos = dcos(_angle);
+
+    // Rotate the coordinates around the y-axis
+    for (var _i = 0; _i < 4; _i++)
+    {
+        var _dx = _xx[_i] - _x;
+        var _dy = _yy[_i] - _y;
+        _xx[_i] = _x + _dx * _cos + _dy * _sin;
+        _yy[_i] = _y - _dx * _sin + _dy * _cos;
+    }
+}
+
+/// @desc Applies pitch rotation to the given coordinates
+/// @param {Array} _yy The y coordinates array.
+/// @param {Array} _zz The z coordinates array.
+/// @param {Real} _y The y origin.
+/// @param {Real} _z The z origin.
+/// @param {Real} _angle The angle of rotation.
+function vertex_rotate_pitch(_yy, _zz, _y, _z, _angle)
+{
+    // Calculate the sine and cosine of the angle
+    var _sin = dsin(_angle);
+    var _cos = dcos(_angle);
+
+    // Rotate the coordinates around the x-axis
+    for (var _i = 0; _i < 4; _i++)
+    {
+        var _dy = _yy[_i] - _y;
+        var _dz = _zz[_i] - _z;
+        _yy[_i] = _y + _dy * _cos + _dz * _sin;
+        _zz[_i] = _z - _dy * _sin + _dz * _cos;
+    }
+}
+
+/// @desc Applies roll rotation to the given coordinates
+/// @param {Array} _xx The x coordinates array.
+/// @param {Array} _zz The z coordinates array.
+/// @param {Real} _x The x origin.
+/// @param {Real} _z The z origin.
+/// @param {Real} _angle The angle of rotation.
+function vertex_rotate_roll(_xx, _zz, _x, _z, _angle)
+{
+    // Calculate the sine and cosine of the angle
+    var _sin = dsin(_angle);
+    var _cos = dcos(_angle);
+
+    // Rotate the coordinates around the z-axis
+    for (var _i = 0; _i < 4; _i++)
+    {
+        var _dx = _xx[_i] - _x;
+        var _dz = _zz[_i] - _z;
+        _xx[_i] = _x + _dx * _cos + _dz * _sin;
+        _zz[_i] = _z - _dx * _sin + _dz * _cos;
     }
 }
 
@@ -239,37 +305,13 @@ function vertex_add_sprite_ext(_buffer, _sprite, _subimg, _x, _y, _z, _xscale, _
     var _zz = [_z, _z, _z, _z];
 
     // Calculate the sprite yaw
-    var _cos = dcos(_yaw);
-    var _sin = dsin(_yaw);
-    for (var _i = 0; _i < 4; _i++)
-    {
-        var _dx = _xx[_i] - _x;
-        var _dy = _yy[_i] - _y;
-        _xx[_i] = _x + _dx * _cos + _dy * _sin;
-        _yy[_i] = _y - _dx * _sin + _dy * _cos;
-    }
+    vertex_rotate_yaw(_xx, _yy, _x, _y, _yaw);
 
     // Calculate the sprite pitch
-    _cos = dcos(_pitch);
-    _sin = dsin(_pitch);
-    for (var _i = 0; _i < 4; _i++)
-    {
-        var _dy = _yy[_i] - _y;
-        var _dz = _zz[_i] - _z;
-        _yy[_i] = _y + _dy * _cos + _dz * _sin;
-        _zz[_i] = _z - _dy * _sin + _dz * _cos;
-    }
+    vertex_rotate_pitch(_yy, _zz, _y, _z, _pitch);
 
     // Calculate the sprite roll
-    _cos = dcos(_roll);
-    _sin = dsin(_roll);
-    for (var _i = 0; _i < 4; _i++)
-    {
-        var _dx = _xx[_i] - _x;
-        var _dz = _zz[_i] - _z;
-        _xx[_i] = _x + _dx * _cos + _dz * _sin;
-        _zz[_i] = _z - _dx * _sin + _dz * _cos;
-    }
+    vertex_rotate_roll(_xx, _zz, _x, _z, _roll);
 
     // Add the sprite to the vertex buffer
     vertex_add_quadrilateral(_buffer, _xx, _yy, _zz, 0, 0, 1, _color, _alpha, _uvs);
@@ -356,44 +398,4 @@ function vertex_add_cube(_buffer, _sprite, _subimg, _x, _y, _z, _xscale, _yscale
     vertex_add_quadrilateral(_buffer, [_x[4], _x[0], _x[3], _x[7]], [_y[4], _y[0], _y[3], _y[7]], [_z[4], _z[0], _z[3], _z[7]], 0, 0, 1, _color, _alpha, _uvs);
     vertex_add_quadrilateral(_buffer, [_x[3], _x[2], _x[6], _x[7]], [_y[3], _y[2], _y[6], _y[7]], [_z[3], _z[2], _z[6], _z[7]], 0, 0, 1, _color, _alpha, _uvs);
     vertex_add_quadrilateral(_buffer, [_x[4], _x[5], _x[1], _x[0]], [_y[4], _y[5], _y[1], _y[0]], [_z[4], _z[5], _z[1], _z[0]], 0, 0, 1, _color, _alpha, _uvs);
-}
-
-/// @desc Applies rotation to the given coordinates
-/// @param {Array} _xx The x coordinates array.
-/// @param {Array} _yy The y coordinates array.
-/// @param {Array} _zz The z coordinates array.
-/// @param {Real} _x The x origin.
-/// @param {Real} _y The y origin.
-/// @param {Real} _z The z origin.
-/// @param {Real} _angle The angle of rotation.
-/// @param {String} _axis The axis of rotation ('yaw', 'pitch', 'roll').
-// Note: This function is not tested.
-function apply_rotation(_xx, _yy, _zz, _x, _y, _z, _angle, _axis)
-{
-    var _cos = dcos(_angle);
-    var _sin = dsin(_angle);
-    for (var _i = 0; _i < 4; _i++)
-    {
-        if (_axis == "yaw")
-        {
-            var _dx = _xx[_i] - _x;
-            var _dy = _yy[_i] - _y;
-            _xx[_i] = _x + _dx * _cos + _dy * _sin;
-            _yy[_i] = _y - _dx * _sin + _dy * _cos;
-        }
-        else if (_axis == "pitch")
-        {
-            var _dy = _yy[_i] - _y;
-            var _dz = _zz[_i] - _z;
-            _yy[_i] = _y + _dy * _cos + _dz * _sin;
-            _zz[_i] = _z - _dy * _sin + _dz * _cos;
-        }
-        else if (_axis == "roll")
-        {
-            var _dx = _xx[_i] - _x;
-            var _dz = _zz[_i] - _z;
-            _xx[_i] = _x + _dx * _cos + _dz * _sin;
-            _zz[_i] = _z - _dx * _sin + _dz * _cos;
-        }
-    }
 }

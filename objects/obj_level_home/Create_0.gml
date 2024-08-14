@@ -1,6 +1,3 @@
-// Inherit the parent event
-event_inherited();
-
 // Get width and height of the GUI layer
 var _width = display_get_gui_width();
 var _height = display_get_gui_height();

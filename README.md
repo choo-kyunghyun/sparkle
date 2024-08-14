@@ -6,17 +6,37 @@ Sparkle is an open-source [GameMaker](https://gamemaker.io/en) project. The goal
 
 ## Features
 
-### Master object
+### Hierarchy
 
-A single game object manages all systems. This allows for a quick understanding of the entire code and makes maintenance easy.
+The project has a unique hierarchical structure. Each game element exists as a sub-element of the top-level element called Game. This makes maintenance easy and improves code readability.
 
-### UI manager
+### UI Manager
 
-The project provides a UI manager. Buttons placed in the room editor are automatically managed by the manager. This makes it easy to add and manage UI elements.
+The UI elements placed in the Room editor are automatically managed by the manager. Each element is automatically updated.
 
 ### Camera
 
-A camera object that supports both 2D and 3D is provided. You only need to select one of the pre-written update functions. This allows for easy application of camera settings suitable for various game genres.
+A camera object that supports both 2D and 3D is provided. Various methods and update scripts are available. You can place the configuration object in the Room editor to select and use the desired camera. Update scripts for different genres of games are provided.
+
+### Input Manager
+
+Input Manager When binding input keys, they are stored as functions rather than constants. This allows you to manage all types of inputs, such as keyboard, mouse, and gamepad, in a single table. It supports key setting presets.
+
+### Delta Time
+
+Everything will move independently of the frame rate.
+
+### Actor Manager
+
+In this project, both players and non-playable characters are actors. An actor object is provided, and the actor manager will manage them.
+
+### Audio Manager
+
+The audio manager will be supported in the future.
+
+### String
+
+Do you want to use various colors and fonts in a single string? Use String. You can change the color in the middle of the string with color tags like `<color=#666666>`, or change the font in the middle with font tags like `<font=fnt_sparkle>`. This String is used in various UIs of this project.
 
 ## License
 
@@ -41,26 +61,27 @@ These are helpful resources for indie developers creating video games.
 
 | Type | Item | Description | Status |
 | ---- | ---- | ----------- | ------ |
-| ~~Feature~~ | ~~Sparkle wiki~~ | ~~Comprehensive documentation and guides for the project~~ New code editor supports markdown. I am considering changing to an internal manual instead of GitHub wiki. | ~~Planned~~ |
+| Improvement | Code refactoring | Refactor code for better maintainability | In Progress |
+| Feature | Input manager | Input manager with gamepad support and presets | In Progress |
+| Issue | `fnt_sparkle` | There is a significant readability issue with the Sparkle font. Some characters need to be recreated. | In Progress |
+| Improvement | String | Implement more `draw_text_*` and `string_*` functions | Planned |
+| Improvement | `obj_level` and level manager | Rework | Planned |
+| Feature | Screenshot | Screenshot | Planned |
+| Feature | Documents | New code editor supports markdown. I am considering changing to an internal manual instead of GitHub wiki. | Planned |
 | Feature | Actor | Implement actor object, faction system, pathfinding script, buffs and debuffs system, and actor manager | Planned |
-| Feature | Items and inventory | Implement items and actor inventory | Planned |
-| Feature | Item upgrade system | Implement item upgrade system including weapon modding | Planned |
-| Feature | Audio manager | Implement a comprehensive audio system | Planned |
-| Feature | Crossfading | Crossfading for bgm transition | Planned |
-| Feature | Dialogue | In-game dialogues system with external files support | Planned |
-| Feature | Input manager | Input manager with gamepad support and presets | Planned |
-| Feature | Gesture | Support gestures | Planned |
-| Feature | Tilemap | Custom tilemap scripts for tilemap manipulation | Planned |
 | Feature | Gravity | Simple gravity for any axis | Planned |
 | Feature | `obj_collider` | Special collider object for platformer | Planned |
-| Feature | FPS camera | A camera update script for FPS games | Planned |
-| Feature | HUD and UI Rework | According to the GameMaker Roadmap, Flex Panel will be added in August and UI Layer will be added in October. | Planned |
-| Feature | `draw_text_transformed_format()` | Implement more draw_text_format functions | Planned |
-| Feature | Chapter 1 | Demo chapter for rpg | Planned |
-| Feature | Chapter 2 | Demo chapter for platformer | Planned |
-| Feature | Chapter 3 | Demo chapter for top-view shooting | Planned |
-| Issues | `draw_apply_format()` causes framerate drop | Parsing is performed in the Draw event. | Fix in progress |
-| Issues | Camera pitch | The pitch of the camera must be clamped. | Investigating |
-| Issues | Performance of `draw_text_format()` | Parsing is handled in the Draw event, causing serious frame drops. | Pending |
-| Improvement | Code refactoring | Refactor code for better maintainability | Ongoing |
+| Feature | FPS camera | A camera update method for FPS games | Planned |
+| Issue | Camera pitch | The pitch of the camera must be clamped. | Planned |
+| Feature | Items and inventory | Implement items and actor inventory | Planned |
+| Feature | Item upgrade system | Implement item upgrade system including weapon modding | Planned |
+| Feature | Dialogue | In-game dialogues system with external files support | Planned |
+| Feature | Audio manager | Implement a comprehensive audio system | Planned |
+| Feature | Crossfading | Crossfading for bgm transition | Planned |
+| Feature | Tilemap | Custom tilemap scripts for tilemap manipulation | Planned |
 | Improvement | Optimize rendering | Improve rendering performance | Planned |
+| Demo | Chapter 1 | Demo chapter for Platformer | Planned |
+| Demo | Chapter 2 | Demo chapter for Bullet Hell | Planned |
+| Demo | Chapter 3 | Demo chapter for RPG | Planned |
+| Improvement | HUD and UI Rework | According to the GameMaker Roadmap, Flex Panel will be added in August and UI Layer will be added in October. | Planned |
+| Improvement | JavaScript | The project’s scripts will be rewritten in JavaScript. Starting from the end of 2024, JavaScript will be available in GameMaker. Since JavaScript has more users than GML and can receive more assistance from GitHub Copilot, the scripts written in GML will be rewritten in JavaScript if there are no major issues. | Planned |

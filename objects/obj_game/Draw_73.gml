@@ -1,2 +1,2 @@
-// Draw UI
-ui_manager.draw();
+// Draw end
+game.draw_end();

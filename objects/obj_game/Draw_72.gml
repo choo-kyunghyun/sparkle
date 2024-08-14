@@ -1,2 +1,2 @@
-// Draw UI
-ui_manager.draw();
+// Draw begin
+game.draw_begin();

@@ -1,2 +1,2 @@
-// Update the camera
-camera.update();
+// Step end
+game.step_end();
