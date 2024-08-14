@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_Input_",
+  "%Name":"scr_Actor",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_Input_",
+  "name":"scr_Actor",
   "parent":{
     "name":"Core Scripts",
     "path":"folders/Scripts/Core Scripts.yy",
