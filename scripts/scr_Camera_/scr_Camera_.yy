@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_Input",
+  "%Name":"scr_Camera_",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_Input",
+  "name":"scr_Camera_",
   "parent":{
     "name":"Core Scripts",
     "path":"folders/Scripts/Core Scripts.yy",
