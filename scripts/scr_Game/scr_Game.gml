@@ -1,9 +1,9 @@
 // Macro
 #macro GAME obj_game.game
-#macro TIME obj_game.game.time
-#macro CAMERA obj_game.game.camera
-#macro INPUT obj_game.game.input
-#macro LEVEL obj_game.game.level
+#macro TIME GAME.time
+#macro CAMERA GAME.camera
+#macro INPUT GAME.input
+#macro LEVEL GAME.level
 
 /// @desc Game.
 function Game() constructor
@@ -14,7 +14,7 @@ function Game() constructor
     static init = function(_id, _release)
     {
         // Check if the function is called in the correct event.
-        if (event_number != ev_create) debug_event("Game: init() must be called in the Create event.");
+        if (event_type != ev_create) debug_event("Game: init() must be called in the Create event.");
 
         // Set ID
         id = _id;
@@ -25,10 +25,6 @@ function Game() constructor
 
         // Game time
         time = new GameTime();
-
-        // Collider instance for precise collision checks
-        // TODO: Move to Actor class
-        collider = instance_create_layer(0, 0, id.layer, obj_collider);
 
         // Actor manager
         actor_manager = new ActorManager();
@@ -109,20 +105,13 @@ function Game() constructor
     }
 
     /// @desc Update the game.
-    static step_begin = function()
+    static update = function()
     {
         // Check if the function is called in the correct event.
-        if (event_number != ev_step_begin) debug_event("Game: step_begin() must be called in the Begin Step event.");
+        if (event_type != ev_step) debug_event("Game: update() must be called in the Step event.");
 
         // Update the game time
         time.update();
-    }
-
-    /// @desc Update the game.
-    static step = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_step) debug_event("Game: step() must be called in the Step event.");
 
         // Toggle fullscreen
         if (keyboard_check(vk_alt) && keyboard_check_pressed(vk_enter))
@@ -130,8 +119,7 @@ function Game() constructor
             window_set_fullscreen(!window_get_fullscreen());
         }
 
-        // Sparkle watermark
-        // Note: This is a hidden feature. You can remove this if you want.
+        // Watermark
         if (string_ends_with(keyboard_string, "sparkle"))
         {
             url_open("https://github.com/Choo-Kyunghyun/Sparkle");
@@ -182,30 +170,16 @@ function Game() constructor
 
         // Update GUI
         ui_manager.update();
-    }
-
-    /// @desc Update the game.
-    static step_end = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_step_end) debug_event("Game: step_end() must be called in the End Step event.");
 
         // Update the camera
         camera.update();
     }
 
     /// @desc Draw the game.
-    static draw_begin = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_draw_begin) debug_event("Game: draw_begin() must be called in the Draw Begin event.");
-    }
-
-    /// @desc Draw the game.
     static draw = function()
     {
         // Check if the function is called in the correct event.
-        if (event_number != ev_draw) debug_event("Game: draw() must be called in the Draw event.");
+        if (event_type != ev_draw) debug_event("Game: draw() must be called in the Draw event.");
 
         // Submit vertex buffer
         vertex_manager.submit();
@@ -215,23 +189,6 @@ function Game() constructor
         {
             script_execute_ext(level.draw, level.draw_args);
         }
-    }
-
-    /// @desc Draw the game.
-    static draw_end = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_draw_end) debug_event("Game: draw_end() must be called in the Draw End event.");
-    }
-
-    /// @desc Draw the GUI.
-    static gui_begin = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_gui_begin) debug_event("Game: gui_begin() must be called in the Draw GUI Begin event.");
-
-        // Draw UI
-        ui_manager.draw();
     }
 
     /// @desc Draw the GUI.
@@ -248,28 +205,28 @@ function Game() constructor
 
         // Draw UI
         ui_manager.draw();
+        ui_manager.draw_tooltip();
     }
 
     /// @desc Draw the GUI.
+    // TODO: Use surface_copy and surface_save to take a screenshot instead of screen_save
+    // TODO: Merge all GUI functions into one function
     static gui_end = function()
     {
         // Check if the function is called in the correct event.
         if (event_number != ev_gui_end) debug_event("Game: gui_end() must be called in the Draw GUI End event.");
 
-        // Draw UI and tooltip
-        ui_manager.draw();
-        ui_manager.draw_tooltip();
-
         // Take a screenshot
         // Note: Not tested
-        if (input.check("screenshot"))
-        {
-            var _filename = "Screenshot-" + string(current_year) + "-" + string(current_month) + "-" + string(current_day) + "-" + string(current_hour) + ":" + string(current_minute) + ":" + string(current_second) + "-" + string(current_time) + ".png";
-            screen_save(directory.screenshot + _filename);
-        }
+        // if (input.check("screenshot"))
+        // {
+        //     var _filename = "Screenshot-" + string(current_year) + "-" + string(current_month) + "-" + string(current_day) + "-" + string(current_hour) + ":" + string(current_minute) + ":" + string(current_second) + "-" + string(current_time) + ".png";
+        //     screen_save(directory.screenshot + _filename);
+        // }
     }
     
     /// @desc Room start.
+    // TODO: Merge room_start and room_end into refresh function
     static room_start = function()
     {
         // Check if the function is called in the correct event.
@@ -309,9 +266,6 @@ function Game() constructor
             }
         }
 
-        // Refresh the GUI manager
-        ui_manager.refresh();
-
         // Add static objects to the vertex buffer
         var _vm = vertex_manager;
 
@@ -349,6 +303,14 @@ function Game() constructor
 
         // Unassign the current level object
         level = noone;
+    }
+
+    /// @desc Room transition.
+    static refresh = function()
+    {
+        // Check if the function is called in the correct event.
+        if (event_number != ev_room_start) debug_event("Game: refresh() must be called in the Room Start event.");
+
     }
 
     /// @desc Destroy the game.

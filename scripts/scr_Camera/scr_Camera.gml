@@ -32,6 +32,9 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     zfar = _zfar;
     script = update_default;
     custom = -1;
+
+    // Camera's position cannot be out of bounds by default
+    bound = false;
     
     /// @desc Destroys the camera.
     static destroy = function()
@@ -132,6 +135,7 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     };
 
     /// @desc Updates the camera with boundary checking.
+    // TODO: Remove this method and use bound property instead.
     static update_bound = function()
     {
         // Delta time

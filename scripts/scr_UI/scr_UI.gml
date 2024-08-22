@@ -11,12 +11,6 @@ enum BUTTON_STATE
 /// @desc User interface manager.
 function UIManager() constructor
 {
-    // Create panel manager
-    panel_manager = new PanelManager();
-
-    // Create button manager
-    button_manager = new ButtonManager();
-
     // GUI scale
     scale = 1;
 	
@@ -44,11 +38,59 @@ function UIManager() constructor
         // Update scale
         display_set_gui_maximise(scale, scale);
 
-        // Update panels
-        panel_manager.update();
+        // Get number of objects
+        var _num = instance_number(obj_ui);
 
-        // Update buttons
-        button_manager.update();
+        // Input detection
+        var _pressed = mouse_check_button_pressed(mb_left);
+        var _released = mouse_check_button_released(mb_left);
+
+        // Update objects
+        for (var _i = 0; _i < _num; _i++)
+        {
+            // Get instance
+            var _inst = instance_find(obj_ui, _i);
+
+            // Update instance
+            if (object_is_ancestor(_inst.object_index, obj_button) || _inst.object_index == obj_button)
+            {
+                // Skip if instance is invisible
+                if (!_inst.visible || !layer_get_visible(_inst.layer)) continue;
+
+                // Input detection
+                var _hover = position_meeting(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), _inst.id);
+
+                // State transition
+                if (_inst.state == BUTTON_STATE.IDLE && _hover) _inst.state = BUTTON_STATE.HOVER;
+                else if (_inst.state == BUTTON_STATE.HOVER && _pressed) _inst.state = BUTTON_STATE.PRESSED;
+                else if (_inst.state == BUTTON_STATE.HOVER && !_hover) _inst.state = BUTTON_STATE.IDLE;
+                else if (_inst.state == BUTTON_STATE.PRESSED && _released && _hover) _inst.state = BUTTON_STATE.RELEASED;
+                else if (_inst.state == BUTTON_STATE.PRESSED && _released && !_hover) _inst.state = BUTTON_STATE.IDLE;
+                else if (_inst.state == BUTTON_STATE.RELEASED && !_hover) _inst.state = BUTTON_STATE.IDLE;
+                else if (_inst.state == BUTTON_STATE.RELEASED && _hover) _inst.state = BUTTON_STATE.HOVER;
+                else continue;
+
+                // Sound effects
+                if (_inst.sfx[_inst.state] >= 0) audio_play_sound(_inst.sfx[_inst.state], 1, false);
+
+                // Cursor
+                _inst.cursor_display = (_inst.state == BUTTON_STATE.HOVER || _inst.state == BUTTON_STATE.PRESSED);
+
+                // Button actions
+                if (_inst.actions[_inst.state] != undefined)
+                {
+                    script_execute_ext(_inst.actions[_inst.state], _inst.actions_args[_inst.state]);
+                }
+            }
+            else if (object_is_ancestor(_inst.object_index, obj_panel) || _inst.object_index == obj_panel)
+            {
+                for (var _j = 0; _j < array_length(_inst.children); _j++)
+                {
+                    if (_inst.visible) instance_activate_object(_inst.children[_j].id);
+                    else instance_deactivate_object(_inst.children[_j].id);
+                }
+            }
+        }
 
         // Get mouse position
         var _mouse_x = device_mouse_x_to_gui(0);
@@ -83,264 +125,69 @@ function UIManager() constructor
     }
 
     /// @desc Draw the user interface.
-    /// @param {Constant.EventType} _event The event that called this function.
-    static draw = function(_event = event_number)
+    static draw = function()
     {
-        // Draw panels
-        panel_manager.draw(_event);
+        // Get number of objects
+        var _num = instance_number(obj_ui);
 
-        // Draw buttons
-        button_manager.draw(_event);
+        // Draw objects
+        for (var _i = 0; _i < _num; _i++)
+        {
+            // Get instance
+            var _inst = instance_find(obj_ui, _i);
+
+            // Draw instance
+            if (object_is_ancestor(_inst.object_index, obj_button) || _inst.object_index == obj_button)
+            {
+                // Skip if instance is invisible
+                if (!_inst.visible || !layer_get_visible(_inst.layer)) continue;
+
+                // Draw button
+                with (_inst)
+                {
+                    // Button
+                    draw_self();
+
+                    // Icon
+                    if (icon_sprite >= 0)
+                    {
+                        draw_sprite_ext(icon_sprite, icon_subimg, x + icon_xoffset, y + icon_yoffset, icon_xscale, icon_yscale, icon_rot, icon_color, icon_alpha);
+                    }
+
+                    // Cursor
+                    if (cursor_display && cursor_sprite >= 0)
+                    {
+                        draw_sprite_stretched_ext(cursor_sprite, cursor_subimg, bbox_left - cursor_xoffset, bbox_top - cursor_yoffset, bbox_right - bbox_left + cursor_xoffset * 2, bbox_bottom - bbox_top + cursor_yoffset * 2, cursor_color, cursor_alpha);
+                    }
+
+                    // Text
+                    text.draw(text_x, text_y);
+
+                    // Visual effects
+                    if (vfx[state] != undefined) vfx[state]();
+                }
+            }
+            else if (object_is_ancestor(_inst.object_index, obj_panel) || _inst.object_index == obj_panel)
+            {
+                with (_inst)
+                {
+                    if (visible && sprite_index >= 0) draw_self();
+                }
+            }
+        }
     }
 
     /// @desc Draw the tooltip.
-	// Note: This function is called in the Draw GUI event.
     static draw_tooltip = function()
     {
+        // Check the event
+        if (event_number != ev_gui) debug_event("UIManager: draw_tooltip() must be called in the Draw GUI event.");
+
         // Draw tooltip
         if (tooltip.sprite != -1 && tooltip.string != -1)
         {
             draw_sprite_stretched_ext(tooltip.sprite, tooltip.subimg, tooltip.x - tooltip.margin_x, tooltip.y - tooltip.margin_y, tooltip.width + tooltip.margin_x * 2, tooltip.height + tooltip.margin_y * 2, tooltip.color, tooltip.alpha);
             tooltip.string.draw(tooltip.x, tooltip.y);
-        }
-    }
-
-    /// @desc Refresh the button manager
-    static refresh = function()
-    {
-        // Refresh button manager
-        button_manager.refresh();
-
-        // Refresh panel manager
-        panel_manager.refresh();
-    }
-}
-
-// Panel manager
-function PanelManager() constructor
-{
-    // Arrays
-    panels_gui_begin = [];
-    panels_gui = [];
-    panels_gui_end = [];
-
-    /// @desc Get panel array by event
-    /// @param {Constant.EventType} _event The event to get
-    /// @return {Array} The panel array
-    /// @pure
-    static get_array = function(_event)
-    {
-        switch (_event)
-        {
-            case ev_gui_begin:
-                return panels_gui_begin;
-            case ev_gui:
-                return panels_gui;
-            case ev_gui_end:
-                return panels_gui_end;
-            default:
-                return undefined;
-        }
-    }
-
-    /// @desc Remove all panels in the manager array and add new panels
-    static refresh = function()
-    {
-        // Remove all panels
-        var _list = [panels_gui_begin, panels_gui, panels_gui_end];
-        for (var _i = 0; _i < array_length(_list); _i++)
-        {
-            array_delete(_list[_i], 0, array_length(_list[_i]));
-        }
-
-        // Add new panels
-        for (var _i = 0; _i < instance_number(obj_panel); _i++)
-        {
-            var _inst = instance_find(obj_panel, _i);
-            var _array = get_array(_inst.event);
-            if (_array == undefined) continue;
-            array_push(_array, _inst);
-        }
-    }
-
-    /// @desc Update panels
-    static update = function()
-    {
-        var _list = [panels_gui_begin, panels_gui, panels_gui_end];
-        for (var _i = 0; _i < array_length(_list); _i++)
-        {
-            for (var _j = 0; _j < array_length(_list[_i]); _j++)
-            {
-                with (_list[_i][_j])
-                {
-                    for (var _k = 0; _k < array_length(children); _k++)
-                    {
-                        if (visible) instance_activate_object(children[_k].id);
-                        else instance_deactivate_object(children[_k].id);
-                    }
-                }
-            }
-        }
-    }
-
-    /// @desc Draw panels
-    /// @param {Constant.EventType} _event The event to draw
-    static draw = function(_event)
-    {
-        // Get array
-        var _array = get_array(_event);
-
-        // Check if array is valid
-        if (array_length(_array) == 0) return;
-
-        // Draw each panel
-        for (var _i = 0; _i < array_length(_array); _i++)
-        {
-            with (_array[_i])
-            {
-                if (visible && sprite_index >= 0) draw_self();
-            }
-        }
-    }
-}
-
-// Button manager class
-function ButtonManager() constructor
-{
-    // Arrays
-    buttons_gui_begin = [];
-    buttons_gui = [];
-    buttons_gui_end = [];
-
-    /// @desc Get button array by event
-    /// @param {Constant.EventType} _event The event to get
-    /// @return {Array} The button array
-    /// @pure
-    static get_array = function(_event)
-    {
-        switch (_event)
-        {
-            case ev_gui_begin:
-                return buttons_gui_begin;
-            case ev_gui:
-                return buttons_gui;
-            case ev_gui_end:
-                return buttons_gui_end;
-            default:
-                return undefined;
-        }
-    }
-
-    /// @desc Remove all buttons in the manager array and add new buttons
-    static refresh = function()
-    {
-        // Remove all buttons
-        var _list = [buttons_gui_begin, buttons_gui, buttons_gui_end];
-        for (var _i = 0; _i < array_length(_list); _i++)
-        {
-            array_delete(_list[_i], 0, array_length(_list[_i]));
-        }
-
-        // Add new buttons
-        for (var _i = 0; _i < instance_number(obj_button); _i++)
-        {
-            var _inst = instance_find(obj_button, _i);
-            var _array = get_array(_inst.event);
-            if (_array == undefined) continue;
-            array_push(_array, _inst);
-        }
-    }
-
-    /// @desc Update buttons
-    static update = function()
-    {
-        // Update each array
-        var _list = [buttons_gui_begin, buttons_gui, buttons_gui_end];
-        for (var _i = 0; _i < array_length(_list); _i++)
-        {
-            for (var _j = 0; _j < array_length(_list[_i]); _j++)
-            {
-                with (_list[_i][_j])
-                {
-                    // Skip if button is invisible
-                    if (!_list[_i][_j].visible || !layer_get_visible(_list[_i][_j].layer)) continue;
-
-                    // Input detection
-                    var _hover = position_meeting(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), id);
-                    var _pressed = mouse_check_button_pressed(mb_left);
-                    var _released = mouse_check_button_released(mb_left);
-
-                    // State transition
-                    if (state == BUTTON_STATE.IDLE && _hover) state = BUTTON_STATE.HOVER;
-                    else if (state == BUTTON_STATE.HOVER && _pressed) state = BUTTON_STATE.PRESSED;
-                    else if (state == BUTTON_STATE.HOVER && !_hover) state = BUTTON_STATE.IDLE;
-                    else if (state == BUTTON_STATE.PRESSED && _released && _hover) state = BUTTON_STATE.RELEASED;
-                    else if (state == BUTTON_STATE.PRESSED && _released && !_hover) state = BUTTON_STATE.IDLE;
-                    else if (state == BUTTON_STATE.RELEASED && !_hover) state = BUTTON_STATE.IDLE;
-                    else if (state == BUTTON_STATE.RELEASED && _hover) state = BUTTON_STATE.HOVER;
-                    else continue;
-
-                    // Sound effects
-                    if (sfx[state] >= 0) audio_play_sound(sfx[state], 1, false);
-
-                    // Cursor
-                    cursor.display = (state == BUTTON_STATE.HOVER || state == BUTTON_STATE.PRESSED);
-
-                    // Button actions
-                    if (actions[state] != undefined)
-					{
-                        script_execute_ext(actions[state], actions_args[state]);
-					}
-                }
-            }
-        }
-    }
-
-    /// @desc Draw buttons
-    /// @param {Constant.EventType} _event The event to draw
-    static draw = function(_event)
-    {
-        // Get array
-        var _array = get_array(_event);
-
-        // Check if array is valid
-        if (array_length(_array) == 0) return;
-
-        // Draw each button
-        for (var _i = 0; _i < array_length(_array); _i++)
-        {
-            // Skip if button is invisible
-            if (!_array[_i].visible || !layer_get_visible(_array[_i].layer)) continue;
-
-            with (_array[_i])
-            {
-                // Button
-                draw_self();
-
-                // Icon
-                if (icon.sprite >= 0)
-                {
-                    draw_sprite_ext(icon.sprite, icon.subimg, icon.x, icon.y, icon.xscale, icon.yscale, icon.rot, icon.color, icon.alpha);
-                }
-
-                // Cursor
-                if (cursor.display && cursor.sprite >= 0)
-                {
-                    draw_sprite_stretched_ext(cursor.sprite, cursor.subimg, bbox_left - cursor.xoffset, bbox_top - cursor.yoffset, bbox_right - bbox_left + cursor.xoffset * 2, bbox_bottom - bbox_top + cursor.yoffset * 2, cursor.color, cursor.alpha);
-                }
-            }
-
-            // Draw text
-            with (_array[_i])
-            {
-                text.draw(text_x, text_y);
-            }
-
-            // Draw visual effects
-            with (_array[_i])
-            {
-                if (vfx[state] != undefined) vfx[state]();
-            }
         }
     }
 }

@@ -11,7 +11,10 @@
     "name":"Core Objects",
     "path":"folders/Objects/Core Objects.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_ui",
+    "path":"objects/obj_ui/obj_ui.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

@@ -1,2 +1,2 @@
 // Step
-game.step();
+game.update();

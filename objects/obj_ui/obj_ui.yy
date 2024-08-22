@@ -1,9 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_collider",
+  "%Name":"obj_ui",
   "eventList":[],
   "managed":true,
-  "name":"obj_collider",
+  "name":"obj_ui",
   "overriddenProperties":[],
   "parent":{
     "name":"Core Objects",

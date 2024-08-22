@@ -25,4 +25,18 @@ function InputManager() constructor
     {
         return input[$ _input]();
     };
+
+    /// @desc Import input presets.
+    /// @param {String} _path The path to the input presets.
+    static import = function(_path)
+    {
+        
+    };
+
+    /// @desc Export input presets.
+    /// @param {String} _path The path to the input presets.
+    static export = function(_path)
+    {
+        
+    };
 }
