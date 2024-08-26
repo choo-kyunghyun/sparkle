@@ -127,6 +127,9 @@ function UIManager() constructor
     /// @desc Draw the user interface.
     static draw = function()
     {
+        // Check the event
+        if (event_number != ev_gui) debug_event("UIManager: draw() must be called in the Draw GUI event.");
+
         // Get number of objects
         var _num = instance_number(obj_ui);
 
@@ -175,13 +178,6 @@ function UIManager() constructor
                 }
             }
         }
-    }
-
-    /// @desc Draw the tooltip.
-    static draw_tooltip = function()
-    {
-        // Check the event
-        if (event_number != ev_gui) debug_event("UIManager: draw_tooltip() must be called in the Draw GUI event.");
 
         // Draw tooltip
         if (tooltip.sprite != -1 && tooltip.string != -1)

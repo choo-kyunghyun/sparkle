@@ -1,6 +1,6 @@
 # Sparkle
 
-![Sparkle](assets/splash.png)
+![Sparkle](assets/logos/splash.png)
 
 Sparkle is an open-source [GameMaker](https://gamemaker.io/en) project. The goal of this project is to make the various features as easy to use as possible. This project is in its early stages and there may be inconsistent changes.
 
@@ -37,6 +37,10 @@ The audio manager will be supported in the future.
 ### String
 
 Do you want to use various colors and fonts in a single string? Use String. You can change the color in the middle of the string with color tags like `<color=#666666>`, or change the font in the middle with font tags like `<font=fnt_sparkle>`. This String is used in various UIs of this project.
+
+### Sparkle Font
+
+Provides a custom-made font for this project. The font is available in both TrueType and bitmap formats.
 
 ## License
 

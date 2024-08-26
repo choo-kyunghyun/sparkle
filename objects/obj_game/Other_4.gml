@@ -1,2 +1,2 @@
 // Room start
-game.room_start();
+game.refresh();

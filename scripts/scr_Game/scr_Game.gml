@@ -69,13 +69,6 @@ function Game() constructor
             language : os_get_language(),
             region : os_get_region()
         };
-
-        // Directory paths
-        // TODO: Move to IO class
-        directory =
-        {
-            screenshot : working_directory + "\Screenshots\\"
-        };
         
         // Set gpu settings
         gpu_set_ztestenable(true);
@@ -188,7 +181,7 @@ function Game() constructor
         if (level != noone && level.draw != undefined)
         {
             script_execute_ext(level.draw, level.draw_args);
-        }
+        }        
     }
 
     /// @desc Draw the GUI.
@@ -205,40 +198,43 @@ function Game() constructor
 
         // Draw UI
         ui_manager.draw();
-        ui_manager.draw_tooltip();
     }
 
     /// @desc Draw the GUI.
-    // TODO: Use surface_copy and surface_save to take a screenshot instead of screen_save
-    // TODO: Merge all GUI functions into one function
     static gui_end = function()
     {
         // Check if the function is called in the correct event.
         if (event_number != ev_gui_end) debug_event("Game: gui_end() must be called in the Draw GUI End event.");
 
-        // Take a screenshot
-        // Note: Not tested
-        // if (input.check("screenshot"))
-        // {
-        //     var _filename = "Screenshot-" + string(current_year) + "-" + string(current_month) + "-" + string(current_day) + "-" + string(current_hour) + ":" + string(current_minute) + ":" + string(current_second) + "-" + string(current_time) + ".png";
-        //     screen_save(directory.screenshot + _filename);
-        // }
+        // Screenshot
+        if (input.check("screenshot"))
+        {
+            var _filename = "Screenshots\\" + string(current_year) + "-" + string(current_month) + "-" + string(current_day) + "-" + string(current_hour) + "-" + string(current_minute) + "-" + string(current_second) + "-" + string(current_time) + ".png";
+            screen_save(_filename);
+        }
     }
     
-    /// @desc Room start.
-    // TODO: Merge room_start and room_end into refresh function
-    static room_start = function()
+    /// @desc Room transition.
+    static refresh = function()
     {
         // Check if the function is called in the correct event.
-        if (event_number != ev_room_start) debug_event("Game: room_start() must be called in the Room Start event.");
+        if (event_number != ev_room_start) debug_event("Game: refresh() must be called in the Room Start event.");
+
+        // Remove all vertex buffers
+        vertex_manager.delete_all();
 
         // Change the room settings
         view_enabled = true;
         view_visible[0] = true;
         view_camera[0] = camera.id;
 
+        // Check the number of level instances
+        if (instance_number(obj_level) > 1)
+        {
+            debug_event("Game: Multiple level instances detected. Only one level instance is allowed.");
+        }
+
         // Get the level instance
-        // Note: Only one level instance should exist in the room
         level = instance_find(obj_level, 0);
 
         // If the level instance exists
@@ -252,6 +248,7 @@ function Game() constructor
             // Change the camera settings
             camera.script = level.camera_update_script;
             camera.target = level.camera_target;
+            camera.bound = level.camera_bound;
 
             // Update the camera position
             if (camera.target == noone) camera.position(level.camera_x, level.camera_y, level.camera_z);
@@ -264,6 +261,10 @@ function Game() constructor
                 transition.delta = transition.delta > 0 ? transition.delta : -transition.delta;
                 transition.start();
             }
+        }
+        else
+        {
+            camera.target = noone;
         }
 
         // Add static objects to the vertex buffer
@@ -287,30 +288,6 @@ function Game() constructor
 
         // Freeze the vertex buffer to improve performance
         _vm.freeze_all();
-    }
-
-    /// @desc Room end.
-    static room_end = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_room_end) debug_event("Game: room_end() must be called in the Room End event.");
-
-        // Remove all vertex buffers
-        vertex_manager.delete_all();
-
-        // Unassign the camera target
-        camera.target = noone;
-
-        // Unassign the current level object
-        level = noone;
-    }
-
-    /// @desc Room transition.
-    static refresh = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_room_start) debug_event("Game: refresh() must be called in the Room Start event.");
-
     }
 
     /// @desc Destroy the game.

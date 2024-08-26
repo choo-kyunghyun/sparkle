@@ -31,7 +31,6 @@
       ],"listItems":[],"multiselect":false,"name":"camera_target","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":5,},
     {"$GMObjectProperty":"v1","%Name":"camera_update_script","filters":[],"listItems":[
         "GAME.camera.update_default",
-        "GAME.camera.update_bound",
         "GAME.camera.update_rpg",
         "GAME.camera.update_fps",
       ],"multiselect":false,"name":"camera_update_script","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"GAME.camera.update_default","varType":6,},
@@ -40,6 +39,7 @@
     {"$GMObjectProperty":"v1","%Name":"camera_z","filters":[],"listItems":[],"multiselect":false,"name":"camera_z","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"camera_width","filters":[],"listItems":[],"multiselect":false,"name":"camera_width","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
     {"$GMObjectProperty":"v1","%Name":"camera_height","filters":[],"listItems":[],"multiselect":false,"name":"camera_height","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":0,},
+    {"$GMObjectProperty":"v1","%Name":"camera_bound","filters":[],"listItems":[],"multiselect":false,"name":"camera_bound","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
     {"$GMObjectProperty":"v1","%Name":"update","filters":[],"listItems":[],"multiselect":false,"name":"update","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"undefined","varType":4,},
     {"$GMObjectProperty":"v1","%Name":"update_args","filters":[],"listItems":[],"multiselect":false,"name":"update_args","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"[]","varType":4,},
     {"$GMObjectProperty":"v1","%Name":"draw","filters":[],"listItems":[],"multiselect":false,"name":"draw","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"undefined","varType":4,},

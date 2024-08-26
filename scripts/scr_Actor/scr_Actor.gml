@@ -24,9 +24,14 @@ function ActorManager() constructor
             var _dz = 0;
 
             // Gravity
-            if (!place_meeting(x, y + 1, obj_wall))
+            if (!place_meeting(x, y + bbox_bottom, obj_wall))
             {
-                _dy += 5 * _game.time.delta;
+                grav += 60 * _game.time.delta;
+                _dy += grav * _game.time.delta;
+            }
+            else
+            {
+                grav = 0;
             }
 
             // Movement

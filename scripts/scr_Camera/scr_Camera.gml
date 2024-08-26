@@ -32,8 +32,6 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
     zfar = _zfar;
     script = update_default;
     custom = -1;
-
-    // Camera's position cannot be out of bounds by default
     bound = false;
     
     /// @desc Destroys the camera.
@@ -128,29 +126,12 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
             y = lerp(y, target.y - height * 0.5, _speed);
         }
 
-        // Update the camera
-        camera_set_view_pos(id, x, y);
-        camera_set_view_size(id, width, height);
-        camera_apply(id);
-    };
-
-    /// @desc Updates the camera with boundary checking.
-    // TODO: Remove this method and use bound property instead.
-    static update_bound = function()
-    {
-        // Delta time
-        var _speed = speed * GAME.time.delta;
-
-        // Update the position
-        if (target != noone)
-        {
-            x = lerp(x, target.x - width * 0.5, _speed);
-            y = lerp(y, target.y - height * 0.5, _speed);
-        }
-
         // Check the bounds
-        x = clamp(x, 0, room_width - width);
-        y = clamp(y, 0, room_height - height);
+        if (bound)
+        {
+            x = clamp(x, 0, room_width - width);
+            y = clamp(y, 0, room_height - height);
+        }
 
         // Update the camera
         camera_set_view_pos(id, x, y);
@@ -175,6 +156,13 @@ function Camera(_x = 0, _y = 0, _z = 0, _width = room_width, _height = room_heig
             x = lerp(x, target.x + _dist_x, _speed);
             y = lerp(y, target.y + _dist_y, _speed);
             z = lerp(z, target.depth + _dist_z, _speed);
+        }
+
+        // Check the bounds
+        if (bound)
+        {
+            x = clamp(x, 0, room_width - width);
+            y = clamp(y, 0, room_height - height);
         }
 
         // Update the camera

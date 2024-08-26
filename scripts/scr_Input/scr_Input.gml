@@ -16,7 +16,7 @@ function InputManager() constructor
         interact : function() { return keyboard_check_pressed(ord("E")); },
         pause : function() { return keyboard_check_pressed(vk_escape); },
         scan : function() { return keyboard_check_pressed(ord("F")); },
-        screenshot : function() { return keyboard_check_pressed(vk_printscreen); }
+        screenshot : function() { return keyboard_check_pressed(vk_f5); }
     };
     
     /// @desc Check if the input is pressed.
@@ -30,13 +30,13 @@ function InputManager() constructor
     /// @param {String} _path The path to the input presets.
     static import = function(_path)
     {
-        
+        input = json_parse(_path);
     };
 
     /// @desc Export input presets.
     /// @param {String} _path The path to the input presets.
     static export = function(_path)
     {
-        
+        return json_stringify(input);
     };
 }

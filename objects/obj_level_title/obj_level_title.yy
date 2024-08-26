@@ -10,7 +10,8 @@
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"camera_width","path":"objects/obj_level/obj_level.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"room_width",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"camera_height","path":"objects/obj_level/obj_level.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"room_height",},
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"camera_target","path":"objects/obj_level/obj_level.yy",},"resource":{"name":"obj_anchor","path":"objects/obj_anchor/obj_anchor.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"obj_anchor",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"camera_update_script","path":"objects/obj_level/obj_level.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"GAME.camera.update_bound",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"camera_update_script","path":"objects/obj_level/obj_level.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"GAME.camera.update_default",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"propertyId":{"name":"camera_bound","path":"objects/obj_level/obj_level.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"True",},
   ],
   "parent":{
     "name":"Level Objects",
