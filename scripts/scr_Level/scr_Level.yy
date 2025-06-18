@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_Level",
+  "%Name":"scr_level",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_Level",
+  "name":"scr_level",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"Core Scripts",
+    "path":"folders/Sparkle Core Assets/Core Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -1,2 +1,0 @@
-// Destroy
-game.destroy();

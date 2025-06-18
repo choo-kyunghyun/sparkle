@@ -1,42 +1,69 @@
-/// @desc Input manager.
-function InputManager() constructor
-{
-    // List of all input presets.
-    presets = [];
+new Input();
 
-    // List of all input actions.
-    input =
-    {
-        left : function() { return keyboard_check(ord("A")); },
-        right : function() { return keyboard_check(ord("D")); },
-        up : function() { return keyboard_check(ord("W")); },
-        down : function() { return keyboard_check(ord("S")); },
-        jump : function() { return keyboard_check(vk_space); },
-        attack : function() { return mouse_check_button(mb_left); },
-        interact : function() { return keyboard_check_pressed(ord("E")); },
-        pause : function() { return keyboard_check_pressed(vk_escape); },
-        scan : function() { return keyboard_check_pressed(ord("F")); },
-        screenshot : function() { return keyboard_check_pressed(vk_f5); }
-    };
-    
-    /// @desc Check if the input is pressed.
-    /// @param {String} _input The input to check.
-    static check = function(_input)
-    {
-        return input[$ _input]();
-    };
+/**
+ * Input class for managing input bindings and actions.
+ * @returns {Struct.Input}
+ */
+function Input() constructor {
+    static binds = {};
+    static sensitivity = 2.5;
 
-    /// @desc Import input presets.
-    /// @param {String} _path The path to the input presets.
-    static import = function(_path)
-    {
-        input = json_parse(_path);
-    };
+    /**
+     * Binds an action to an input ID.
+     * @returns {Struct.Input}
+     * @param {String} id - The identifier for the input action.
+     * @param {Function} action - The function that returns true if the action is triggered.
+     */
+    static bind = function(_id, _action) {
+        self.binds[$ _id] = _action;
+        return self;
+    }
 
-    /// @desc Export input presets.
-    /// @param {String} _path The path to the input presets.
-    static export = function(_path)
-    {
-        return json_stringify(input);
-    };
+    /**
+     * Unbinds an action from an input ID.
+     * @returns {Struct.Input}
+     * @param {String} id - The identifier for the input action to unbind.
+     */
+    static unbind = function(_id) {
+        struct_remove(self.binds, _id);
+        return self;
+    }
+
+    /**
+     * Checks an action by its ID.
+     * @returns {Bool}
+     * @param {String} id - The identifier for the input action to check.
+     */
+    static check = function(_id) {
+        if (self.binds[$ _id] == undefined) {
+            throw new Error("Action " + _id + " not bound.");
+        }
+        return self.binds[$ _id]();
+    }
+
+    /**
+     * Imports input bindings from a file.
+     * @returns {Struct.Input}
+     * @param {String} fname - The name of the file to import bindings from.
+     */
+    static import = function(_fname) {
+        var _struct = Struct.import(_fname);
+        if (is_struct(_struct)) {
+            delete self.binds;
+            self.binds = _struct;
+        } else {
+            throw new Error("Import failed.");
+        }
+        return self;
+    }
+
+    /**
+     * Exports input bindings to a file.
+     * @returns {Struct.Input}
+     * @param {String} fname - The name of the file to export bindings to.
+     */
+    static export = function(_fname) {
+        Struct.export(self.binds, _fname);
+        return self;
+    }
 }

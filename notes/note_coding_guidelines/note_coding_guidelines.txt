@@ -1,0 +1,76 @@
+# Coding Guidelines
+
+## Names
+
+- **GameMaker Assets:** Use specific prefixes for GameMaker assets for clarity and organization. This naming convention generally follows the default naming rules suggested by Feather, GameMaker's integrated code analysis tool.
+  - Scripts: `scr_` (e.g., `scr_player_movement`)
+  - Objects: `obj_` (e.g., `obj_player`)
+  - Sprites: `spr_` (e.g., `spr_player_idle`)
+  - Sounds: `snd_` (e.g., `snd_jump`)
+  - Rooms: `rm_` (e.g., `rm_level_1`)
+  - Tilesets: `ts_` (e.g., `ts_terrain`)
+  - Fonts: `fnt_` (e.g., `fnt_main`)
+  - Animation Curves: `ac_` (e.g., `ac_jump_curve`)
+  - Shaders: `sh_` (e.g., `sh_outline`)
+  - Notes: `note_` (e.g., `note_design_ideas`)
+  - Timelines: `tl_` (e.g., `tl_level_intro`)
+  - Paths: `pth_` (e.g., `pth_enemy_patrol`)
+  - Sequences: `seq_` (e.g., `seq_intro_animation`)
+- **Variables & Functions:**
+  - Use `snake_case` for instance variables, global variables, and function names (e.g., `player_speed`, `global.game_score`, `calculate_damage`).
+  - Local variables and function parameters should be prefixed with an underscore (`_`) (e.g., `var _local_value;`, `function(_player_id, _amount)`).
+- **Constructors:** Use `PascalCase` for constructor function names (e.g., `function PlayerState() constructor {}`).
+- **Macros:** Use `UPPER_SNAKE_CASE` for macros (e.g., `MAX_PLAYERS`, `DEFAULT_SPEED`).
+- **Enums:** Use `UPPER_SNAKE_CASE` for enum names (e.g., `INPUT_STATE`, `GAME_PHASE`).
+- **Enum Members:** Use `UPPER_SNAKE_CASE` (e.g., `PRESSED`, `ACTIVE`, `GAME_OVER`).
+- **Achievement IDs:** Use `UPPER_SNAKE_CASE` for achievement identifiers, largely influenced by conventions like those found in Steamworks (e.g., `ACH_GAME_COMPLETED`, `ACH_ALL_COLLECTIBLES`).
+
+## Comments
+
+- **JSDoc Style:** Use JSDoc-style comments for all scripts, constructor functions, and their public static/instance methods.
+  - Include a brief description of the function/script.
+  - Use `@param {Type} param_name - Description` for each parameter.
+  - Use `@returns {Type} - Description` for the return value.
+  - Example:
+    ```gml
+    /**
+     * Calculates the total damage dealt to an enemy.
+     * @returns {Real} The total calculated damage.
+     * @param {Id.Instance} enemy_instance The instance ID of the enemy.
+     * @param {Real} base_damage The base damage of the attack.
+     */
+    function calculate_total_damage(_enemy_instance, _base_damage) {
+        // ... implementation ...
+    }
+    ```
+- **Inline Comments:** Use `//` for single-line comments to explain complex logic or non-obvious code sections.
+- **TODOs & BUGs:**
+  - Use `// TODO: Description` for tasks that need to be completed.
+  - Use `// BUG: Description` to mark known bugs that need fixing.
+
+## Code Structure and General Practices
+
+- **Constructors for Data/State:** Use constructor functions (`function Name() constructor {}`) to define complex data structures or objects that encapsulate state and related methods (e.g., `Achievement`, `VertexBuffer`).
+- **Static Members for Systems:** Utilize static variables and methods within constructors for manager-like functionalities or systems that operate on collections or global state related to the constructor's purpose (e.g., `Achievement.add()`, `Vertex.buffer_get()`).
+- **`self` in Static Context:** When a static method or variable within a constructor needs to refer to other static members of the same constructor, use `self` (e.g., `self.static_variable`, `self.static_method()`).
+- **Clarity and Readability:** Prioritize writing code that is easy to understand. Break down complex logic into smaller, well-named functions.
+- **File Organization:** Group related assets and scripts into appropriately named folders within the GameMaker asset browser.
+
+## Formatters and Coding Styles
+
+- **GameMaker Language (GML):**
+  - Currently, there is no single dominant, universally adopted code formatter for GML.
+  - Adhere to the naming conventions and commenting rules outlined in these guidelines to maintain consistency.
+  - Strive for clear, readable code, and use the GameMaker IDE's built-in formatting tools where available (e.g., auto-indentation).
+- **JavaScript:**
+  - **Formatter:** [Prettier](https://prettier.io/) is recommended for automatic code formatting.
+  - **Coding Style:** We will adhere to the coding style guidelines documented on [MDN Web Docs](https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Writing_style_guide/Code_style_guide/JavaScript). MDN uses Prettier with the following configuration:
+    ```json
+    {
+      "bracketSameLine": true
+    }
+    ```
+- **Markdown:**
+  - **Formatter:** [Prettier](https://prettier.io/) is recommended for automatic code formatting.
+- **JSON:**
+  - **Formatter:** [Prettier](https://prettier.io/) is recommended for automatic code formatting.

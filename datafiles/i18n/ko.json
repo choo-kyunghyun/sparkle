@@ -1,0 +1,12 @@
+{
+  "LOC_TITLE_BUTTON_NEW": "새 게임",
+  "LOC_TITLE_BUTTON_NEW_TOOLTIP": "새 게임을 시작합니다.",
+  "LOC_TITLE_BUTTON_LOAD": "불러오기",
+  "LOC_TITLE_BUTTON_LOAD_TOOLTIP": "저장된 게임을 불러옵니다.",
+  "LOC_TITLE_BUTTON_SETTINGS": "설정",
+  "LOC_TITLE_BUTTON_SETTINGS_TOOLTIP": "게임 설정을 변경합니다.",
+  "LOC_TITLE_BUTTON_CREDITS": "크레딧",
+  "LOC_TITLE_BUTTON_CREDITS_TOOLTIP": "게임 제작에 참여한 사람들을 확인합니다.",
+  "LOC_TITLE_BUTTON_EXIT": "종료",
+  "LOC_TITLE_BUTTON_EXIT_TOOLTIP": "게임을 종료합니다."
+}

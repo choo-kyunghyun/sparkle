@@ -1,0 +1,16 @@
+{
+  "name": "Sample Mod",
+  "version": "1.0.0",
+  "description": "A sample mod for demonstration purposes.",
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": ["base >= 1.0.0"],
+  "tags": ["example", "sample"],
+  "homepage": "https://example.com/sample-mod",
+  "data": [
+    {
+      "type": "achievement",
+      "path": "achievements/sample-achievement.json"
+    }
+  ]
+}
