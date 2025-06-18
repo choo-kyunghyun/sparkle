@@ -7,7 +7,6 @@ Please use the Issues section of the GitHub repository.
 | State | Title | Description |
 | ----- | ----- | ----------- |
 | Planned | JavaScript | 2027 LTS |
-| In progress | Legacy | Import all code from sparkle_old. |
 
 ## Core Scripts
 
@@ -27,7 +26,7 @@ Please use the Issues section of the GitHub repository.
 | Planned | Object highlight | Implement a system to highlight specific game objects using quest markers, image_blend, outline shaders, etc. |
 | In progress | Notification | Implement a notification system that queues notifications, outputs them, and leaves them in a log. |
 | On hold | Custom mouse cursors | GameMaker does not support changing the native mouse cursor, so this is on hold. Note: There are third-party libraries that allow changing the mouse cursor on desktop platforms. |
-| On hold | Emoji | We need to add more characters and emojis to fnt_sparkle. However, the font_add_sprite() function can only assign one stripe strip to a font. Instead of creating tens of thousands of empty images, using the font_add_sprite_ext() function would be a good alternative, but it would be very complicated to maintain. We will postpone the implementation of this feature. |
+| On hold | Emoji | Add more characters and emojis using the font_add_sprite_ext() function. |
 
 #### i18n
 
@@ -78,6 +77,7 @@ Please use the Issues section of the GitHub repository.
 | Planned | Tileset | Implementing the ability to add tilesets at runtime |
 | Planned | Autotile | Implementing runtime autotiling methods |
 | Planned | Runtime tiling | Implementing tile, tileset, and tilemap manipulation methods |
+| Planned | 3D Collsion | 3D tilemap collision with z-axis |
 
 ### Input
 
@@ -282,86 +282,106 @@ Please use the Issues section of the GitHub repository.
 
 ### Gacha
 
-## Working
+## Game Concept Overview
 
-- 세계관 설정 및 시나리오 작성
+This document outlines the core ideas and features for the game.
 
-- 근미래 SF 배경과 고대 판타지의 적절한 조합
+### Worldbuilding and Scenario Creation
 
-- 총기제일주의
-    총기 습득 및 개조를 핵심으로
-    대부분의 전투는 총격전 및 시가전
+Worldbuilding & Scenario: Develop the game's setting and write the primary narrative.
+Setting Blend: A suitable combination of a near-future sci-fi backdrop with ancient fantasy elements.
 
-- 황금만능주의
-    코인을 사용하여 거의 대부분의 아이템 구매 가능
-    코인을 사용하여 매우 많은 문제를 해결 가능
+### Gameplay Pillars
 
-- 함선
-    개인 함선을 구매 및 관리할 수 있음
-    이동 수단이면서 이동형 기지
+Gun Supremacy
+Core Mechanic: Centered around acquiring and customizing firearms.
+Combat Focus: Most combat involves gunfights and urban warfare.
 
-- 메인퀘스트
-    스파크와 스파클의 원리와 비밀에 대해 파해치기 위해 행성을 탐험하는 것이 메인 퀘스트
+### Moneymaking is Everything (Plutocracy)
 
-- 서브퀘스트라인
-    매우 다양한 컨셉의 서브 퀘스트 라인
+Currency: Coins can be used to purchase almost all items.
+Problem Solving: Many problems can be resolved by spending coins.
 
-- 카메라
-    1인칭 및 3인칭 지원
-    건설 모드시 자유시점 탑뷰 모드 지원
+### Ships
 
-- 저장
-    게임 진행 상황은 어느 때나 저장할 수 있으나 자동 저장을 제공하지 않음
-    10분 이상 저장하지 않을 시 10분 마다 경고문 UI가 출력되나 자동 저장은 제공하지 않음
-    사망 시 타이틀 화면으로 돌아가며 이전 세이브를 불러올 수 있음
+Ownership: Players can purchase and manage personal ships.
+Dual Function: Serves as both a means of transportation and a mobile base.
 
-- 건설모드
-    기지 및 함선에서 건설 모드를 통해 기지 구축이 가능
-    생존 및 퀘스트 해결에 필요한 것들을 자급자족
+### Quests & Progression
 
-- 로그라이트
-    사망해도 이전 저장 파일을 마음것 불러올 수는 있지만 그 외에는 로그라이트 형식을 따름
-    회차에 따른 보상이나 변화 없음
-    절차적 기반 생성으로 월드를 생성
-        미리 정의해둔 구조물과 건물, 도시 등이 무작위 위치에 생성됨
-        스파클 역시 무작위 위치의 던전에 생성
-        actor의 인벤토리 역시 아이템 풀 내에서 랜덤
+Main Quest: Explore planets to uncover the principles and secrets of "Spark" and "Sparkle."
+Sub-Quest Lines: A wide variety of sub-quest lines with diverse concepts.
 
-- 생존
-    항상 적의 공격 위험이 존재
-    허기 및 갈증은 핵심 생존 요소
-    인벤토리 무게 관리 및 상태이상(질병) 역시 중요
+### Camera
 
-- 경영
-    서브 퀘스트로 다양한 상점 및 시설 경영을 제공
-    직접 매장을 꾸미거나 직원을 고용하는 등 풍부한 컨텐츠 제공
-    경쟁 기업의 사보타주나 습격 등의 이벤트 발생
+Supports both first-person and third-person views.
+Construction Mode: Offers a free-view top-down mode during construction.
 
-- 팩션
-    다양한 팩션들이 존재
-    이들과 우호 관계가 될 수도, 중립일수도, 적대할 수 도 있음
-    동물보호단체, 총기용병단체, 상인단체, 광신도, 경비대, 여러 도시국가, 연합 등 매력적인 팩션들
+### Saving
 
-- 도심
-    도심에서는 직접적인 전투를 피하고 생활적이고 활기가 느껴지는 다양한 퀘스트 제공
-    매장경영, 서명운동, 사보타주, 무역, 아이돌 그룹 육성, 라디오 방송, 함선건설, 건물 수리 및 인테리어, 소방대, 경찰업무, 레이싱, 주유소 업무(대테러임무 포함), 아케이드(미니게임) 등 다양한 컨텐츠 제공
+Manual Save: Game progress can be saved at any time.
+No Auto-Save: Does not provide automatic saving.
+Save Warning: If you haven't saved for more than 10 minutes, a warning UI will appear every 10 minutes, but auto-save is still not provided.
+Death: Upon death, you return to the title screen and can load a previous save.
 
-- 교외
-    교외에서는 광산운영, 농사 등 도심에서 진행하기 어려운 컨텐츠 제공
-    도심보다 전투가 잦으며, 치안 경비가 필요함
+### Base Building & Crafting
 
-- 도시건설
-    일부 지역에서는 플레이어가 직접 도시건설이 가능
-    농촌부터 대도심까지 다양한 에셋 지원
-    NPC들이 플레이어가 건설한 도시에서 정해진 FSM대로 활동하는 것을 관찰하는데 초점
+Construction Mode: Players can build bases within their main base and on their ship using construction mode.
+Self-Sufficiency: Provides resources and tools for self-sufficiency, essential for survival and quest completion.
 
-- 뱃지 및 업적
-    플레이어는 다양한 업적을 달성할 수 있음
-    업적은 회차마다 따로 기록되나 스팀 업적 동기화 등을 통해 외부 플랫폼에서는 누적 가능
-    일부 업적은 위업으로 취급하며 특별한 뱃지를 지급
-    게임 오버 화면에서 업적과 위업을 뱃지로 보여줌
+### Roguelite Elements
 
-- 타이틀 화면
-    타이틀 룸은 냥 캣의 배경과 유사하게 우주를 표현
-    마인크래프트식 스플래시 문구(랜덤)도 추가
-    게임 시작(시작 버튼 클릭 후 새 게임과 불러오기 제공), 모드, 설정, 크레딧(깃헙)-시퀸스 기반, 종료 버튼
+Reload Saves: Players can freely load previous save files even after dying.
+No Progression Rewards: No rewards or changes carry over between playthroughs.
+Procedural Generation: The world is procedurally generated.
+Random Placement: Pre-defined structures, buildings, and cities are spawned at random locations.
+Sparkle Location: "Sparkle" is generated within dungeons at random locations.
+Random Inventory: Actor inventories are randomized from an item pool.
+
+### Survival
+
+Enemy Threat: Constant risk of enemy attacks.
+Core Needs: Hunger and thirst are core survival elements.
+Inventory & Status: Inventory weight management and status effects (diseases) are also important.
+
+### Management
+
+Shop/Facility Management: Sub-quests offer opportunities to manage various shops and facilities.
+Rich Content: Provides rich content such as decorating stores and hiring employees.
+Events: Events like sabotage or raids from rival corporations can occur.
+
+### Factions
+
+Diverse Factions: Various factions exist within the game world.
+Relationship System: Players can be allied, neutral, or hostile with these factions.
+Examples: Attractive factions include animal welfare groups, gun mercenary groups, merchant guilds, cultists, security forces, various city-states, and alliances.
+
+### Urban Areas
+
+Focus: Direct combat is largely avoided in urban areas.
+Quest Types: Offers diverse quests that feel lively and relate to daily life.
+Content Examples: Store management, signature campaigns, sabotage, trade, idol group training, radio broadcasting, ship construction, building repair and interior design, fire department duties, police work, racing, gas station work (including anti-terrorism missions), arcade (mini-games), and more.
+
+### Suburban Areas
+
+Content Examples: Offers content difficult to conduct in urban areas, such as mining operations and farming.
+Combat & Security: More frequent combat than urban areas, requiring security patrols.
+
+### City Building
+
+Player-Built Cities: In some areas, players can directly build cities.
+Asset Variety: Supports a wide range of assets, from rural villages to large metropolises.
+NPC Observation: Focuses on observing NPCs acting according to defined FSMs within the player-built cities.
+
+### Badges & Achievements
+
+Achievements: Players can earn various achievements.
+Tracking: Achievements are recorded separately for each playthrough but can be accumulated on external platforms (e.g., Steam Achievements synchronization).
+Grand Achievement & Badges: Some achievements are considered "Grand Achievement" and award special badges.
+Display: Achievements and Grand Achievements are displayed as badges on the game over screen.
+
+### Title Screen
+
+Title Room: The title room represents space, similar to the Nyan Cat background.
+Splash Text: Includes Minecraft-style splash text (randomized).
+Buttons: Game Start (offers "New Game" and "Load Game" after clicking), Mods, Settings, Credits (GitHub - sequence-based), and Exit.
