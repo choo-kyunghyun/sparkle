@@ -1,323 +1,116 @@
-// Macro
-#macro GAME obj_game.game
-#macro TIME GAME.time
-#macro CAMERA GAME.camera
-#macro INPUT GAME.input
-#macro LEVEL GAME.level
+/**
+ * This function does nothing. It is a placeholder for cases where no action is needed.
+ * It can be used to avoid errors in situations where a function is expected but no action is required.
+ * Never delete this function or it will cause errors in the game.
+ * @returns {Undefined}
+ */
+function noop() {
+	return;
+}
 
-/// @desc Game.
-function Game() constructor
-{
-    /// @desc Initialize the game.
-    /// @param {Id.Instance} _id Object ID of the game object.
-    /// @param {Bool} _release Release mode.
-    static init = function(_id, _release)
-    {
-        // Check if the function is called in the correct event.
-        if (event_type != ev_create) debug_event("Game: init() must be called in the Create event.");
+/**
+ * This function opens the repository page. You can change the URL to your own homepage or repository.
+ * @returns {Undefined}
+ */
+function homepage() {
+    url_open("https://github.com/choo-kyunghyun/sparkle");
+}
 
-        // Set ID
-        id = _id;
+/**
+ * This function check keyboard input for a specific keyword.
+ * If the keyword is found at the end of the keyboard string, it will remove the keyword and call the homepage function.
+ * You can change the keyword to your own keyword.
+ * @returns {Undefined}
+ */
+function watermark() {
+	var _keyword = "sparkle";
+	if (string_ends_with(keyboard_string, _keyword)) {
+		keyboard_string = string_delete(keyboard_string, string_length(keyboard_string), -1 * string_length(_keyword));
+		homepage();
+	}
+}
 
-        // Set release settings
-        show_debug_overlay(!_release);
-        gml_release_mode(_release);
+/**
+ * This function checks for a fullscreen toggle shortcut.
+ * It toggles the fullscreen mode when the Alt key is pressed and Enter is pressed.
+ * @returns {Undefined}
+ */
+function fullscreen_shortcut() {
+	if (keyboard_check(vk_alt) && keyboard_check_pressed(vk_enter)) {
+		window_set_fullscreen(!window_get_fullscreen());
+	}
+}
 
-        // Game time
-        time = new GameTime();
+// TODO: Move to scr_color and encapsulate color operations
+/**
+ * This function extracts the alpha component from a color value.
+ * @returns {Real}
+ * @param {Real} col - The color value from which to extract the alpha.
+ */
+function color_get_alpha(_col) {
+	return (_col >> 24) / 0xFF;
+}
 
-        // Actor manager
-        actor_manager = new ActorManager();
+// TODO: Move to scr_screen and generalize to take screenshots with different formats
+// TODO: Why there is no webP support in GameMaker?
+/**
+ * This function takes a screenshot of the current game window.
+ * It saves the screenshot in the "screenshots" directory with a timestamped filename.
+ * This function must be called in the Draw GUI End Event of the game object.
+ * @returns {Undefined}
+ */
+function screenshot() {
+	if (Input.check("screenshot")) {
+        var _datetime = string(current_year);
+        _datetime += "-" + string_replace_all(string_format(current_month, 2, 0), " ", "0");
+        _datetime += "-" + string_replace_all(string_format(current_day, 2, 0), " ", "0");
+        _datetime += "_" + string_replace_all(string_format(current_hour, 2, 0), " ", "0");
+        _datetime += "-" + string_replace_all(string_format(current_minute, 2, 0), " ", "0");
+        _datetime += "-" + string_replace_all(string_format(current_second, 2, 0), " ", "0");
+		_datetime += $"_{current_time}";
+		var _fname = working_directory + "screenshots\\" + _datetime + ".png";
+		screen_save(_fname);
+	}
+}
 
-        // Camera object
-        // TODO: Edit constructor to resize to room size
-        camera = new Camera();
-        camera.resize(room_width, room_height);
-
-        // Vertex manager
-        vertex_manager = new VertexManager();
-
-        // UI manager
-        // TODO: Edit constructor to take scale as argument
-        ui_manager = new UIManager();
-        ui_manager.scale = 2;
-
-        // Input manager
-        input = new InputManager();
-
-        // Level instance
-        // TODO: Move to Level class
-        level = noone;
-
-        // Transition manager
-        // TODO: Move to Level class
-        transition = new Transition();
-
-        // Dialogue manager
-        dialogue_manager = -1;
-
-        // Audio manager
-        audio_manager = new AudioManager();
-
-        // Network manager
-        network_manager = -1;
-
-        // OS
-        // TODO: Move to OS class
-        os =
-        {
-            language : os_get_language(),
-            region : os_get_region()
-        };
-        
-        // Set gpu settings
-        gpu_set_ztestenable(true);
-        gpu_set_alphatestenable(true);
-
-        // Set display settings
-        if (display_aa >= 8)        display_reset(8, false);
-        else if (display_aa >= 4)   display_reset(4, false);
-        else if (display_aa >= 2)   display_reset(2, false);
-        else                        display_reset(0, false);
-
-        // Set window size
-        window_set_size(display_get_width() * 0.5, display_get_height() * 0.5);
-        surface_resize(application_surface, window_get_width(), window_get_height());
-
-        // Center window
-        window_center();
-
-        // Set framerate
-        game_set_speed(display_get_frequency(), gamespeed_fps);
-
-        // Set font
-        draw_set_font(fnt_sparkle);
-
-        // Randomize
-        randomize();
+// TODO: Move to scr_display and encapsulate display operations
+/**
+ * This function will return all available anti-aliasing options as an array.
+ * @returns {Array<real>}
+ */
+function display_get_aa() {
+    var _arr = [];
+    if (display_aa & 0b1000) {
+        array_push(_arr, 8);
     }
-
-    /// @desc Update the game.
-    static update = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_type != ev_step) debug_event("Game: update() must be called in the Step event.");
-
-        // Update the game time
-        time.update();
-
-        // Toggle fullscreen
-        if (keyboard_check(vk_alt) && keyboard_check_pressed(vk_enter))
-        {
-            window_set_fullscreen(!window_get_fullscreen());
-        }
-
-        // Watermark
-        if (string_ends_with(keyboard_string, "sparkle"))
-        {
-            url_open("https://github.com/Choo-Kyunghyun/Sparkle");
-            keyboard_string = string_delete(keyboard_string, string_length(keyboard_string), -7);
-        }
-
-        // Perform the transition effect
-        // TODO: Move to Level class
-        transition.update();
-
-        // Execute the update script of the current level
-        // TODO: Move to Level class
-        if (level >= 0 && level.update != undefined)
-        {
-            script_execute_ext(level.update, level.update_args);
-        }
-
-        // Update all actors
-        actor_manager.update();
-
-        // Update the vertex manager
-        var _vm = vertex_manager;
-        _vm.begin_all();
-
-        // Add all actors to the vertex buffer
-        with (obj_actor)
-        {
-            if (visible && sprite_index != -1 && layer_get_visible(layer))
-            {
-                // Get texture
-                var _tex = sprite_get_texture(sprite_index, image_index);
-
-                // Add the sprite
-                var _buffer = _vm.add(_tex);
-                vertex_add_sprite_ext(_buffer, sprite_index, image_index, x, y, depth - sprite_get_yoffset(sprite_index) * image_yscale, image_xscale, image_yscale, image_angle, image_pitch, image_roll, image_blend, image_alpha);
-
-                // Add the silhouette
-                if (silhouette)
-                {
-                    _buffer = _vm.add(_tex, cmpfunc_greater);
-                    vertex_add_sprite_ext(_buffer, sprite_index, image_index, x, y, depth - sprite_get_yoffset(sprite_index) * image_yscale, image_xscale, image_yscale, image_angle, image_pitch, image_roll, c_black, image_alpha * 0.5);
-                }
-            }
-        }
-
-        // End the vertex buffer
-        _vm.end_all();
-
-        // Update GUI
-        ui_manager.update();
-
-        // Update the camera
-        camera.update();
+    if (display_aa & 0b0100) {
+        array_push(_arr, 4);
     }
-
-    /// @desc Draw the game.
-    static draw = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_type != ev_draw) debug_event("Game: draw() must be called in the Draw event.");
-
-        // Submit vertex buffer
-        vertex_manager.submit();
-
-        // Draw level
-        if (level != noone && level.draw != undefined)
-        {
-            script_execute_ext(level.draw, level.draw_args);
-        }        
+    if (display_aa & 0b0010) {
+        array_push(_arr, 2);
     }
+    array_push(_arr, 0);
+    return _arr;
+}
 
-    /// @desc Draw the GUI.
-    static gui = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_gui) debug_event("Game: gui() must be called in the Draw GUI event.");
+// TODO: Move to scr_input or scr_window.
+/**
+ * This function checks if the window has focus and sets the mouse to be locked or not based on that.
+ * It returns true if the window has focus, otherwise false.
+ * @returns {Bool}
+ */
+function window_mouse_lock() {
+    var _focus = window_has_focus();
+    window_mouse_set_locked(_focus);
+    return _focus;
+}
 
-        // Draw level GUI
-        if (level != noone && level.draw_gui != undefined)
-        {
-            script_execute_ext(level.draw_gui, level.draw_gui_args);
-        }
-
-        // Draw UI
-        ui_manager.draw();
-    }
-
-    /// @desc Draw the GUI.
-    static gui_end = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_gui_end) debug_event("Game: gui_end() must be called in the Draw GUI End event.");
-
-        // Screenshot
-        if (input.check("screenshot"))
-        {
-            var _filename = "Screenshots\\" + string(current_year) + "-" + string(current_month) + "-" + string(current_day) + "-" + string(current_hour) + "-" + string(current_minute) + "-" + string(current_second) + "-" + string(current_time) + ".png";
-            screen_save(_filename);
-        }
-    }
-    
-    /// @desc Room transition.
-    static refresh = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_room_start) debug_event("Game: refresh() must be called in the Room Start event.");
-
-        // Remove all vertex buffers
-        vertex_manager.delete_all();
-
-        // Change the room settings
-        view_enabled = true;
-        view_visible[0] = true;
-        view_camera[0] = camera.id;
-
-        // Check the number of level instances
-        if (instance_number(obj_level) > 1)
-        {
-            debug_event("Game: Multiple level instances detected. Only one level instance is allowed.");
-        }
-
-        // Get the level instance
-        level = instance_find(obj_level, 0);
-
-        // If the level instance exists
-        if (level != noone)
-        {	
-            // Update the camera size
-            if (level.camera_width != 0) camera.width = level.camera_width;
-            if (level.camera_height != 0) camera.height = level.camera_height;
-            camera.resize(camera.width, camera.height);
-
-            // Change the camera settings
-            camera.script = level.camera_update_script;
-            camera.target = level.camera_target;
-            camera.bound = level.camera_bound;
-
-            // Update the camera position
-            if (camera.target == noone) camera.position(level.camera_x, level.camera_y, level.camera_z);
-            else camera.position(camera.target.x - camera.width / 2, camera.target.y - camera.height / 2, camera.target.depth - camera.dist);
-
-            // Start the transition effect
-            // Note: This code isn't complete and should be modified to fit your needs
-            if (level.transition)
-            {
-                transition.delta = transition.delta > 0 ? transition.delta : -transition.delta;
-                transition.start();
-            }
-        }
-        else
-        {
-            camera.target = noone;
-        }
-
-        // Add static objects to the vertex buffer
-        var _vm = vertex_manager;
-
-        // Begin the vertex buffer
-        _vm.begin_all();
-
-        // Add all walls to the vertex buffer
-        with (obj_wall)
-        {
-            if (visible && sprite_index != -1)
-            {
-                var _buffer = _vm.add(sprite_get_texture(sprite_index, image_index));
-                vertex_add_cube(_buffer, sprite_index, image_index, x, y, depth - sprite_height, image_xscale, image_yscale, image_angle, image_pitch, image_roll, image_blend, image_alpha);
-            }
-        }
-
-        // Add all actors to the vertex buffer
-        _vm.end_all();
-
-        // Freeze the vertex buffer to improve performance
-        _vm.freeze_all();
-    }
-
-    /// @desc Destroy the game.
-    static destroy = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_destroy && event_number != ev_destroy && event_number != ev_game_end) debug_event("Game: destroy() must be called in the Destroy event.");
-
-        // Destroy the camera
-        camera.destroy();
-    }
-
-    /// @desc Asynchronous - System event.
-    static async_system = function()
-    {
-        // Check if the function is called in the correct event.
-        if (event_number != ev_async_system_event) debug_event("Game: async_system() must be called in the Asynchronous - System event.");
-
-        // Gamepad index
-        var _index = -1;
-
-        // Update gamepad
-        switch (async_load[? "event_type"])
-        {
-            case "gamepad discovered":
-                _index = async_load[? "pad_index"];
-                break;
-            case "gamepad lost":
-                _index = async_load[? "pad_index"];
-                break;
-        }
-    }
+/**
+ * This function toggles the debug overlay.
+ * If the debug overlay is open, it will close it; if it is closed, it will open it.
+ * @returns {Undefined}
+ */
+function debug_overlay_toggle() {
+    var _open = is_debug_overlay_open();
+    show_debug_log(!_open);
 }

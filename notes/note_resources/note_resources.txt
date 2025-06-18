@@ -1,0 +1,61 @@
+# Resources
+
+## IDE
+
+### GameMaker
+
+- [Manual](https://manual.gamemaker.io/)
+- [Blog](https://gamemaker.io/en/blog)
+- [Tutorials](https://gamemaker.io/en/tutorials)
+- [Marketplace](https://marketplace.gamemaker.io/)
+
+## Text Editor
+
+### Visual Studio Code
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+
+#### GitHub Copilot
+
+- [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+- [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)
+
+#### Stitch
+
+- [Stitch](https://marketplace.visualstudio.com/items?itemName=bscotch.bscotch-stitch-vscode)
+
+## Assets
+
+### itch.io
+
+- [Game assets](https://itch.io/game-assets)
+
+### Google Fonts
+
+- [Noto Sans](https://fonts.google.com/noto/specimen/Noto+Sans)
+
+### Aseprite
+
+- [GitHub](https://github.com/aseprite/aseprite)
+- [Website](https://www.aseprite.org/)
+- [Steam](https://store.steampowered.com/app/431730/Aseprite/)
+
+### nisrulz/app-privacy-policy-generator
+
+- [GitHub](https://github.com/nisrulz/app-privacy-policy-generator)
+- [Web](https://app-privacy-policy-generator.nisrulz.com/)
+
+### FontForge
+
+- [GitHub](https://github.com/fontforge/fontforge)
+- [Website](https://fontforge.org/en-US/)
+
+### Stable Diffusion
+
+- [comfyanonymous/ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+- [Stable Diffusion](https://stability.ai/stable-image)
+
+### facebookresearch/audiocraft
+
+- [GitHub](https://github.com/facebookresearch/audiocraft)
+- [Demo](https://huggingface.co/spaces/facebook/MusicGen)

@@ -1,0 +1,367 @@
+# Sparkle Roadmap
+
+Please use the Issues section of the GitHub repository.
+
+## Project
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | JavaScript | 2027 LTS |
+| In progress | Legacy | Import all code from sparkle_old. |
+
+## Core Scripts
+
+### User Interface
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Menu | Implementation of various menus such as pause menu, quest and journal, radio, craft, inventory, and store |
+| Planned | Skill tree | Implementing a skill tree interface and a stat interface |
+| Planned | World map | Implementing a world map using grid data |
+| Planned | Mini map | Implementing a minimap using Surface |
+| Planned | Translation | Implement a system that can read files from working_directory and change existing strings to translated strings. |
+| Planned | Color palette | Implementing a color palette using the draw_getpixel() function |
+| Planned | Killfeed | Implement killfeed using notification system |
+| Planned | Encyclopedia | Implementing an in-game encyclopedia |
+| Planned | Dialogue and Cutscenes | Implement a system that plays dialogues and cutscenes by parsing internal scripts and external files. |
+| Planned | Object highlight | Implement a system to highlight specific game objects using quest markers, image_blend, outline shaders, etc. |
+| In progress | Notification | Implement a notification system that queues notifications, outputs them, and leaves them in a log. |
+| On hold | Custom mouse cursors | GameMaker does not support changing the native mouse cursor, so this is on hold. Note: There are third-party libraries that allow changing the mouse cursor on desktop platforms. |
+| On hold | Emoji | We need to add more characters and emojis to fnt_sparkle. However, the font_add_sprite() function can only assign one stripe strip to a font. Instead of creating tens of thousands of empty images, using the font_add_sprite_ext() function would be a good alternative, but it would be very complicated to maintain. We will postpone the implementation of this feature. |
+
+#### i18n
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Sprite | - |
+| Planned | Sound | - |
+
+### Game Object and Actor
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Inventory | Implementing actor inventory using the item system |
+| Planned | Gravity | Gravity for Platformer(Y-axis) and ARPG(Z-axis) |
+| Planned | FSM | Finite state machine |
+| Planned | Animation | Animations based on FSM |
+| Planned | Faction | Multiple faction system |
+| Planned | Shadow | Shadow |
+| Planned | A* | Custom a* motion planning with weights |
+| Planned | Projectile | Projectile management with homing and collision |
+| Planned | Object effect | Buffs and debuffs system |
+| Planned | Collider | Precise tilemap collider `obj_collider` |
+| Planned | Silhouette | Silhouette is implemented via Vertex. Using zfunc=cmpfunc_greater and image_blend = c_black, image_alpha = 0.5. |
+
+### Graphics
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | 3D lightning | 3D lightning system with multiple colored light sources, including point light, spot light, and diagonal light |
+| Planned | Shadow mapping | Shadow mapping |
+| Planned | LUT | The LUT feature is built into GameMaker as a layer effect. |
+| Planned | Fog | Fog |
+| Planned | Skybox | Skybox |
+| Planned | Palette swap | Palette swap shader |
+
+### Vertex
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Wavefront .obj file | Implementing Wavefront .obj file input/output |
+| Planned | Buffer I/O | Implementing buffer import/export methods |
+
+### Tilemap
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Custom tilemap system | Implementing a custom tilemap system using Vertex |
+| Planned | Tileset | Implementing the ability to add tilesets at runtime |
+| Planned | Autotile | Implementing runtime autotiling methods |
+| Planned | Runtime tiling | Implementing tile, tileset, and tilemap manipulation methods |
+
+### Input
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Analog input | Implementing analog input (real value) for controller stick input |
+| Planned | Controller input presets | Implemented presets that support movement using the D-pad and movement using the stick respectively |
+| Planned | Touch input presets | Implementing touch and mouse-only input presets |
+| Planned | Virtual joystick | Virtual joystick |
+| Planned | Controller vibrations | Controller vibrations |
+
+### Audio
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | 3D audio | 3D audio system. Rotate audio listener oriantation in FPS mode. if audio stream got 0 gain, stop that audio stream and reset the variable. |
+| Planned | Mono and stereo | Mono audio mode and stereo mode |
+| Planned | Crossfade | Audio crossfade system for BGM. audio_play_sound and audio_sound_gain. |
+| Planned | Audio groups and volume slider | Audio groups(Master, SFX, and BGM) and volume slider(gain) |
+| Planned | Hitsound | Hitsound and killsound |
+| Planned | BPM | Pre-defined BPM for each BGM (including radio music). Actors and objects can do dance up and down like PAC-MAN CHAMPIONSHIP EDITION. Or adjust all sprite's image_speed for mood! |
+
+### Camera
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Screenshake | Screenshake |
+| Planned | Matrix method | View matrix export for shader |
+| Planned | BUG | Camera.resize should be optional, not automatical, for lightning |
+
+### Mod
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Sound asset | Audio mod support (.wav and .ogg) |
+| Planned | Input presets | Custom input presets |
+| Planned | Achievement mod | Achievement mod support |
+| Planned | Sprite asset | Sprite add and change mod support (.png) |
+| Planned | Font asset | .ttf font importer |
+
+### Network
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Server and client | Server and client |
+| Planned | Asynchronous event | Implementing asynchronous function functionality |
+| Planned | Co-op | Presets for co-op |
+| Planned | Network notification | Output network events to the notification system |
+| Planned | Chat | Implementing a chat server and client |
+
+### Grid
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Draw | draw_grid() |
+| Planned | Snap | snap_grid() |
+
+### File & Struct
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Checksum | Hash |
+| Planned | Base64 | Encode and decode |
+
+## Maingame
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Scan mode | Implementing a scan mode using a game object highlight system and an in-game encyclopedia. Implemented with reference to games such as Starbound and Starfield. |
+| Planned | Radio station | A system inspired by the GTA series and the Fallout series. Providing various radio stations. Providing custom radio stations through mods. |
+| In Progress | Title screen | Create a space concept wallpaper, implement random splash text like Minecraft |
+| Planned | Procedural generation | Generate the entire level using procedural generation. Create based on predefined prefabs. |
+| Planned | Save game | Saving the entire world to a file using File and Struct. |
+| Planned | In-game time | Day and night time. |
+| Planned | Fishing | Fishing. |
+| Planned | Wild animals | Hostile creatures, friendly creatures, and neutral creatures. |
+| Planned | Companions | Hire NPCs. |
+| Planned | Area control | Fog of the war and area system. |
+| Planned | Hunger and thirst | Water and food. |
+| Planned | Cleanness and bladder | Optional challenge. |
+| Planned | Temperature and weather | More challenge. |
+| Planned | Various terrain and environments | Forest, rivers, caves, moutains, etc. |
+| Planned | Storage network | Collect and manage resources. |
+| Planned | Independence villages | There are independent, small settlements that players can contribute to growing. Players can build farms directly in the construction area and provide resources to grow the village. |
+| Planned | Hostile factions | Outlaws, Scavengers, Raiders, etc. |
+| Planned | Grid-base free construction zones | Provides areas where players can freely build settlements from scratch. |
+| Planned | Farming | Farming in the Free Construction Zone. |
+| Planned | Settler | NPC. |
+| Planned | Merchants | Static merchants and wandering merchants. Some wandering merchants follow routines created during world creation. |
+| Planned | `obj_level` | Level manager object. |
+| Planned | Hideouts | Hideouts, camping sites and Camping anywhere. |
+| Planned | Large settlements | Towns and cities, trading area and customizable houses. |
+
+### Items
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Guns and weapons | - |
+| Planned | Armour and clothes | - |
+| Planned | Upgrade | Item upgrade and modding system. |
+
+### Main Quests
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Main quest | Implementing the main questline. Collecting sparkles and learning sparks are the key. |
+
+### Side Quests
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Main quest | Implementing the main questline. Collecting sparkles and learning sparks are the key. |
+
+### Achievement
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+
+### Concept
+
+#### 2D ARPG
+
+- ARPG like Fallout 4 and Starfield.
+- Actors have DnD-style stats.
+- Unlike typical RPGs, there are no levels or experience points.
+- Stats are mainly determined by equipment.
+- Guns, Spaces, Outlaws.
+
+#### Spark
+
+- Inspired by Stands from JoJo's Bizarre Adventure and Persona from the Persona series.
+- Players and some NPCs have special abilities.
+- Various abilities such as bullet time, time stopping, space travel, and anti-gravity.
+
+#### Sparkle
+
+- Sparkles are very special artifacts.
+- Each Sparkle grants a Spark to the player.
+- Players can collect Sparkles to use different Sparks.
+
+#### Tutorial
+
+- The game begins on the player's personal spaceship.
+- Allows character and world customization from the player's personal spaceship.
+- Player can choose special mode and arrange mode like randomizer mode at beginning.
+- The tutorial takes place at the spaceport where the player landed.
+- The player comes from another star system and is treated as visiting the planet they land on for the first time.
+- The reason the player is sent to the planet is to explore a recently discovered unknown power (Spark).
+- Guides the player through the game's fundamental systems, including basic controls, movement, and the user interface at the spaceport where they land.
+
+#### Hype Mode
+
+- Music is magic! Every time-related and speed-related must be tied with BGM's BPM
+- If player keep dodged all attack(no-hit play), BGM is getting faster!
+- and it gives attack damage bonuses and reward bonuses to player!
+
+#### Smartphone
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Map | World map application. |
+| Planned | Radio and music | Select radio station. Multi-channel. Advertising and news, music playback. Custom radio stations. |
+| Planned | Inventory | Access to storage network. |
+| Planned | Equipment | Dress up. |
+| Planned | Online orders | Shops. |
+| Planned | Camera | Screenshots with filters. |
+| Planned | Notes | Memo. |
+| Planned | Call | Call your companions or spaceships to summon them to your current location. |
+| Planned | Mail | Messages. |
+| Planned | News | News. |
+
+#### Fictional companies
+
+| State | Title | Description |
+| ----- | ----- | ----------- |
+| Planned | Arms companies | Guns and weapons. |
+| Planned | Food and drink | Food and drink. |
+| Planned | Pharmaceutical companies | Pharmaceutical companies. |
+| Planned | Automobile | Cars and spaceships. |
+| Planned | Convenience store | Also cafes. |
+
+## Minigames
+
+### Rhythm
+
+- Sequence-based rhythm game
+- Stress-free rhythm game
+- Do not display combo
+- Do not display perfect/miss
+- Just vibe and dance
+- One Key to Four keys
+- Battle with enemy
+- Just give XPs based on performance, do not display the actual result
+- Pre-selected music for each enemy
+- Enemy health is decreased by the time and perfomance
+- When enemy hitpoint is below 0 and song is end, show the result
+- Difficulty and number of notes varies by perfomance
+
+### Platformer
+
+### Bullet Hell
+
+### Gacha
+
+## Working
+
+- 세계관 설정 및 시나리오 작성
+
+- 근미래 SF 배경과 고대 판타지의 적절한 조합
+
+- 총기제일주의
+    총기 습득 및 개조를 핵심으로
+    대부분의 전투는 총격전 및 시가전
+
+- 황금만능주의
+    코인을 사용하여 거의 대부분의 아이템 구매 가능
+    코인을 사용하여 매우 많은 문제를 해결 가능
+
+- 함선
+    개인 함선을 구매 및 관리할 수 있음
+    이동 수단이면서 이동형 기지
+
+- 메인퀘스트
+    스파크와 스파클의 원리와 비밀에 대해 파해치기 위해 행성을 탐험하는 것이 메인 퀘스트
+
+- 서브퀘스트라인
+    매우 다양한 컨셉의 서브 퀘스트 라인
+
+- 카메라
+    1인칭 및 3인칭 지원
+    건설 모드시 자유시점 탑뷰 모드 지원
+
+- 저장
+    게임 진행 상황은 어느 때나 저장할 수 있으나 자동 저장을 제공하지 않음
+    10분 이상 저장하지 않을 시 10분 마다 경고문 UI가 출력되나 자동 저장은 제공하지 않음
+    사망 시 타이틀 화면으로 돌아가며 이전 세이브를 불러올 수 있음
+
+- 건설모드
+    기지 및 함선에서 건설 모드를 통해 기지 구축이 가능
+    생존 및 퀘스트 해결에 필요한 것들을 자급자족
+
+- 로그라이트
+    사망해도 이전 저장 파일을 마음것 불러올 수는 있지만 그 외에는 로그라이트 형식을 따름
+    회차에 따른 보상이나 변화 없음
+    절차적 기반 생성으로 월드를 생성
+        미리 정의해둔 구조물과 건물, 도시 등이 무작위 위치에 생성됨
+        스파클 역시 무작위 위치의 던전에 생성
+        actor의 인벤토리 역시 아이템 풀 내에서 랜덤
+
+- 생존
+    항상 적의 공격 위험이 존재
+    허기 및 갈증은 핵심 생존 요소
+    인벤토리 무게 관리 및 상태이상(질병) 역시 중요
+
+- 경영
+    서브 퀘스트로 다양한 상점 및 시설 경영을 제공
+    직접 매장을 꾸미거나 직원을 고용하는 등 풍부한 컨텐츠 제공
+    경쟁 기업의 사보타주나 습격 등의 이벤트 발생
+
+- 팩션
+    다양한 팩션들이 존재
+    이들과 우호 관계가 될 수도, 중립일수도, 적대할 수 도 있음
+    동물보호단체, 총기용병단체, 상인단체, 광신도, 경비대, 여러 도시국가, 연합 등 매력적인 팩션들
+
+- 도심
+    도심에서는 직접적인 전투를 피하고 생활적이고 활기가 느껴지는 다양한 퀘스트 제공
+    매장경영, 서명운동, 사보타주, 무역, 아이돌 그룹 육성, 라디오 방송, 함선건설, 건물 수리 및 인테리어, 소방대, 경찰업무, 레이싱, 주유소 업무(대테러임무 포함), 아케이드(미니게임) 등 다양한 컨텐츠 제공
+
+- 교외
+    교외에서는 광산운영, 농사 등 도심에서 진행하기 어려운 컨텐츠 제공
+    도심보다 전투가 잦으며, 치안 경비가 필요함
+
+- 도시건설
+    일부 지역에서는 플레이어가 직접 도시건설이 가능
+    농촌부터 대도심까지 다양한 에셋 지원
+    NPC들이 플레이어가 건설한 도시에서 정해진 FSM대로 활동하는 것을 관찰하는데 초점
+
+- 뱃지 및 업적
+    플레이어는 다양한 업적을 달성할 수 있음
+    업적은 회차마다 따로 기록되나 스팀 업적 동기화 등을 통해 외부 플랫폼에서는 누적 가능
+    일부 업적은 위업으로 취급하며 특별한 뱃지를 지급
+    게임 오버 화면에서 업적과 위업을 뱃지로 보여줌
+
+- 타이틀 화면
+    타이틀 룸은 냥 캣의 배경과 유사하게 우주를 표현
+    마인크래프트식 스플래시 문구(랜덤)도 추가
+    게임 시작(시작 버튼 클릭 후 새 게임과 불러오기 제공), 모드, 설정, 크레딧(깃헙)-시퀸스 기반, 종료 버튼

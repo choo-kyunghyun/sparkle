@@ -1,0 +1,37 @@
+{
+  "$GMShape":"v1",
+  "%Name":"",
+  "baked":false,
+  "maxX":32.0,
+  "maxY":32.0,
+  "minX":0.0,
+  "minY":0.0,
+  "name":"",
+  "precision":0.050000012,
+  "resourceType":"GMShape",
+  "resourceVersion":"2.0",
+  "styleGroups":[
+    {"$GMStyleGroup":"","%Name":"","fillStyles":[
+        {"$1":"","rgba":4294967295,},
+      ],"lineStyleData":[],"name":"","resourceType":"GMStyleGroup","resourceVersion":"2.0","shapes":[
+        {"$GMSubShape":"v2","%Name":"","AALines":[0,1,1,2,2,3,3,4,4,5,5,6,],"AAVectors":[
+            {"x":1.4140164,"y":5.4642227E-05,},
+            {"x":1.4140359,"y":3.5455854E-05,},
+            {"x":1.4138587,"y":-0.00014172829,},
+            {"x":0.00016518234,"y":1.4145453,},
+            {"x":-1.4141027,"y":-5.5662007E-05,},
+            {"x":9.830941E-05,"y":-1.4143672,},
+            {"x":1.4140164,"y":5.4642227E-05,},
+          ],"closed":true,"fillStyle0":-1,"fillStyle1":0,"linePoints":[],"lines":[],"lineStyle":-1,"lineTris":[],"name":"","pointColours":[],"points":[
+            {"x":23.777985,"y":6.0999985,},
+            {"x":13.879989,"y":15.999988,},
+            {"x":23.775997,"y":25.898981,},
+            {"x":20.94799,"y":28.728975,},
+            {"x":8.222,"y":15.999988,},
+            {"x":20.949993,"y":3.271,},
+            {"x":23.777985,"y":6.0999985,},
+          ],"resourceType":"GMSubShape","resourceVersion":"2.0","tris":[2,3,4,1,2,4,1,4,5,0,1,5,],},
+      ],},
+  ],
+  "triangulated":true,
+}

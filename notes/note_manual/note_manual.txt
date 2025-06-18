@@ -1,0 +1,36 @@
+# Sparkle Manual
+
+## Project Structure
+
+### Core Objects
+
+- **`obj_game`:** `obj_game` is a game manager object. It initializes the game and updates the core scripts.
+- **`obj_object`:** `obj_object` is the parent object of the player character and all objects that the character can directly interact with.
+  - **`obj_actor`:** `obj_actor` is the parent object of game objects that can make decisions and move on their own, such as people or animals. It is based on a finite state machine.
+- **`obj_camera`:** `obj_camera` is the camera parent object. You can create a camera by assigning methods to this object.
+
+### Core Scripts
+
+- **`scr_achievement`:** `scr_achievement`contains the `Achievement()` constructor. It handles adding and managing achievements for the game.
+- **`scr_animcurve`:** `scr_animcurve` makes it easy to use Animation Curves.
+- **`scr_camera`:** `scr_camera` defines the `Camera()` constructor, which performs camera updates.
+- **`scr_debug`:** Provides utility functions for debugging, such as logging messages to the console or drawing debug information on screen.
+- **`scr_error`:** Contains functions for custom error handling and reporting within the game.
+- **`scr_file`:** Includes functions for file input/output operations, like saving and loading game data or configuration files.
+- **`scr_game`:** This script contains unclassified core functions.
+- **`scr_grid`:** Offers utility functions for working with GameMaker's ds_grid data structure, often used for pathfinding or managing grid-based game elements.
+- **`scr_i18n`:** Handles internationalization and localization, allowing the game to support multiple languages.
+- **`scr_input`:** Manages player input from various sources like keyboard, mouse, and gamepads.
+- **`scr_log`:** Implements a logging system for recording game events, errors, or debug messages, potentially to a file or an in-game console.
+- **`scr_mod`:** Implements support for game modifications (mods), allowing users to extend or alter game content.
+- **`scr_network`:** Provides low-level functions for network communication, used for multiplayer features or online interactions.
+- **`scr_settings`:** Manages game settings, such as graphics options, audio volume, and control configurations.
+- **`scr_struct`:** Contains utility functions for creating and manipulating GameMaker structs.
+- **`scr_time`:** Includes functions related to time, such as timers, managing game speed, or formatting time displays.
+- **`scr_ui`:** Manages User Interface (UI) elements, their creation, updates, and interactions.
+- **`scr_vertex`:** Provides functions for creating and manipulating vertex buffers, used for custom 2D/3D drawing and special effects.
+
+### Shaders
+
+- **`sh_apple`:** This shader makes the game a bad apple.
+- **`sh_grayscale`:** This shader makes the game grayscale.

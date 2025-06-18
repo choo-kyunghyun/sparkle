@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_UI",
+  "%Name":"scr_ui",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_UI",
+  "name":"scr_ui",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"Core Scripts",
+    "path":"folders/Sparkle Core Assets/Core Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

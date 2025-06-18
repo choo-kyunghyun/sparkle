@@ -57,10 +57,3 @@ Temporary Items
 # GameMaker temporary files
 *.resource_order
 *.old
-
-# Stitch
-.Stitch
-/tmp
-
-# Temporary folders
-/assets/temp

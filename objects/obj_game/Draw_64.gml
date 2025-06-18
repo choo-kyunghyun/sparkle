@@ -1,2 +1,1 @@
-// Draw GUI
-game.gui();
+UserInterface.draw();

@@ -1,0 +1,24 @@
+{
+  "$GMAnimCurve":"",
+  "%Name":"ac_benchmark_exp",
+  "channels":[
+    {"$GMAnimCurveChannel":"","%Name":"curve1","colour":4290799884,"name":"curve1","points":[
+        {"th0":-0.1,"th1":0.07364341,"tv0":0.0,"tv1":0.0,"x":0.0,"y":0.1,},
+        {"th0":-0.014728682,"th1":0.038336854,"tv0":0.0,"tv1":0.0,"x":0.1,"y":0.25,},
+        {"th0":-0.038198113,"th1":0.07434815,"tv0":-0.008695743,"tv1":0.016925246,"x":0.2,"y":1.0,},
+        {"th0":1.0,"th1":-1.0,"tv0":0.0,"tv1":0.0,"x":0.3498943,"y":5.0,},
+        {"th0":-0.04310863,"th1":0.03304931,"tv0":-0.02600409,"tv1":0.019936087,"x":0.6,"y":17.0,},
+        {"th0":-0.066907346,"th1":0.051303804,"tv0":-0.09074412,"tv1":0.06958157,"x":0.75,"y":35.0,},
+        {"th0":-0.04158926,"th1":0.026168738,"tv0":-0.0885154,"tv1":0.055695537,"x":0.9,"y":67.0,},
+        {"th0":-0.1,"th1":0.1,"tv0":0.0,"tv1":0.0,"x":1.0,"y":100.0,},
+      ],"resourceType":"GMAnimCurveChannel","resourceVersion":"2.0","visible":true,},
+  ],
+  "function":1,
+  "name":"ac_benchmark_exp",
+  "parent":{
+    "name":"Curve",
+    "path":"folders/Sparkle Dev Assets/Curve.yy",
+  },
+  "resourceType":"GMAnimCurve",
+  "resourceVersion":"2.0",
+}
